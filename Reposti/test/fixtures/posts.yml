@@ -1,0 +1,27 @@
+# == Schema Information
+#
+# Table name: posts
+#
+#  id           :bigint           not null, primary key
+#  post_type_id :integer
+#  title        :string
+#  body         :string
+#  reblogged    :boolean
+#  reblogged_id :integer
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#
+
+one:
+  post_type_id: 1
+  title: MyString
+  body: MyString
+  reblogged: false
+  reblogged_id: 1
+
+two:
+  post_type_id: 1
+  title: MyString
+  body: MyString
+  reblogged: false
+  reblogged_id: 1
