@@ -23,6 +23,9 @@ class Post < ApplicationRecord
     optional: true
 
   has_one :user_post
+  has_one :author,
+    through: :user_post,
+    source: :user
   has_many :reblogs,
     foreign_key: :reblogged_id,
     class_name: :Post
