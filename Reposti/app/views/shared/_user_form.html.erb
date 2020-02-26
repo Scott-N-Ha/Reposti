@@ -1,0 +1,9 @@
+<form action="<%= action %>" method="post">
+    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+    Username: <input type="text" class="user-form-username" name="user[username]" value="<%= user.username %>"><br>
+    <% if submit_text == "Sign Up" %>
+    Email: <input type="text" class="user-form-email" name="user[email]" value="<%= user.email %>"><br>
+    <% end %>
+    Password: <input type="password" name="user[password]" class="user-form-password"><br>
+    <button class="user-form-button"><%= submit_text %></button>
+</form>
