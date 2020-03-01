@@ -11,8 +11,8 @@ const receiveSingleUser = (payload) => ({
 });
 
 // Thunk Actions
-export const fetchSingleUser = user => dispatch => (
-  UserAPI.fetchSingleUser(user)
+export const fetchSingleUser = username => dispatch => (
+  UserAPI.fetchSingleUser(username)
     .then(user => dispatch(receiveSingleUser(user)),
       errors => dispatch(receiveErrors(errors)))
 );

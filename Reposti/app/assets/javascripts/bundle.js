@@ -201,9 +201,9 @@ var receiveSingleUser = function receiveSingleUser(payload) {
 }; // Thunk Actions
 
 
-var fetchSingleUser = function fetchSingleUser(user) {
+var fetchSingleUser = function fetchSingleUser(username) {
   return function (dispatch) {
-    return _util_users_api_util_js__WEBPACK_IMPORTED_MODULE_0__["fetchSingleUser"](user).then(function (user) {
+    return _util_users_api_util_js__WEBPACK_IMPORTED_MODULE_0__["fetchSingleUser"](username).then(function (user) {
       return dispatch(receiveSingleUser(user));
     }, function (errors) {
       return dispatch(Object(_errors_actions_js__WEBPACK_IMPORTED_MODULE_1__["receiveErrors"])(errors));
@@ -229,18 +229,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _nav_bar_nav_bar_container_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./nav_bar/nav_bar_container.js */ "./frontend/components/nav_bar/nav_bar_container.js");
 /* harmony import */ var _session_login_form_container_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./session/login_form_container.js */ "./frontend/components/session/login_form_container.js");
 /* harmony import */ var _session_signup_form_container_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./session/signup_form_container.js */ "./frontend/components/session/signup_form_container.js");
-/* harmony import */ var _user_user_container_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./user/user_container.js */ "./frontend/components/user/user_container.js");
+/* harmony import */ var _users_user_container_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./users/user_container.js */ "./frontend/components/users/user_container.js");
+
 
 
 
 
 
  // testing
-
- // testing
+// testing
 
 var App = function App(props) {
-  debugger;
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "app"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("header", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Reposti"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_nav_bar_nav_bar_container_js__WEBPACK_IMPORTED_MODULE_3__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util_jsx__WEBPACK_IMPORTED_MODULE_2__["AuthRoute"], {
@@ -251,7 +250,7 @@ var App = function App(props) {
     component: _session_signup_form_container_js__WEBPACK_IMPORTED_MODULE_5__["default"]
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     path: "/:username",
-    component: _user_user_container_js__WEBPACK_IMPORTED_MODULE_6__["default"]
+    component: _users_user_container_js__WEBPACK_IMPORTED_MODULE_6__["default"]
   })));
 };
 
@@ -552,10 +551,10 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 
 /***/ }),
 
-/***/ "./frontend/components/user/user.jsx":
-/*!*******************************************!*\
-  !*** ./frontend/components/user/user.jsx ***!
-  \*******************************************/
+/***/ "./frontend/components/users/user.jsx":
+/*!********************************************!*\
+  !*** ./frontend/components/users/user.jsx ***!
+  \********************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -596,16 +595,21 @@ var User = /*#__PURE__*/function (_React$Component) {
   _createClass(User, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      debugger;
       this.props.fetchSingleUser(this.props.match.params.username);
     }
   }, {
     key: "render",
     value: function render() {
-      debugger;
+      if (Object.keys(this.props.user).length < 1) return null;
+      var posts = this.props.posts.map(function (post) {
+        // replace this with a PostContainer or PostComponent later
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+          key: post.id
+        }, "Title: ", post.title, " ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), "Body: ", post.body, " ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), "Remember to replace with an actual container please. ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null));
+      });
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "user-div"
-      }, "Inside User Div");
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, this.props.user.username), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, posts));
     }
   }]);
 
@@ -616,10 +620,10 @@ var User = /*#__PURE__*/function (_React$Component) {
 
 /***/ }),
 
-/***/ "./frontend/components/user/user_container.js":
-/*!****************************************************!*\
-  !*** ./frontend/components/user/user_container.js ***!
-  \****************************************************/
+/***/ "./frontend/components/users/user_container.js":
+/*!*****************************************************!*\
+  !*** ./frontend/components/users/user_container.js ***!
+  \*****************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -627,7 +631,7 @@ var User = /*#__PURE__*/function (_React$Component) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-/* harmony import */ var _user_jsx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./user.jsx */ "./frontend/components/user/user.jsx");
+/* harmony import */ var _user_jsx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./user.jsx */ "./frontend/components/users/user.jsx");
 /* harmony import */ var _actions_users_actions_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/users_actions.js */ "./frontend/actions/users_actions.js");
 
 
@@ -638,8 +642,15 @@ var mapStateToProps = function mapStateToProps(_ref, ownProps) {
   var _ref$entities = _ref.entities,
       users = _ref$entities.users,
       posts = _ref$entities.posts;
-  debugger;
-  return {};
+  var foundUser = Object.values(users).find(function (user) {
+    return user.username === ownProps.match.params.username;
+  });
+  return {
+    user: foundUser,
+    posts: foundUser.posts ? foundUser.posts.map(function (id) {
+      return posts[id];
+    }) : []
+  };
 };
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
@@ -919,13 +930,11 @@ var usersReducer = function usersReducer() {
 
   switch (action.type) {
     case _actions_session_actions_js__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_CURRENT_USER"]:
-      // debugger
       userId = Object.keys(action.currentUser.users)[0];
       nextState[userId] = action.currentUser.users[userId];
       return nextState;
 
     case _actions_users_actions_js__WEBPACK_IMPORTED_MODULE_1__["RECEIVE_SINGLE_USER"]:
-      // debugger
       userId = action.payload.users[Object.keys(action.payload.users)[0]].id;
       nextState[userId] = action.payload.users[userId];
       return nextState;

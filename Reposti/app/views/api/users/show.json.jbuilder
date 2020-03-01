@@ -1,8 +1,8 @@
 json.users do
   json.set! @user.id do
     json.partial! "api/users/user", user: @user
+    json.posts @user.posts.map(&:id)
   end
-  json.posts @user.posts.map(&:id)
 end 
 json.posts do
   @user.posts.each do |post|
