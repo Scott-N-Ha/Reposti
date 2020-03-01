@@ -1,4 +1,6 @@
-import { RECEIVE_ERRORS, RECEIVE_CURRENT_USER } from "../actions/session_actions.js";
+import { RECEIVE_CURRENT_USER } from "../actions/session_actions.js";
+import { RECEIVE_SINGLE_USER } from "../actions/users_actions.js";
+import { RECEIVE_ERRORS } from "../actions/errors_actions.js";
 
 const initialState = {
 }
@@ -12,6 +14,9 @@ const sessionErrorsReducer = (state = initialState, action) => {
       nextState["session"] = action.errors
       return nextState;
     case RECEIVE_CURRENT_USER:
+      nextState["user"] = action.errors
+      return nextState;
+    case RECEIVE_SINGLE_USER:
       nextState["user"] = action.errors
       return nextState;
     default:
