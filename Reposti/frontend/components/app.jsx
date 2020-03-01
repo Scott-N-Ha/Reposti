@@ -5,13 +5,13 @@ import { AuthRoute, ProtectedRoute } from '../util/route_util.jsx';
 import NavBarContainer from './nav_bar/nav_bar_container.js';
 import LoginFormContainer from './session/login_form_container.js';
 import SignupFormContainer from './session/signup_form_container.js';
+import UserContainer from './users/user_container.js';
 
 // testing
-import UserContainer from './user/user_container.js';
+
 // testing
 
 const App = (props) => {
-  debugger
   return (<div className="app">
     <header>
       <h1>Reposti</h1>
