@@ -7,17 +7,19 @@ import LoginFormContainer from './session/login_form_container.js';
 import SignupFormContainer from './session/signup_form_container.js';
 
 // testing
-
+import UserContainer from './user/user_container.js';
 // testing
 
 const App = (props) => {
+  debugger
   return (<div className="app">
     <header>
       <h1>Reposti</h1>
       <NavBarContainer />
       <AuthRoute path="/login" component={LoginFormContainer} />
       <AuthRoute path="/signup" component={SignupFormContainer} />
-      <ProtectedRoute path="/" />
+      {/* <ProtectedRoute path="/" /> */}
+      <Route path={`/:username`} component={UserContainer} />
     </header>
   </div>)
 };

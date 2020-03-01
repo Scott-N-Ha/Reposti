@@ -5,7 +5,7 @@ import configureStore from './store/store.js';
 import Root from './components/root.jsx';
 
 // testing
-
+import { fetchSingleUser } from './actions/users_actions.js';
 // testing
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // testing
   window.store = store;
-
+  window.fetchSingleUser = fetchSingleUser;
   // testing
 
   const root = document.getElementById('root');

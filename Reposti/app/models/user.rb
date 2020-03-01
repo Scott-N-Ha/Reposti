@@ -11,6 +11,9 @@
 #  updated_at      :datetime         not null
 #
 class User < ApplicationRecord
+  extend FriendlyId
+  friendly_id :username, use: :slugged
+
   validates :username, :email, :password_digest, :session_token, presence: true
   validates :username, :email, :session_token, uniqueness: true
   validates :password, length: {minimum: 6, allow_nil: true}
@@ -41,4 +44,7 @@ class User < ApplicationRecord
   def ensure_session_token
     self.session_token ||= SecureRandom::urlsafe_base64
   end
+
+  has_many :posts,
+    foreign_key: :author_id
 end
