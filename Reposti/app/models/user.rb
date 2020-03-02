@@ -44,7 +44,23 @@ class User < ApplicationRecord
   def ensure_session_token
     self.session_token ||= SecureRandom::urlsafe_base64
   end
-
+  
   has_many :posts,
-    foreign_key: :author_id
+  foreign_key: :author_id
+  
+  has_many :leaders_link,
+    foreign_key: :follower_id,
+    class_name: :Follow
+  
+  has_many :followers_link, 
+    foreign_key: :leader_id,
+    class_name: :Follow
+
+  has_many :leaders,
+    through: :leaders_link,
+    source: :leader
+    
+  has_many :followers,
+    through: :followers_link,
+    source: :follower
 end

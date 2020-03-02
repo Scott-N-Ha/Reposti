@@ -685,13 +685,18 @@ var User = /*#__PURE__*/function (_React$Component) {
   } // componentWillMount(){
   //   debugger
   // }
-  // componentDidUpdate(){
-  //   this.props.fetchSingleUser(this.props.match.params.username)
-  //   // debugger
-  // }
 
 
   _createClass(User, [{
+    key: "componentWillUpdate",
+    value: function componentWillUpdate() {
+      debugger;
+    } // componentDidUpdate(){
+    //   this.props.fetchSingleUser(this.props.match.params.username)
+    //   // debugger
+    // }
+
+  }, {
     key: "componentDidMount",
     value: function componentDidMount() {
       this.props.fetchSingleUser(this.props.match.params.username); // debugger
@@ -799,6 +804,9 @@ document.addEventListener("DOMContentLoaded", function () {
     preloadedState = {
       entities: {
         users: _defineProperty({}, window.currentUser.id, window.currentUser)
+      },
+      session: {
+        id: window.currentUser.id
       }
     };
   }
@@ -1032,6 +1040,7 @@ var usersReducer = function usersReducer() {
 
   switch (action.type) {
     case _actions_session_actions_js__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_CURRENT_USER"]:
+      debugger;
       userId = Object.keys(action.currentUser.users)[0];
       nextState[userId] = action.currentUser.users[userId];
       return nextState;

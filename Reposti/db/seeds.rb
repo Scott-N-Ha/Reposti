@@ -8,7 +8,11 @@
 
 User.destroy_all
 
-u1 = User.create(username: 'test', email: 'test@email.com', password: 'password')
+u = User.create(username: 'test', email: 'test@email.com', password: 'password')
+u1 = User.create(username: 'test1', email: 'test1@email.com', password: 'password')
+u2 = User.create(username: 'test2', email: 'test2@email.com', password: 'password')
+u3 = User.create(username: 'test3', email: 'test3@email.com', password: 'password')
+
 
 PostType.destroy_all
 
@@ -22,5 +26,12 @@ video = PostType.create(name: 'video')
 
 Post.destroy_all
 
-p1 = Post.create(post_type_id: text.id, title: 'Test Text Post', body: 'The body of a the test text post', author_id: u1.id)
-p2 = Post.create(post_type_id: quote.id, title: 'Quote Test Post', body: 'The body of a test quote post', author_id: u1.id)
+p1 = Post.create(post_type_id: text.id, title: 'Test Text Post', body: 'The body of a the test text post', author_id: u.id)
+p2 = Post.create(post_type_id: quote.id, title: 'Quote Test Post', body: 'The body of a test quote post', author_id: u.id)
+
+Follow.destroy_all
+
+fuu1 = Follow.create(leader_id: u.id, follower_id: u1.id)
+fuu2 = Follow.create(leader_id: u.id, follower_id: u2.id)
+fuu3 = Follow.create(leader_id: u.id, follower_id: u3.id)
+fu1u = Follow.create(leader_id: u1.id, follower_id: u.id)
