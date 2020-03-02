@@ -1,23 +1,19 @@
 import * as SessionAPI from '../util/session_api_util.js';
+import { receiveErrors } from './errors_actions.js';
 
 // String Constants
 export const RECEIVE_CURRENT_USER = "RECEIVE_CURRENT_USER";
 export const LOGOUT_CURRENT_USER = "LOGOUT_CURRENT_USER";
-export const RECEIVE_ERRORS = "RECEIVE_ERRORS";
+
 
 // Regular Actions
-export const receiveCurrentUser = (currentUser) => ({
+const receiveCurrentUser = (currentUser) => ({
   type: RECEIVE_CURRENT_USER,
   currentUser
 });
 
-export const logoutCurrentUser = () => ({
+const logoutCurrentUser = () => ({
   type: LOGOUT_CURRENT_USER
-});
-
-export const receiveErrors = (errors) => ({
-  type: RECEIVE_ERRORS,
-  errors
 });
 
 // Thunk Actions
