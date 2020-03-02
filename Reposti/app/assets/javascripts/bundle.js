@@ -276,9 +276,11 @@ __webpack_require__.r(__webpack_exports__);
 var loginInfo = function loginInfo() {
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "login-info"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["NavLink"], {
+    activeClassName: "currentPage",
     to: "/signup"
-  }, "Sign Up"), " or ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+  }, "Sign Up"), " or ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["NavLink"], {
+    activeClassName: "currentPage",
     to: "/login"
   }, "Log In"));
 };
@@ -286,7 +288,7 @@ var loginInfo = function loginInfo() {
 var logoutInfo = function logoutInfo(currentUser, logout) {
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "logout-info"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Welcome ", currentUser.username), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Welcome ", currentUser.username), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["NavLink"], {
     to: "/"
   }, "Home"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
     onClick: logout
@@ -486,7 +488,7 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
-    login: function login(user) {
+    action: function action(user) {
       return dispatch(Object(_actions_session_actions_js__WEBPACK_IMPORTED_MODULE_2__["login"])(user));
     }
   };
@@ -542,7 +544,8 @@ var SessionForm = /*#__PURE__*/function (_React$Component) {
     _this.state = {
       username: '',
       email: '',
-      password: ''
+      password: '',
+      renderErrors: false
     };
     _this.handleChange = _this.handleChange.bind(_assertThisInitialized(_this));
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
@@ -557,13 +560,8 @@ var SessionForm = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "handleSubmit",
     value: function handleSubmit(e) {
-      e.preventDefault(); // debugger
-
-      if (this.props.formType === 'signup') {
-        this.props.signup(this.state);
-      } else {
-        this.props.login(this.state);
-      }
+      e.preventDefault();
+      this.props.action(this.state);
     }
   }, {
     key: "showEmail",
@@ -631,7 +629,7 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
-    signup: function signup(user) {
+    action: function action(user) {
       return dispatch(Object(_actions_session_actions_js__WEBPACK_IMPORTED_MODULE_2__["signup"])(user));
     }
   };
@@ -685,13 +683,12 @@ var User = /*#__PURE__*/function (_React$Component) {
   } // componentWillMount(){
   //   debugger
   // }
+  // componentWillUpdate(prevProps){
+  //   // debugger
+  // }
 
 
   _createClass(User, [{
-    key: "componentWillUpdate",
-    value: function componentWillUpdate(prevProps) {// debugger
-    }
-  }, {
     key: "componentDidUpdate",
     value: function componentDidUpdate(prevProps) {
       if (prevProps.match.params.username !== this.props.match.params.username) {
@@ -701,22 +698,24 @@ var User = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "componentDidMount",
     value: function componentDidMount() {
-      this.props.fetchSingleUser(this.props.match.params.username); // debugger
+      this.props.fetchSingleUser(this.props.match.params.username);
     }
   }, {
     key: "render",
     value: function render() {
-      if (this.props.user === undefined) return null; // debugger
-
-      var posts = this.props.posts.map(function (post) {
-        // replace this with a PostContainer or PostComponent later
+      var _this$props = this.props,
+          user = _this$props.user,
+          posts = _this$props.posts;
+      if (user === undefined || user.followers === undefined || user.leaders === undefined) return null;
+      var userPosts = posts.map(function (post) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_posts_post_container_js__WEBPACK_IMPORTED_MODULE_1__["default"], {
           post: post
         }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null));
-      });
+      }); // debugger
+
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "user-div"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, this.props.user.username), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, posts));
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, user.username), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Following: ", user.leaders.length), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Followers: ", user.followers.length), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, userPosts));
     }
   }]);
 
@@ -814,7 +813,8 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   var store = Object(_store_store_js__WEBPACK_IMPORTED_MODULE_2__["default"])(preloadedState);
-  delete window.currentUser; // testing
+  delete window.currentUser;
+  document.getElementById('bootstrap-script').remove(); // testing
 
   window.store = store;
   window.fetchSingleUser = _actions_users_actions_js__WEBPACK_IMPORTED_MODULE_4__["fetchSingleUser"]; // testing
@@ -1042,7 +1042,6 @@ var usersReducer = function usersReducer() {
 
   switch (action.type) {
     case _actions_session_actions_js__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_CURRENT_USER"]:
-      debugger;
       userId = Object.keys(action.currentUser.users)[0];
       nextState[userId] = action.currentUser.users[userId];
       return nextState;
@@ -1050,6 +1049,16 @@ var usersReducer = function usersReducer() {
     case _actions_users_actions_js__WEBPACK_IMPORTED_MODULE_1__["RECEIVE_SINGLE_USER"]:
       userId = action.payload.users[Object.keys(action.payload.users)[0]].id;
       nextState[userId] = action.payload.users[userId];
+      Object.keys(action.payload.followers).forEach(function (id) {
+        if (nextState[id] === undefined) {
+          nextState[id] = action.payload.followers[id];
+        }
+      });
+      Object.keys(action.payload.leaders).forEach(function (id) {
+        if (nextState[id] === undefined) {
+          nextState[id] = action.payload.leaders[id];
+        }
+      });
       return nextState;
 
     default:

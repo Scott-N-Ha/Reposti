@@ -11,13 +11,25 @@ const usersReducer = (state = initialState, action) => {
 
   switch (action.type) {
     case RECEIVE_CURRENT_USER:
-      debugger
       userId = Object.keys(action.currentUser.users)[0];
       nextState[userId] = action.currentUser.users[userId];
       return nextState;
     case RECEIVE_SINGLE_USER:
       userId = action.payload.users[Object.keys(action.payload.users)[0]].id;
       nextState[userId] = action.payload.users[userId];
+
+      Object.keys(action.payload.followers).forEach(id => {
+        if (nextState[id] === undefined){
+          nextState[id] = action.payload.followers[id];
+        }
+      });
+
+      Object.keys(action.payload.leaders).forEach(id => {
+        if (nextState[id] === undefined){
+          nextState[id] = action.payload.leaders[id];
+        }
+      });
+
       return nextState;
     default:
       return state;

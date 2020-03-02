@@ -26,6 +26,7 @@ document.addEventListener("DOMContentLoaded", () => {
   
   const store = configureStore(preloadedState);
   delete window.currentUser;
+  document.getElementById('bootstrap-script').remove();
 
   // testing
   window.store = store;

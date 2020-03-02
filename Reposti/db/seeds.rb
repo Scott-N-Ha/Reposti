@@ -35,3 +35,4 @@ fuu1 = Follow.create(leader_id: u.id, follower_id: u1.id)
 fuu2 = Follow.create(leader_id: u.id, follower_id: u2.id)
 fuu3 = Follow.create(leader_id: u.id, follower_id: u3.id)
 fu1u = Follow.create(leader_id: u1.id, follower_id: u.id)
+
