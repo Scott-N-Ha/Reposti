@@ -242,16 +242,16 @@ __webpack_require__.r(__webpack_exports__);
 var App = function App(props) {
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "app"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("header", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Reposti"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_nav_bar_nav_bar_container_js__WEBPACK_IMPORTED_MODULE_3__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util_jsx__WEBPACK_IMPORTED_MODULE_2__["AuthRoute"], {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("header", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Reposti"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_nav_bar_nav_bar_container_js__WEBPACK_IMPORTED_MODULE_3__["default"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util_jsx__WEBPACK_IMPORTED_MODULE_2__["AuthRoute"], {
     path: "/login",
     component: _session_login_form_container_js__WEBPACK_IMPORTED_MODULE_4__["default"]
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util_jsx__WEBPACK_IMPORTED_MODULE_2__["AuthRoute"], {
     path: "/signup",
     component: _session_signup_form_container_js__WEBPACK_IMPORTED_MODULE_5__["default"]
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util_jsx__WEBPACK_IMPORTED_MODULE_2__["ProtectedRoute"], {
     path: "/:username",
     component: _users_user_container_js__WEBPACK_IMPORTED_MODULE_6__["default"]
-  })));
+  }));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (App);
@@ -286,7 +286,9 @@ var loginInfo = function loginInfo() {
 var logoutInfo = function logoutInfo(currentUser, logout) {
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "logout-info"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Welcome ", currentUser.username), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Welcome ", currentUser.username), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+    to: "/"
+  }, "Home"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
     onClick: logout
   }, "Log Out"));
 };
@@ -336,6 +338,94 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["withRouter"])(Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, mapDispatchToProps)(_nav_bar_jsx__WEBPACK_IMPORTED_MODULE_3__["default"])));
+
+/***/ }),
+
+/***/ "./frontend/components/posts/post.jsx":
+/*!********************************************!*\
+  !*** ./frontend/components/posts/post.jsx ***!
+  \********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Post; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+var Post = /*#__PURE__*/function (_React$Component) {
+  _inherits(Post, _React$Component);
+
+  function Post(props) {
+    var _this;
+
+    _classCallCheck(this, Post);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(Post).call(this, props));
+    _this.state = _this.props.post;
+    return _this;
+  }
+
+  _createClass(Post, [{
+    key: "render",
+    value: function render() {
+      if (this.props.post === undefined) return null;
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "post-div",
+        key: this.props.post.id
+      }, "This is a test render of post Title: ", this.props.post.title, " ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), "Body: ", this.props.post.body, " ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null));
+    }
+  }]);
+
+  return Post;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+
+
+
+/***/ }),
+
+/***/ "./frontend/components/posts/post_container.js":
+/*!*****************************************************!*\
+  !*** ./frontend/components/posts/post_container.js ***!
+  \*****************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var _post_jsx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./post.jsx */ "./frontend/components/posts/post.jsx");
+
+
+ // const mapStateToProps = ({})
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {// will need to include a delete post, edit post APIs
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["withRouter"])(Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(null, mapDispatchToProps)(_post_jsx__WEBPACK_IMPORTED_MODULE_2__["default"])));
 
 /***/ }),
 
@@ -563,6 +653,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return User; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _posts_post_container_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../posts/post_container.js */ "./frontend/components/posts/post_container.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -583,6 +674,7 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
+
 var User = /*#__PURE__*/function (_React$Component) {
   _inherits(User, _React$Component);
 
@@ -590,22 +682,30 @@ var User = /*#__PURE__*/function (_React$Component) {
     _classCallCheck(this, User);
 
     return _possibleConstructorReturn(this, _getPrototypeOf(User).call(this, props));
-  }
+  } // componentWillMount(){
+  //   debugger
+  // }
+  // componentDidUpdate(){
+  //   this.props.fetchSingleUser(this.props.match.params.username)
+  //   // debugger
+  // }
+
 
   _createClass(User, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      this.props.fetchSingleUser(this.props.match.params.username);
+      this.props.fetchSingleUser(this.props.match.params.username); // debugger
     }
   }, {
     key: "render",
     value: function render() {
-      if (Object.keys(this.props.user).length < 1) return null;
+      if (this.props.user === undefined) return null; // debugger
+
       var posts = this.props.posts.map(function (post) {
         // replace this with a PostContainer or PostComponent later
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-          key: post.id
-        }, "Title: ", post.title, " ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), "Body: ", post.body, " ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), "Remember to replace with an actual container please. ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null));
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_posts_post_container_js__WEBPACK_IMPORTED_MODULE_1__["default"], {
+          post: post
+        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null));
       });
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "user-div"
@@ -645,11 +745,13 @@ var mapStateToProps = function mapStateToProps(_ref, ownProps) {
   var foundUser = Object.values(users).find(function (user) {
     return user.username === ownProps.match.params.username;
   });
+  var userPosts = foundUser !== undefined ? foundUser.posts !== undefined ? foundUser.posts.map(function (id) {
+    return posts[id];
+  }) : [] : []; // debugger
+
   return {
     user: foundUser,
-    posts: foundUser.posts ? foundUser.posts.map(function (id) {
-      return posts[id];
-    }) : []
+    posts: userPosts
   };
 };
 
@@ -1021,7 +1123,7 @@ var Protected = function Protected(_ref2) {
     exact: exact,
     render: function render(props) {
       return loggedIn ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Component, props) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Redirect"], {
-        to: "/"
+        to: "/login"
       });
     }
   });

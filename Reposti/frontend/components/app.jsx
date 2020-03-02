@@ -12,15 +12,17 @@ import UserContainer from './users/user_container.js';
 // testing
 
 const App = (props) => {
-  return (<div className="app">
+  return (
+  <div className="app">
     <header>
       <h1>Reposti</h1>
       <NavBarContainer />
-      <AuthRoute path="/login" component={LoginFormContainer} />
-      <AuthRoute path="/signup" component={SignupFormContainer} />
-      {/* <ProtectedRoute path="/" /> */}
-      <Route path={`/:username`} component={UserContainer} />
     </header>
+
+    <AuthRoute path="/login" component={LoginFormContainer} />
+    <AuthRoute path="/signup" component={SignupFormContainer} />
+    {/* <ProtectedRoute path="/" /> */}
+    <ProtectedRoute path={`/:username`} component={UserContainer} />
   </div>)
 };
 
