@@ -11,6 +11,7 @@ const usersReducer = (state = initialState, action) => {
 
   switch (action.type) {
     case RECEIVE_CURRENT_USER:
+      debugger
       userId = Object.keys(action.currentUser.users)[0];
       nextState[userId] = action.currentUser.users[userId];
       return nextState;

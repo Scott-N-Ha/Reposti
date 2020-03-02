@@ -11,6 +11,10 @@ export default class User extends React.Component {
   // componentWillMount(){
   //   debugger
   // }
+
+  componentWillUpdate (){
+    debugger
+  }
   
   // componentDidUpdate(){
   //   this.props.fetchSingleUser(this.props.match.params.username)
