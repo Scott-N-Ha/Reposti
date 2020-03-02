@@ -689,13 +689,15 @@ var User = /*#__PURE__*/function (_React$Component) {
 
   _createClass(User, [{
     key: "componentWillUpdate",
-    value: function componentWillUpdate() {
-      debugger;
-    } // componentDidUpdate(){
-    //   this.props.fetchSingleUser(this.props.match.params.username)
-    //   // debugger
-    // }
-
+    value: function componentWillUpdate(prevProps) {// debugger
+    }
+  }, {
+    key: "componentDidUpdate",
+    value: function componentDidUpdate(prevProps) {
+      if (prevProps.match.params.username !== this.props.match.params.username) {
+        this.props.fetchSingleUser(this.props.match.params.username);
+      }
+    }
   }, {
     key: "componentDidMount",
     value: function componentDidMount() {
