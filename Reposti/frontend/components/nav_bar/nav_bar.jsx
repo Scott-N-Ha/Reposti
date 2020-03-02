@@ -13,6 +13,7 @@ const loginInfo = () => {
 const logoutInfo = (currentUser, logout) => (
   <div className='logout-info'>
     <h2>Welcome {currentUser.username}</h2>
+    <Link to="/">Home</Link><br/>
     <button onClick={logout}>Log Out</button>
   </div>
 )
