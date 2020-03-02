@@ -6,7 +6,8 @@ export default class SessionForm extends React.Component {
     this.state = {
       username: '',
       email: '',
-      password: ''
+      password: '',
+      renderErrors: false
     }
 
     this.handleChange = this.handleChange.bind(this);
@@ -19,12 +20,8 @@ export default class SessionForm extends React.Component {
 
   handleSubmit(e){
     e.preventDefault();
-    // debugger
-    if (this.props.formType === 'signup') {
-      this.props.signup(this.state);
-    } else {
-      this.props.login(this.state);
-    }
+
+    this.props.action(this.state)
   }
 
   showEmail(){

@@ -1,11 +1,11 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 
 const loginInfo = () => {
   
   return (
     <div className='login-info'>
-      <Link to='/signup'>Sign Up</Link> or <Link to='/login'>Log In</Link>
+      <NavLink activeClassName="currentPage" to='/signup'>Sign Up</NavLink> or <NavLink activeClassName="currentPage" to='/login'>Log In</NavLink>
     </div>
   )
 };
@@ -13,7 +13,7 @@ const loginInfo = () => {
 const logoutInfo = (currentUser, logout) => (
   <div className='logout-info'>
     <h2>Welcome {currentUser.username}</h2>
-    <Link to="/">Home</Link><br/>
+    <NavLink to="/">Home</NavLink><br/>
     <button onClick={logout}>Log Out</button>
   </div>
 )

@@ -5,16 +5,16 @@ import PostContainer from '../posts/post_container.js';
 export default class User extends React.Component {
   constructor(props){
     super(props);
-
+    
   }
 
   // componentWillMount(){
   //   debugger
   // }
 
-  componentWillUpdate(prevProps){
-    // debugger
-  }
+  // componentWillUpdate(prevProps){
+  //   // debugger
+  // }
   
   componentDidUpdate(prevProps){
     if (prevProps.match.params.username !== this.props.match.params.username){
@@ -24,16 +24,14 @@ export default class User extends React.Component {
 
   componentDidMount(){
     this.props.fetchSingleUser(this.props.match.params.username)
-    // debugger
   }
 
   render(){
-    if (this.props.user === undefined) return null;
+    const { user, posts } = this.props;
 
-    // debugger
+    if (user === undefined || user.followers === undefined || user.leaders === undefined) return null;
 
-    const posts = this.props.posts.map(post => {
-      // replace this with a PostContainer or PostComponent later
+    const userPosts = posts.map(post => {
       return (
         <li>
           <PostContainer post={post} />
@@ -41,12 +39,17 @@ export default class User extends React.Component {
         </li>
       );
     });
+
+    // debugger
     
     return (
       <div className="user-div">
-        <h2>{this.props.user.username}</h2>
+        <h2>{user.username}</h2>
+        <h3>Following: {user.leaders.length}</h3>
+        <h3>Followers: {user.followers.length}</h3>
+
         <ul>
-          {posts}
+          {userPosts}
         </ul>
       </div>
     );
