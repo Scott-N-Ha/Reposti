@@ -1,4 +1,14 @@
 class Api::UsersController < ApplicationController
+  def show
+    if user_username
+      @user = User.includes(:posts).find_by(username: user_username)
+      render :show
+    else
+      flash.now[:errors] = ['Cannot find this user']
+      render json: ['Cannot find this user'], status: :not_found
+    end
+  end
+
   def create
     @user = User.new(user_params)
 
@@ -14,5 +24,9 @@ class Api::UsersController < ApplicationController
   private
   def user_params
     params.require(:user).permit(:username, :email, :password)
+  end
+
+  def user_username
+    params[:id]
   end
 end
