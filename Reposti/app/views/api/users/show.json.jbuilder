@@ -1,9 +1,9 @@
 json.users do
   json.set! @user.id do
     json.partial! "api/users/user", user: @user
-    json.posts @user.posts.map(&:id)
-    json.followers @user.followers_link.map(&:id)
-    json.leaders @user.leaders_link.map(&:id)
+    json.posts @user.posts.sort {|a, b| b.created_at <=> a.created_at}.map(&:id)
+    json.followers @user.followers_link.sort {|a, b| b.created_at <=> a.created_at}.map(&:id)
+    json.leaders @user.leaders_link.sort {|a, b| b.created_at <=> a.created_at}.map(&:id)
   end
 end 
 # json.leaders @user.leaders.map(&:id)
@@ -18,7 +18,7 @@ json.follows do
 end
 
 json.posts do
-  (@user.posts + @user.followed_posts).uniq.each do |post|
+  (@user.posts + @user.followed_posts).uniq.sort {|a, b| b.created_at <=> a.created_at}.each do |post|
     json.set! post.id do
       json.partial! 'api/posts/post', post: post
     end
@@ -26,7 +26,7 @@ json.posts do
 end
 
 json.follows_and_leads_users do
-  (@user.followers + @user.leaders).uniq.each do |user|
+  (@user.followers + @user.leaders).uniq.sort {|a, b| b.created_at <=> a.created_at}.each do |user|
     json.set! user.id do
       json.partial! 'api/users/user', user: user
     end

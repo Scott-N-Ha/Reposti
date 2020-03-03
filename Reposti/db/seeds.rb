@@ -28,6 +28,7 @@ Post.destroy_all
 
 p1 = Post.create(post_type_id: text.id, title: 'Test Text Post', body: 'The body of a the test text post', author_id: u.id)
 p2 = Post.create(post_type_id: quote.id, title: 'Quote Test Post', body: 'The body of a test quote post', author_id: u.id)
+p3 = Post.create(post_type_id: link.id, title: 'Test Link Post', body: 'https://github.com/aa-ScottHa/', author_id: u1.id)
 
 Follow.destroy_all
 

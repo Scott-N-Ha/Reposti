@@ -6,7 +6,7 @@ import NavBarContainer from './nav_bar/nav_bar_container.js';
 import LoginFormContainer from './session/login_form_container.js';
 import SignupFormContainer from './session/signup_form_container.js';
 import UserContainer from './users/user_container.js';
-import PostIndex from './posts/post_index.jsx';
+import PostIndexContainer from './posts/post_index_container.js';
 
 // testing
 
@@ -24,7 +24,7 @@ const App = (props) => {
     <AuthRoute path="/signup" component={SignupFormContainer} />
     {/* <ProtectedRoute path="/" /> */}
     <ProtectedRoute path={`/:username`} component={UserContainer} />
-    <ProtectedRoute exact path={'/'} component={PostIndex} />
+    <ProtectedRoute exact path={'/'} component={PostIndexContainer} />
   </div>)
 };
 
