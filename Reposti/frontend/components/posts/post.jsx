@@ -16,7 +16,9 @@ export default class Post extends React.Component {
   render () {
     const { post, author, currUser } = this.props;
 
-    if (post === undefined ) return null;
+    // if (post === undefined || author  ) return null;
+
+    if (!([post, author, currUser].every(el => el !== undefined))) return null;
 
     return (
       <div className='post-div' key={post.id}>

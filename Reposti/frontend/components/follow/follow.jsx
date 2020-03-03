@@ -5,6 +5,7 @@ export default class Follow extends React.Component {
     super(props);
   }
 
+
   follow(){
     const { currentUser, pageUserId, createFollow } = this.props;
     return <button onClick={() => createFollow({follower_id: currentUser, leader_id: pageUserId})}>Follow</button>
@@ -16,7 +17,6 @@ export default class Follow extends React.Component {
   }
 
   render(){
-    
     return (
       <div className='follow-component'>
         { this.props.follow === undefined ? this.follow() : this.unfollow()}

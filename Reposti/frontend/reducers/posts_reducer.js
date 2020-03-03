@@ -12,7 +12,6 @@ const postsReducer = (state = initialState, action) => {
 
   switch (action.type) {
     case RECEIVE_CURRENT_USER:
-      // debugger
       return Object.assign(nextState, action.currentUser.posts);
     case RECEIVE_SINGLE_USER:
       return Object.assign(nextState, action.payload.posts);
