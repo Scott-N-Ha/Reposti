@@ -17,7 +17,7 @@ export default class PostIndex extends React.Component {
     if (this.props.posts === undefined) return null;
 
     const posts = this.props.posts.map(post => {
-      return <li><PostContainer post={post} /></li>
+      return <li key={post.id}><PostContainer post={post} /></li>
     });
 
     return(
