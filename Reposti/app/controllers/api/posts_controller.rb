@@ -27,16 +27,28 @@ class Api::PostsController < ApplicationController
     if @post.save
       render :show
     else
+      flash.now[:errors] = @post.errors.full_messages
       render json: @post.errors.full_messages
     end
   end
 
   def update
     if post_id
-      @post = Post.find_by(id: [post_id])
+      @post = Post.find_by(id: post_id)
       
     else
 
+    end
+  end
+
+  def destroy
+    @post = Post.find_by(id: post_id)
+    if @post
+      @post.destroy
+      render :show
+    else
+      flash.now[:errors] = ['Cannot find post with that ID']
+      render json: ['Cannot find post with that ID']
     end
   end
 

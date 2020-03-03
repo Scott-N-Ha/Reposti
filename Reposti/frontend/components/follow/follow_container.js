@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
 import Follow from './follow.jsx';
-import { } from '../../actions/follows_action.js';
+import { createFollow, deleteFollow } from '../../actions/follows_action.js';
 
 const mapStateToProps = (state, ownProps) => {
 

@@ -5,7 +5,7 @@ import configureStore from './store/store.js';
 import Root from './components/root.jsx';
 
 // testing
-import { createFollow, deleteFollow } from './actions/follows_action.js';
+import { deletePost } from './actions/posts_actions.js';
 // testing
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -31,8 +31,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // testing
   window.store = store;
-  window.createFollow = createFollow;
-  window.deleteFollow = deleteFollow;
+  window.deletePost = deletePost;
   // testing
 
   const root = document.getElementById('root');

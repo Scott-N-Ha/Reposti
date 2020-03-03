@@ -36,12 +36,14 @@ export default class User extends React.Component {
     if (user === undefined || user.followers === undefined || user.leaders === undefined) return this.userNotFound();
 
     const userPosts = posts.map(post => {
-      return (
-        <li>
-          <PostContainer post={post} />
-          <br/>
-        </li>
-      );
+      if (post.id !== undefined){
+        return (
+          <li key={post.id}>
+            <PostContainer post={post} />
+            <br/>
+          </li>
+        )
+      }
     });
     
     return (
