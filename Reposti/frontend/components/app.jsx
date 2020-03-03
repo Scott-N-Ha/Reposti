@@ -20,11 +20,12 @@ const App = (props) => {
       <NavBarContainer />
     </header>
 
-    <AuthRoute path="/login" component={LoginFormContainer} />
-    <AuthRoute path="/signup" component={SignupFormContainer} />
-    {/* <ProtectedRoute path="/" /> */}
-    <ProtectedRoute path={`/:username`} component={UserContainer} />
-    <ProtectedRoute exact path={'/'} component={PostIndexContainer} />
+    <Switch>
+      <AuthRoute path="/login" component={LoginFormContainer} />
+      <AuthRoute path="/signup" component={SignupFormContainer} />
+      <ProtectedRoute exact path={'/'} component={PostIndexContainer} />
+      <ProtectedRoute exact path={`/:username`} component={UserContainer} />
+    </Switch>
   </div>)
 };
 

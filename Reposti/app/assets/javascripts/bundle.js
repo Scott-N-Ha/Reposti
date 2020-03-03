@@ -244,9 +244,8 @@ var login = function login(user) {
   return function (dispatch) {
     return _util_session_api_util_js__WEBPACK_IMPORTED_MODULE_0__["login"](user).then(function (user) {
       return dispatch(receiveCurrentUser(user));
-    }, function (errors) {
-      return dispatch(Object(_errors_actions_js__WEBPACK_IMPORTED_MODULE_1__["receiveErrors"])(errors));
-    });
+    }) // errors => dispatch(receiveErrors(errors)))
+    ;
   };
 };
 var logout = function logout() {
@@ -339,20 +338,21 @@ __webpack_require__.r(__webpack_exports__);
 var App = function App(props) {
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "app"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("header", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Reposti"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_nav_bar_nav_bar_container_js__WEBPACK_IMPORTED_MODULE_3__["default"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util_jsx__WEBPACK_IMPORTED_MODULE_2__["AuthRoute"], {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("header", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Reposti"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_nav_bar_nav_bar_container_js__WEBPACK_IMPORTED_MODULE_3__["default"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Switch"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util_jsx__WEBPACK_IMPORTED_MODULE_2__["AuthRoute"], {
     path: "/login",
     component: _session_login_form_container_js__WEBPACK_IMPORTED_MODULE_4__["default"]
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util_jsx__WEBPACK_IMPORTED_MODULE_2__["AuthRoute"], {
     path: "/signup",
     component: _session_signup_form_container_js__WEBPACK_IMPORTED_MODULE_5__["default"]
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util_jsx__WEBPACK_IMPORTED_MODULE_2__["ProtectedRoute"], {
-    path: "/:username",
-    component: _users_user_container_js__WEBPACK_IMPORTED_MODULE_6__["default"]
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util_jsx__WEBPACK_IMPORTED_MODULE_2__["ProtectedRoute"], {
     exact: true,
     path: '/',
     component: _posts_post_index_container_js__WEBPACK_IMPORTED_MODULE_7__["default"]
-  }));
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util_jsx__WEBPACK_IMPORTED_MODULE_2__["ProtectedRoute"], {
+    exact: true,
+    path: "/:username",
+    component: _users_user_container_js__WEBPACK_IMPORTED_MODULE_6__["default"]
+  })));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (App);
@@ -471,7 +471,7 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
     return user.username === currPageUsername;
   })[0].id;
   var follow = Object.values(state.entities.follows).filter(function (follow) {
-    return follow.leader_id === currPageUserId && follow.follower_id === currentUser;
+    return follow.leader_id === currPageUserId && follow.follower_id === Number(currentUser);
   })[0];
   return {
     currentUser: currentUser,
@@ -645,8 +645,11 @@ var Post = /*#__PURE__*/function (_React$Component) {
       var _this$props = this.props,
           post = _this$props.post,
           author = _this$props.author,
-          currUser = _this$props.currUser;
-      if (post === undefined) return null;
+          currUser = _this$props.currUser; // if (post === undefined || author  ) return null;
+
+      if (![post, author, currUser].every(function (el) {
+        return el !== undefined;
+      })) return null;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "post-div",
         key: post.id
@@ -806,7 +809,7 @@ var mapStateToProps = function mapStateToProps(_ref, ownProps) {
     return follow.leader_id;
   });
   var showPosts = Object.values(posts).filter(function (post) {
-    return post.author_id === id || currUserFollows.includes(post.author_id);
+    return post.author_id === currUser.id || currUserFollows.includes(post.author_id);
   });
   return {
     currUser: currUser,
@@ -1083,6 +1086,7 @@ var User = /*#__PURE__*/function (_React$Component) {
   // componentWillUpdate(prevProps){
   //   // debugger
   // }
+  //&& this.props.match.params.username !== undefined
 
 
   _createClass(User, [{
@@ -1304,8 +1308,10 @@ var errorsReducer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"]
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _actions_follows_action_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/follows_action.js */ "./frontend/actions/follows_action.js");
+/* harmony import */ var _actions_session_actions_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/session_actions.js */ "./frontend/actions/session_actions.js");
 /* harmony import */ var _actions_users_actions_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../actions/users_actions.js */ "./frontend/actions/users_actions.js");
+/* harmony import */ var _actions_follows_action_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../actions/follows_action.js */ "./frontend/actions/follows_action.js");
+
 
 
 var initialState = {};
@@ -1318,15 +1324,18 @@ var followsReducer = function followsReducer() {
   var followId;
 
   switch (action.type) {
+    case _actions_session_actions_js__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_CURRENT_USER"]:
+      return Object.assign(nextState, action.currentUser.follows);
+
     case _actions_users_actions_js__WEBPACK_IMPORTED_MODULE_1__["RECEIVE_SINGLE_USER"]:
       return Object.assign(nextState, action.payload.follows);
 
-    case _actions_follows_action_js__WEBPACK_IMPORTED_MODULE_0__["CREATE_FOLLOW"]:
+    case _actions_follows_action_js__WEBPACK_IMPORTED_MODULE_2__["CREATE_FOLLOW"]:
       followId = Object.keys(action.payload)[0];
       nextState[followId] = action.payload[followId];
       return nextState;
 
-    case _actions_follows_action_js__WEBPACK_IMPORTED_MODULE_0__["DELETE_FOLLOW"]:
+    case _actions_follows_action_js__WEBPACK_IMPORTED_MODULE_2__["DELETE_FOLLOW"]:
       followId = Object.keys(action.payload)[0];
       delete nextState[followId];
       return nextState;
@@ -1365,7 +1374,6 @@ var postsReducer = function postsReducer() {
 
   switch (action.type) {
     case _actions_session_actions_js__WEBPACK_IMPORTED_MODULE_1__["RECEIVE_CURRENT_USER"]:
-      // debugger
       return Object.assign(nextState, action.currentUser.posts);
 
     case _actions_users_actions_js__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_SINGLE_USER"]:

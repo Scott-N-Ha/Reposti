@@ -14,6 +14,7 @@ const usersReducer = (state = initialState, action) => {
       userId = Object.keys(action.currentUser.users)[0];
       nextState[userId] = action.currentUser.users[userId];
       return nextState;
+      
     case RECEIVE_SINGLE_USER:
       userId = action.payload.users[Object.keys(action.payload.users)[0]].id;
       nextState[userId] = action.payload.users[userId];

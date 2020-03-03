@@ -19,8 +19,8 @@ const logoutCurrentUser = () => ({
 // Thunk Actions
 export const login = user => dispatch => (
   SessionAPI.login(user)
-    .then(user => dispatch(receiveCurrentUser(user)),
-      errors => dispatch(receiveErrors(errors)))
+    .then(user => dispatch(receiveCurrentUser(user)))
+      // errors => dispatch(receiveErrors(errors)))
 );
 
 export const logout = () => dispatch => (
