@@ -109,6 +109,63 @@ var receiveErrors = function receiveErrors(errors) {
 
 /***/ }),
 
+/***/ "./frontend/actions/follows_action.js":
+/*!********************************************!*\
+  !*** ./frontend/actions/follows_action.js ***!
+  \********************************************/
+/*! exports provided: CREATE_FOLLOW, DELETE_FOLLOW, createFollow, deleteFollow */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CREATE_FOLLOW", function() { return CREATE_FOLLOW; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DELETE_FOLLOW", function() { return DELETE_FOLLOW; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createFollow", function() { return createFollow; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteFollow", function() { return deleteFollow; });
+/* harmony import */ var _util_follow_api_util_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/follow_api_util.js */ "./frontend/util/follow_api_util.js");
+/* harmony import */ var _errors_actions_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./errors_actions.js */ "./frontend/actions/errors_actions.js");
+
+ // String Constants
+
+var CREATE_FOLLOW = "CREATE_FOLLOW";
+var DELETE_FOLLOW = "DELETE_FOLLOW"; // Regular Actions
+
+var createFollowAction = function createFollowAction(payload) {
+  return {
+    type: CREATE_FOLLOW,
+    payload: payload
+  };
+};
+
+var deleteFollowAction = function deleteFollowAction(payload) {
+  return {
+    type: DELETE_FOLLOW,
+    payload: payload
+  };
+}; // Thunk Actions
+
+
+var createFollow = function createFollow(follow) {
+  return function (dispatch) {
+    return _util_follow_api_util_js__WEBPACK_IMPORTED_MODULE_0__["createFollow"](follow).then(function (follow) {
+      return dispatch(createFollowAction(follow));
+    }, function (errors) {
+      return dispatch(Object(_errors_actions_js__WEBPACK_IMPORTED_MODULE_1__["receiveErrors"])(errors));
+    });
+  };
+};
+var deleteFollow = function deleteFollow(follow) {
+  return function (dispatch) {
+    return _util_follow_api_util_js__WEBPACK_IMPORTED_MODULE_0__["deleteFollow"](follow).then(function (follow) {
+      return dispatch(deleteFollowAction(follow));
+    }, function (errors) {
+      return dispatch(Object(_errors_actions_js__WEBPACK_IMPORTED_MODULE_1__["receiveErrors"])(errors));
+    });
+  };
+};
+
+/***/ }),
+
 /***/ "./frontend/actions/session_actions.js":
 /*!*********************************************!*\
   !*** ./frontend/actions/session_actions.js ***!
@@ -788,7 +845,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _store_store_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./store/store.js */ "./frontend/store/store.js");
 /* harmony import */ var _components_root_jsx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/root.jsx */ "./frontend/components/root.jsx");
-/* harmony import */ var _actions_users_actions_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./actions/users_actions.js */ "./frontend/actions/users_actions.js");
+/* harmony import */ var _actions_follows_action_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./actions/follows_action.js */ "./frontend/actions/follows_action.js");
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 
@@ -814,14 +871,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
   var store = Object(_store_store_js__WEBPACK_IMPORTED_MODULE_2__["default"])(preloadedState);
   delete window.currentUser;
-  document.getElementById('bootstrap-script').remove(); // testing
+  var bootstrapScript = document.getElementById('bootstrap-script');
+  if (bootstrapScript !== null) bootstrapScript.remove(); // testing
 
   window.store = store;
-  window.fetchSingleUser = _actions_users_actions_js__WEBPACK_IMPORTED_MODULE_4__["fetchSingleUser"]; // testing
+  window.createFollow = _actions_follows_action_js__WEBPACK_IMPORTED_MODULE_4__["createFollow"];
+  window.deleteFollow = _actions_follows_action_js__WEBPACK_IMPORTED_MODULE_4__["deleteFollow"]; // testing
 
   var root = document.getElementById('root');
-  react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render( // <div>Test</div>
-  react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_root_jsx__WEBPACK_IMPORTED_MODULE_3__["default"], {
+  react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_root_jsx__WEBPACK_IMPORTED_MODULE_3__["default"], {
     store: store
   }), root);
 });
@@ -840,12 +898,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
 /* harmony import */ var _users_reducer_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./users_reducer.js */ "./frontend/reducers/users_reducer.js");
 /* harmony import */ var _posts_reducer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./posts_reducer.js */ "./frontend/reducers/posts_reducer.js");
+/* harmony import */ var _follows_reducer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./follows_reducer.js */ "./frontend/reducers/follows_reducer.js");
+
 
 
 
 var entitiesReducer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])({
   users: _users_reducer_js__WEBPACK_IMPORTED_MODULE_1__["default"],
-  posts: _posts_reducer_js__WEBPACK_IMPORTED_MODULE_2__["default"]
+  posts: _posts_reducer_js__WEBPACK_IMPORTED_MODULE_2__["default"],
+  follows: _follows_reducer_js__WEBPACK_IMPORTED_MODULE_3__["default"]
 });
 /* harmony default export */ __webpack_exports__["default"] = (entitiesReducer);
 
@@ -868,6 +929,51 @@ var errorsReducer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"]
   session: _session_errors_reducer_js__WEBPACK_IMPORTED_MODULE_1__["default"]
 });
 /* harmony default export */ __webpack_exports__["default"] = (errorsReducer);
+
+/***/ }),
+
+/***/ "./frontend/reducers/follows_reducer.js":
+/*!**********************************************!*\
+  !*** ./frontend/reducers/follows_reducer.js ***!
+  \**********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _actions_follows_action_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/follows_action.js */ "./frontend/actions/follows_action.js");
+/* harmony import */ var _actions_users_actions_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../actions/users_actions.js */ "./frontend/actions/users_actions.js");
+
+
+var initialState = {};
+
+var followsReducer = function followsReducer() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+  Object.freeze(state);
+  var nextState = Object.assign({}, state);
+  var followId;
+
+  switch (action.type) {
+    case _actions_users_actions_js__WEBPACK_IMPORTED_MODULE_1__["RECEIVE_SINGLE_USER"]:
+      return Object.assign(nextState, action.payload.follows);
+
+    case _actions_follows_action_js__WEBPACK_IMPORTED_MODULE_0__["CREATE_FOLLOW"]:
+      followId = Object.keys(action.payload)[0];
+      nextState[followId] = action.payload[followId];
+      return nextState;
+
+    case _actions_follows_action_js__WEBPACK_IMPORTED_MODULE_0__["DELETE_FOLLOW"]:
+      followId = Object.keys(action.payload)[0];
+      delete nextState[followId];
+      return nextState;
+
+    default:
+      return state;
+  }
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (followsReducer);
 
 /***/ }),
 
@@ -1049,14 +1155,9 @@ var usersReducer = function usersReducer() {
     case _actions_users_actions_js__WEBPACK_IMPORTED_MODULE_1__["RECEIVE_SINGLE_USER"]:
       userId = action.payload.users[Object.keys(action.payload.users)[0]].id;
       nextState[userId] = action.payload.users[userId];
-      Object.keys(action.payload.followers).forEach(function (id) {
+      Object.keys(action.payload.follows_and_leads_users).forEach(function (id) {
         if (nextState[id] === undefined) {
-          nextState[id] = action.payload.followers[id];
-        }
-      });
-      Object.keys(action.payload.leaders).forEach(function (id) {
-        if (nextState[id] === undefined) {
-          nextState[id] = action.payload.leaders[id];
+          nextState[id] = action.payload.follows_and_leads_users[id];
         }
       });
       return nextState;
@@ -1095,6 +1196,35 @@ var configureStore = function configureStore() {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (configureStore);
+
+/***/ }),
+
+/***/ "./frontend/util/follow_api_util.js":
+/*!******************************************!*\
+  !*** ./frontend/util/follow_api_util.js ***!
+  \******************************************/
+/*! exports provided: createFollow, deleteFollow */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createFollow", function() { return createFollow; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteFollow", function() { return deleteFollow; });
+var createFollow = function createFollow(follow) {
+  return $.ajax({
+    url: "api/follows/",
+    method: 'POST',
+    data: {
+      follow: follow
+    }
+  });
+};
+var deleteFollow = function deleteFollow(follow) {
+  return $.ajax({
+    url: "api/follows/".concat(follow.id),
+    method: 'DELETE'
+  });
+};
 
 /***/ }),
 

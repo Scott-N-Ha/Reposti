@@ -1,7 +1,7 @@
 class Api::UsersController < ApplicationController
   def show
     if user_username
-      @user = User.includes(:posts).includes(:followers).includes(:leaders).find_by(username: user_username)
+      @user = User.includes(:posts).includes(:followers).includes(:leaders).includes(:leaders_link).includes(:followers_link).find_by(username: user_username)
       render :show
     else
       flash.now[:errors] = ['Cannot find this user']
