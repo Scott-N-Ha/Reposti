@@ -3,7 +3,7 @@ class Api::FollowsController < ApplicationController
     @follow = Follow.new(follow_params)
 
     if @follow.save
-      render :show, status: 200
+      render :show
     else
       flash.now[:errors] = @follow.errors.full_messages
       render json: @follow.errors.full_messages, status: 418
@@ -15,7 +15,7 @@ class Api::FollowsController < ApplicationController
     
     if @follow
       @follow.destroy
-      render :show, status: 200
+      render :show
     else
       render json: ['Cannot find follow'], status: :not_found
     end

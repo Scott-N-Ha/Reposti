@@ -1,6 +1,15 @@
 class Api::SessionsController < ApplicationController
   def create
-    @user = User.includes(:posts).includes(:followers).includes(:leaders).includes(:leaders_link).includes(:followers_link).includes(:followed_posts).find_by_credentials(user_params)
+    @user = User
+              .includes(:posts)
+              .includes(:followers)
+              .includes(:leaders)
+              .includes(:leaders_link)
+              .includes(:followers_link)
+              .includes(:followed_posts)
+              .includes(:likes)
+              .includes(:liked_posts)
+              .find_by_credentials(user_params)
     
     if @user
       login(@user)

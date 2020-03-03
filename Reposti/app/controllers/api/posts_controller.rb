@@ -1,6 +1,6 @@
 class Api::PostsController < ApplicationController
   def index
-    @posts = Post.all.includes(:author)
+    @posts = Post.all.includes(:author).includes(:likes).includes(:likers)
 
     if @posts
       render :index
@@ -11,7 +11,11 @@ class Api::PostsController < ApplicationController
   end
 
   def show
-    @post = Post.includes(:author).find_by(id: params[:id])
+    @post = Post
+              .includes(:author)
+              .includes(:likes)
+              .includes(:likers)
+              .find_by(id: params[:id])
 
     if @post
       render :show

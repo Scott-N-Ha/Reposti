@@ -1532,9 +1532,9 @@ var usersReducer = function usersReducer() {
     case _actions_users_actions_js__WEBPACK_IMPORTED_MODULE_1__["RECEIVE_SINGLE_USER"]:
       userId = action.payload.users[Object.keys(action.payload.users)[0]].id;
       nextState[userId] = action.payload.users[userId];
-      Object.keys(action.payload.follows_and_leads_users).forEach(function (id) {
+      Object.keys(action.payload.other_users).forEach(function (id) {
         if (nextState[id] === undefined) {
-          nextState[id] = action.payload.follows_and_leads_users[id];
+          nextState[id] = action.payload.other_users[id];
         }
       });
       return nextState;
