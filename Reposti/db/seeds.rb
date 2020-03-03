@@ -37,3 +37,8 @@ fuu2 = Follow.create(leader_id: u.id, follower_id: u2.id)
 fuu3 = Follow.create(leader_id: u.id, follower_id: u3.id)
 fu1u = Follow.create(leader_id: u1.id, follower_id: u.id)
 
+Like.destroy_all
+
+lp1u = Like.create(post_id: p1.id, liker_id: u.id)
+lp2u = Like.create(post_id: p2.id, liker_id: u.id)
+lp3u = Like.create(post_id: p3.id, liker_id: u.id)

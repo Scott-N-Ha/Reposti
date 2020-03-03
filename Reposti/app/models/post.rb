@@ -19,5 +19,11 @@ class Post < ApplicationRecord
 
   belongs_to :post_type
 
+  has_many :likes
+
+  has_many :likers,
+    through: :likes,
+    source: :liker
+  
   has_many_attached :photos
 end

@@ -9,6 +9,7 @@
 #  session_token   :string
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
+#  slug            :string
 #
 class User < ApplicationRecord
   extend FriendlyId
@@ -68,4 +69,12 @@ class User < ApplicationRecord
   has_many :followed_posts,
     through: :leaders,
     source: :posts
+
+  has_many :likes,
+    foreign_key: :liker_id,
+    class_name: :Like
+
+  has_many :liked_posts,
+    through: :likes,
+    source: :post
 end
