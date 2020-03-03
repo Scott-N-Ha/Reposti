@@ -1,11 +1,11 @@
 import React from 'react';
 
 import PostContainer from '../posts/post_container.js';
+import FollowContainer from '../follow/follow_container.js';
 
 export default class User extends React.Component {
   constructor(props){
     super(props);
-    
   }
 
   // componentWillMount(){
@@ -26,10 +26,14 @@ export default class User extends React.Component {
     this.props.fetchSingleUser(this.props.match.params.username)
   }
 
-  render(){
-    const { user, posts } = this.props;
+  userNotFound(){
+    return <img src="https://cdn.rswebsols.com/wp-content/uploads/2018/02/404-error-not-found.jpg" alt="404"/>
+  }
 
-    if (user === undefined || user.followers === undefined || user.leaders === undefined) return null;
+  render(){
+    const { user, posts, leadings, followings } = this.props;
+
+    if (user === undefined || user.followers === undefined || user.leaders === undefined) return this.userNotFound();
 
     const userPosts = posts.map(post => {
       return (
@@ -39,14 +43,13 @@ export default class User extends React.Component {
         </li>
       );
     });
-
-    // debugger
     
     return (
       <div className="user-div">
         <h2>{user.username}</h2>
-        <h3>Following: {user.leaders.length}</h3>
-        <h3>Followers: {user.followers.length}</h3>
+        {this.props.currUsername !== this.props.match.params.username ? <FollowContainer /> : null}
+        <h3>Following: {followings.length}</h3>
+        <h3>Followers: {leadings.length}</h3>
 
         <ul>
           {userPosts}

@@ -10,7 +10,7 @@ end
 # json.followers @user.followers.map(&:id)
 
 json.follows do
-  (@user.followers_link + @user.leaders_link).each do |link|
+  (@user.followers_link + @user.leaders_link).uniq.each do |link|
     json.set! link.id do
       json.partial! 'api/follows/follow', follow: link
     end
@@ -18,7 +18,7 @@ json.follows do
 end
 
 json.posts do
-  @user.posts.each do |post|
+  (@user.posts + @user.followed_posts).uniq.each do |post|
     json.set! post.id do
       json.partial! 'api/posts/post', post: post
     end
@@ -26,7 +26,7 @@ json.posts do
 end
 
 json.follows_and_leads_users do
-  (@user.followers + @user.leaders).each do |user|
+  (@user.followers + @user.leaders).uniq.each do |user|
     json.set! user.id do
       json.partial! 'api/users/user', user: user
     end

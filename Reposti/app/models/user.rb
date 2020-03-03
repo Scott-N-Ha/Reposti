@@ -64,4 +64,8 @@ class User < ApplicationRecord
   has_many :followers,
     through: :followers_link,
     source: :follower
+
+  has_many :followed_posts,
+    through: :leaders,
+    source: :posts
 end
