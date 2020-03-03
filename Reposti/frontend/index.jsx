@@ -5,7 +5,7 @@ import configureStore from './store/store.js';
 import Root from './components/root.jsx';
 
 // testing
-import { fetchSingleUser } from './actions/users_actions.js';
+import { createFollow, deleteFollow } from './actions/follows_action.js';
 // testing
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -26,16 +26,17 @@ document.addEventListener("DOMContentLoaded", () => {
   
   const store = configureStore(preloadedState);
   delete window.currentUser;
-  document.getElementById('bootstrap-script').remove();
+  const bootstrapScript = document.getElementById('bootstrap-script')
+  if (bootstrapScript !== null) bootstrapScript.remove();
 
   // testing
   window.store = store;
-  window.fetchSingleUser = fetchSingleUser;
+  window.createFollow = createFollow;
+  window.deleteFollow = deleteFollow;
   // testing
 
   const root = document.getElementById('root');
   ReactDOM.render(
-    // <div>Test</div>
     <Root store={store} />
     , root);
 });
