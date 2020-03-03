@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+import LikeContainer from '../like/like_container.js';
+
 export default class Post extends React.Component {
   constructor(props){
     super(props);
@@ -25,7 +27,7 @@ export default class Post extends React.Component {
         <h3>Title: {post.title}</h3>
         <h4>Author: <Link to={`/${author.username}`}>{author.username}</Link></h4>
         Body: {post.body} <br/>
-        { (currUser.id === author.id) ? this.deleteRender() : null }
+        { (currUser.id === author.id) ? this.deleteRender() : null } <LikeContainer post={post} />
       </div>
     )
   }
