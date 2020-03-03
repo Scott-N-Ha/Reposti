@@ -19,7 +19,7 @@ export default class Follow extends React.Component {
   render(){
     return (
       <div className='follow-component'>
-        { this.props.follow === undefined ? this.follow() : this.unfollow()}
+        { this.props.follow === undefined ? this.follow() : this.unfollow() }
       </div>
     )
   }
