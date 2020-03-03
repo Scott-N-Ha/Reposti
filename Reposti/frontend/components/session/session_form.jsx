@@ -37,7 +37,7 @@ export default class SessionForm extends React.Component {
   render(){
     let buttonText = this.props.formType === 'signup' ? 'Sign Up' : 'Log In';
     return (
-      <div className="session-form">
+      <form className="session-form">
         <label>Username:
           <input type="text" name="username" onChange={this.handleChange} value={this.state.username} />
         </label><br/>
@@ -46,7 +46,7 @@ export default class SessionForm extends React.Component {
           <input type="password" name="password" onChange={this.handleChange} value={this.state.password} />
         </label><br/>
         <button onClick={this.handleSubmit}>{buttonText}</button>
-      </div>
+      </form>
     );
   }
 }

@@ -287,6 +287,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _session_login_form_container_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./session/login_form_container.js */ "./frontend/components/session/login_form_container.js");
 /* harmony import */ var _session_signup_form_container_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./session/signup_form_container.js */ "./frontend/components/session/signup_form_container.js");
 /* harmony import */ var _users_user_container_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./users/user_container.js */ "./frontend/components/users/user_container.js");
+/* harmony import */ var _posts_post_index_jsx__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./posts/post_index.jsx */ "./frontend/components/posts/post_index.jsx");
+
 
 
 
@@ -308,10 +310,170 @@ var App = function App(props) {
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util_jsx__WEBPACK_IMPORTED_MODULE_2__["ProtectedRoute"], {
     path: "/:username",
     component: _users_user_container_js__WEBPACK_IMPORTED_MODULE_6__["default"]
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util_jsx__WEBPACK_IMPORTED_MODULE_2__["ProtectedRoute"], {
+    exact: true,
+    path: '/',
+    component: _posts_post_index_jsx__WEBPACK_IMPORTED_MODULE_7__["default"]
   }));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (App);
+
+/***/ }),
+
+/***/ "./frontend/components/follow/follow.jsx":
+/*!***********************************************!*\
+  !*** ./frontend/components/follow/follow.jsx ***!
+  \***********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Follow; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+var Follow = /*#__PURE__*/function (_React$Component) {
+  _inherits(Follow, _React$Component);
+
+  function Follow(props) {
+    _classCallCheck(this, Follow);
+
+    return _possibleConstructorReturn(this, _getPrototypeOf(Follow).call(this, props));
+  }
+
+  _createClass(Follow, [{
+    key: "follow",
+    value: function follow() {
+      var _this$props = this.props,
+          currentUser = _this$props.currentUser,
+          pageUserId = _this$props.pageUserId,
+          createFollow = _this$props.createFollow;
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        onClick: function onClick() {
+          return createFollow({
+            follower_id: currentUser,
+            leader_id: pageUserId
+          });
+        }
+      }, "Follow");
+    }
+  }, {
+    key: "unfollow",
+    value: function unfollow() {
+      var _this$props2 = this.props,
+          follow = _this$props2.follow,
+          deleteFollow = _this$props2.deleteFollow;
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        onClick: function onClick() {
+          return deleteFollow(follow);
+        }
+      }, "Unfollow");
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "follow-component"
+      }, this.props.follow === undefined ? this.follow() : this.unfollow());
+    }
+  }]);
+
+  return Follow;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+
+
+
+/***/ }),
+
+/***/ "./frontend/components/follow/follow_container.js":
+/*!********************************************************!*\
+  !*** ./frontend/components/follow/follow_container.js ***!
+  \********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var _follow_jsx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./follow.jsx */ "./frontend/components/follow/follow.jsx");
+/* harmony import */ var _actions_follows_action_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/follows_action.js */ "./frontend/actions/follows_action.js");
+
+
+
+
+
+var mapStateToProps = function mapStateToProps(state, ownProps) {
+  // Current User that is logged in
+  var currentUser = state.session.id; // The User Page we are currently on
+
+  var currPageUsername = ownProps.match.params.username;
+  var currPageUserId = Object.values(state.entities.users).filter(function (user) {
+    return user.username === currPageUsername;
+  })[0].id;
+  var follow = Object.values(state.entities.follows).filter(function (follow) {
+    return follow.leader_id === currPageUserId && follow.follower_id === currentUser;
+  })[0];
+  return {
+    currentUser: currentUser,
+    pageUserId: currPageUserId,
+    follow: follow
+  };
+};
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {
+    createFollow: function (_createFollow) {
+      function createFollow(_x) {
+        return _createFollow.apply(this, arguments);
+      }
+
+      createFollow.toString = function () {
+        return _createFollow.toString();
+      };
+
+      return createFollow;
+    }(function (follow) {
+      return dispatch(createFollow(follow));
+    }),
+    deleteFollow: function (_deleteFollow) {
+      function deleteFollow(_x2) {
+        return _deleteFollow.apply(this, arguments);
+      }
+
+      deleteFollow.toString = function () {
+        return _deleteFollow.toString();
+      };
+
+      return deleteFollow;
+    }(function (follow) {
+      return dispatch(deleteFollow(follow));
+    })
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["withRouter"])(Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, mapDispatchToProps)(_follow_jsx__WEBPACK_IMPORTED_MODULE_2__["default"])));
 
 /***/ }),
 
@@ -488,6 +650,64 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 
 /***/ }),
 
+/***/ "./frontend/components/posts/post_index.jsx":
+/*!**************************************************!*\
+  !*** ./frontend/components/posts/post_index.jsx ***!
+  \**************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return PostIndex; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+var PostIndex = /*#__PURE__*/function (_React$Component) {
+  _inherits(PostIndex, _React$Component);
+
+  function PostIndex(props) {
+    _classCallCheck(this, PostIndex);
+
+    return _possibleConstructorReturn(this, _getPrototypeOf(PostIndex).call(this, props));
+  }
+
+  _createClass(PostIndex, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {}
+  }, {
+    key: "render",
+    value: function render() {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Followed Posts:");
+    }
+  }]);
+
+  return PostIndex;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+
+
+
+/***/ }),
+
 /***/ "./frontend/components/root.jsx":
 /*!**************************************!*\
   !*** ./frontend/components/root.jsx ***!
@@ -634,7 +854,7 @@ var SessionForm = /*#__PURE__*/function (_React$Component) {
     key: "render",
     value: function render() {
       var buttonText = this.props.formType === 'signup' ? 'Sign Up' : 'Log In';
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
         className: "session-form"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Username:", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "text",
@@ -709,6 +929,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _posts_post_container_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../posts/post_container.js */ "./frontend/components/posts/post_container.js");
+/* harmony import */ var _follow_follow_container_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../follow/follow_container.js */ "./frontend/components/follow/follow_container.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -726,6 +947,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
 
 
 
@@ -758,21 +980,30 @@ var User = /*#__PURE__*/function (_React$Component) {
       this.props.fetchSingleUser(this.props.match.params.username);
     }
   }, {
+    key: "userNotFound",
+    value: function userNotFound() {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        src: "https://cdn.rswebsols.com/wp-content/uploads/2018/02/404-error-not-found.jpg",
+        alt: "404"
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
       var _this$props = this.props,
           user = _this$props.user,
-          posts = _this$props.posts;
-      if (user === undefined || user.followers === undefined || user.leaders === undefined) return null;
+          posts = _this$props.posts,
+          leadings = _this$props.leadings,
+          followings = _this$props.followings;
+      if (user === undefined || user.followers === undefined || user.leaders === undefined) return this.userNotFound();
       var userPosts = posts.map(function (post) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_posts_post_container_js__WEBPACK_IMPORTED_MODULE_1__["default"], {
           post: post
         }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null));
-      }); // debugger
-
+      });
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "user-div"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, user.username), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Following: ", user.leaders.length), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Followers: ", user.followers.length), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, userPosts));
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, user.username), this.props.currUsername !== this.props.match.params.username ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_follow_follow_container_js__WEBPACK_IMPORTED_MODULE_2__["default"], null) : null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Following: ", followings.length), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Followers: ", leadings.length), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, userPosts));
     }
   }]);
 
@@ -804,17 +1035,28 @@ __webpack_require__.r(__webpack_exports__);
 var mapStateToProps = function mapStateToProps(_ref, ownProps) {
   var _ref$entities = _ref.entities,
       users = _ref$entities.users,
-      posts = _ref$entities.posts;
+      posts = _ref$entities.posts,
+      follows = _ref$entities.follows,
+      id = _ref.session.id;
   var foundUser = Object.values(users).find(function (user) {
     return user.username === ownProps.match.params.username;
   });
-  var userPosts = foundUser !== undefined ? foundUser.posts !== undefined ? foundUser.posts.map(function (id) {
-    return posts[id];
-  }) : [] : []; // debugger
-
+  var userPosts = foundUser !== undefined ? foundUser.posts !== undefined ? foundUser.posts.map(function (userId) {
+    return posts[userId];
+  }) : [] : [];
+  var currUser = users[id];
+  var leadings = foundUser !== undefined && follows !== undefined ? Object.values(follows).filter(function (follow) {
+    return follow.leader_id === foundUser.id;
+  }) : [];
+  var followings = foundUser !== undefined && follows !== undefined ? Object.values(follows).filter(function (follow) {
+    return follow.follower_id === foundUser.id;
+  }) : [];
   return {
+    currUsername: currUser.username,
     user: foundUser,
-    posts: userPosts
+    posts: userPosts,
+    leadings: leadings,
+    followings: followings
   };
 };
 
