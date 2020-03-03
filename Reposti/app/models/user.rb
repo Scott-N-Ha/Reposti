@@ -77,4 +77,8 @@ class User < ApplicationRecord
   has_many :liked_posts,
     through: :likes,
     source: :post
+
+  has_many :liked_posts_authors,
+    through: :liked_posts,
+    source: :author
 end

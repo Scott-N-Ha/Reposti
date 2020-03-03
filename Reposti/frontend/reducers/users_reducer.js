@@ -19,9 +19,9 @@ const usersReducer = (state = initialState, action) => {
       userId = action.payload.users[Object.keys(action.payload.users)[0]].id;
       nextState[userId] = action.payload.users[userId];
 
-      Object.keys(action.payload.follows_and_leads_users).forEach(id => {
+      Object.keys(action.payload.other_users).forEach(id => {
         if (nextState[id] === undefined){
-          nextState[id] = action.payload.follows_and_leads_users[id];
+          nextState[id] = action.payload.other_users[id];
         }
       });
 
