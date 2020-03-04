@@ -23,8 +23,8 @@ const App = (props) => {
     <Switch>
       <AuthRoute path="/login" component={LoginFormContainer} />
       <AuthRoute path="/signup" component={SignupFormContainer} />
-      <ProtectedRoute exact path={'/'} component={PostIndexContainer} />
       <ProtectedRoute exact path={`/:username`} component={UserContainer} />
+      <ProtectedRoute exact path={'/'} component={PostIndexContainer} />
     </Switch>
   </div>)
 };

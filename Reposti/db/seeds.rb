@@ -13,7 +13,6 @@ u1 = User.create(username: 'test1', email: 'test1@email.com', password: 'passwor
 u2 = User.create(username: 'test2', email: 'test2@email.com', password: 'password')
 u3 = User.create(username: 'test3', email: 'test3@email.com', password: 'password')
 
-
 PostType.destroy_all
 
 text = PostType.create(name: 'text')
@@ -27,8 +26,9 @@ video = PostType.create(name: 'video')
 Post.destroy_all
 
 p1 = Post.create(post_type_id: text.id, title: 'Test Text Post', body: 'The body of a the test text post', author_id: u.id)
-p2 = Post.create(post_type_id: quote.id, title: 'Quote Test Post', body: 'The body of a test quote post', author_id: u.id)
+p2 = Post.create(post_type_id: quote.id, title: 'This is the source of the Quote', body: 'This is the Quote itself', author_id: u.id)
 p3 = Post.create(post_type_id: link.id, title: 'Test Link Post', body: 'https://github.com/aa-ScottHa/', author_id: u1.id)
+p4 = Post.create(post_type_id: text.id, title: 'Another test Text Post', body: 'Help.', author_id: u2.id)
 
 Follow.destroy_all
 
@@ -42,3 +42,4 @@ Like.destroy_all
 lp1u = Like.create(post_id: p1.id, liker_id: u.id)
 lp2u = Like.create(post_id: p2.id, liker_id: u.id)
 lp3u = Like.create(post_id: p3.id, liker_id: u.id)
+lp1u1 = Like.create(post_id: p1.id, liker_id: u1.id)

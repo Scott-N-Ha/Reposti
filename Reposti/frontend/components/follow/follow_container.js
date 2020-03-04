@@ -13,7 +13,7 @@ const mapStateToProps = (state, ownProps) => {
   let currPageUsername = ownProps.match.params.username;
   let currPageUserId = Object.values(state.entities.users).filter(user => user.username === currPageUsername)[0].id;
 
-  let follow = Object.values(state.entities.follows).filter(follow => follow.leader_id === currPageUserId && follow.follower_id === Number(currentUser))[0];
+  let follow = Object.values(state.entities.follows).filter(follow => follow.leader_id === currPageUserId && follow.follower_id === currentUser)[0];
 
   return {
     currentUser: currentUser,

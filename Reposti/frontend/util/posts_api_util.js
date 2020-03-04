@@ -4,3 +4,19 @@ export const destroyPost = post => (
     method: 'DELETE'
   })
 );
+
+export const createPost = post => (
+  $.ajax({
+    url: `/api/posts/`,
+    method: 'POST',
+    data: { post }
+  })
+);
+
+export const updatePost = post => (
+  $.ajax({
+    url: `/api/posts/${post.id}`,
+    method: 'PATCH',
+    data: { post }
+  })
+);

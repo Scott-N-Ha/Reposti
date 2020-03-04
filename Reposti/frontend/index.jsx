@@ -5,7 +5,7 @@ import configureStore from './store/store.js';
 import Root from './components/root.jsx';
 
 // testing
-import { deletePost } from './actions/posts_actions.js';
+
 // testing
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -31,7 +31,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // testing
   window.store = store;
-  window.deletePost = deletePost;
   // testing
 
   const root = document.getElementById('root');
