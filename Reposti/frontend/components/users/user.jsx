@@ -8,10 +8,6 @@ export default class User extends React.Component {
     super(props);
   }
 
-  // componentWillMount(){
-  //   debugger
-  // }
-
   // componentWillUpdate(prevProps){
   //   // debugger
   // }
@@ -51,6 +47,10 @@ export default class User extends React.Component {
     return (
       <div className="user-div">
         <h2>{user.username}</h2>
+        <img
+          className="profile-pic-user-show"
+          src={ user.profileImgUrl === "" ? "https://68.media.tumblr.com/9f9b498bf798ef43dddeaa78cec7b027/tumblr_o51oavbMDx1ugpbmuo7_500.png" : user.profileImgUrl }
+          alt={user.username} />
         {this.props.currUsername !== this.props.match.params.username ? <FollowContainer /> : null}
         <h3>Following: {followings.length}</h3>
         <h3>Followers: {leadings.length}</h3>

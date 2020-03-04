@@ -13,7 +13,8 @@ const loginInfo = () => {
 const logoutInfo = (currentUser, logout) => (
   <div className='logout-info'>
     <h2>Welcome {currentUser.username}</h2>
-    <NavLink to="/"><i class="fas fa-home"></i></NavLink><br/>
+    <NavLink to="/"><i class="fas fa-home"></i></NavLink> 
+    <NavLink to="/settings"><i class="fas fa-user"></i></NavLink>
     <button onClick={logout}>Log Out</button>
   </div>
 )

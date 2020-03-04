@@ -35,7 +35,7 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'bootsnap', '>= 1.1.0', require: false
 
 gem 'jquery-rails'
-gem 'aws-sdk-s3'
+gem 'aws-sdk-s3', require: false
 gem 'friendly_id'
 
 group :development, :test do
