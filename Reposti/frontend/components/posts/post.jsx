@@ -24,7 +24,7 @@ export default class Post extends React.Component {
 
     return (
       <div className='post-div' key={post.id}>
-        <h3>Title: {post.title}</h3>
+        <span className='post-title'>{post.title}</span> 
         <h4>Author: <Link to={`/${author.username}`}>{author.username}</Link></h4>
         Body: {post.body} <br/>
         { (currUser.id === author.id) ? this.deleteRender() : null } <LikeContainer post={post} />
