@@ -7,7 +7,6 @@ import { createLike, deleteLike } from '../../actions/likes_actions.js';
 const mapStateToProps = (state, ownProps) => {
   // Current User that is logged in
   let currentUser = state.session.id;
-
   let postId = ownProps.post.id;
 
   let like = Object.values(state.entities.likes).filter(like => like.liker_id === currentUser && like.post_id === postId)[0];

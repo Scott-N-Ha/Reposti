@@ -1,8 +1,8 @@
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
-import Post from './post.jsx';
-import { deletePost } from '../../actions/posts_actions.js';
+import TextShow from './text_show.jsx';
+import { deletePost } from '../../../actions/posts_actions.js';
 
 const mapStateToProps = ({entities: { users, likes }, session: { id }}, ownProps) => {
   let currUser = users[id];
@@ -22,4 +22,4 @@ const mapDispatchToProps = dispatch => ({
 export default withRouter(connect(
   mapStateToProps,
   mapDispatchToProps
-)(Post));
+)(TextShow));
