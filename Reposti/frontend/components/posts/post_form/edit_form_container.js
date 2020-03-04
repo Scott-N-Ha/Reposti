@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
-import Text from './post_form.jsx';
+import PostForm from './post_form.jsx.js';
 
 const mapStateToProps = (state, ownProps) => ({
 
@@ -14,4 +14,4 @@ const mapDispatchToProps = dispatch => ({
 export default withRouter(connect(
   mapStateToProps,
   mapDispatchToProps
-)(Text));
+)(PostForm));

@@ -37,8 +37,8 @@ export default class Post extends React.Component {
     return (
       <div className="link-post">
         <a href={body} className="link-link">
+          <span className='link-title'>{title}</span> <br/>
           <span className='link-body'>{body}</span> <br/>
-          <span className='link-title'>{title}</span>
         </a>
       </div>
     )
