@@ -46,6 +46,8 @@ class User < ApplicationRecord
   def ensure_session_token
     self.session_token ||= SecureRandom::urlsafe_base64
   end
+
+  has_one_attached :profile_image
   
   has_many :posts,
   foreign_key: :author_id
