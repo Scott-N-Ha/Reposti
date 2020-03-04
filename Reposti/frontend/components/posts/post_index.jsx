@@ -1,7 +1,8 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import PostContainer from './post_container.js';
-
+import UserProfileImg from '../users/user_profile_img_container.js';
 
 export default class PostIndex extends React.Component {
   constructor(props){
@@ -12,8 +13,6 @@ export default class PostIndex extends React.Component {
       title: "",
       body: "",
     }
-
-
 
     this.postCreate = this.postCreate.bind(this);
     this.postCancel = this.postCancel.bind(this);
@@ -104,8 +103,16 @@ export default class PostIndex extends React.Component {
   render(){
     if (this.props.posts === undefined) return null;
 
+    const { currUser } = this.props;
+
     const posts = this.props.posts.sort((a,b) => b.id - a.id).map(post => {
-      return <li key={post.id}><PostContainer post={post} /></li>;
+      return (
+        <li key={post.id}>
+          {/* <Link to={`/${currUser.username}`}><img className="feed-image-icon" src={currUser.profileImgUrl} alt={currUser.username} /></Link> */}
+          <UserProfileImg userId={post.author_id} />
+          <PostContainer post={post} />
+        </li>
+        );
     });
 
     return(

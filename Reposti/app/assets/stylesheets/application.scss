@@ -10,10 +10,13 @@
  * files in this directory. Styles in this file should be added after the last require_* statement.
  * It is generally better to create a new file per style scope.
  *
- *= require_tree .
  *= require_self
  */
-
- .hidden {
-   display: none;
- }
+ 
+ @import './reset.css';
+ @import './components/user_profile_img.scss';
+ @import './components/user.scss';
+ 
+.hidden {
+  display: none;
+}
