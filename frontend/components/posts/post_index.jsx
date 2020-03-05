@@ -14,6 +14,8 @@ export default class PostIndex extends React.Component {
       body: "",
     }
 
+    
+
     this.postCreate = this.postCreate.bind(this);
     this.postCancel = this.postCancel.bind(this);
     this.chooseRender = this.chooseRender.bind(this);
