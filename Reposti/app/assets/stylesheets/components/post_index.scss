@@ -1,0 +1,27 @@
+.main-feed {
+  max-width: 625px;
+}
+
+.top-links-container {
+  border-radius: 3px;
+  background-color: #ffffff;
+  max-width: 530px;
+}
+
+.top-links {
+  display: flex;
+}
+
+.top-link {
+  display: block;
+  text-align: center;
+  line-height: 21px;
+  font-size: 15px;
+  width: 75px;
+  min-height: 99px;
+}
+
+.post-index-post {
+  display: flex;
+  margin: 10px;
+}
