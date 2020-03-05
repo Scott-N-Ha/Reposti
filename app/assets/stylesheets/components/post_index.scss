@@ -34,6 +34,10 @@
   flex-direction: column;
 }
 
+.top-links:hover {
+  cursor: pointer;
+}
+
 .post-index-post {
   width: 625px;
   display: flex;

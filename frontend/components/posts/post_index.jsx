@@ -81,6 +81,14 @@ export default class PostIndex extends React.Component {
           </div>
         );
 
+      case 2:
+        return (
+          <div className="photo-post">
+            <input type="image" src="" alt=""/> <br/>
+            <input type="file" name="" id=""/>
+          </div>
+        );
+
       case 3:
         return (
           <div className="quote-post">

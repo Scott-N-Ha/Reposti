@@ -12,7 +12,7 @@ export default class Post extends React.Component {
   }
 
   deleteRender(){
-    return <div onClick={() => this.props.deletePost(this.props.post)}><i class="far fa-trash-alt"></i></div>
+    return <div onClick={() => this.props.deletePost(this.props.post)}><i class="fas fa-cog"></i></div>
   }
 
   renderText({title, body}){
@@ -20,6 +20,18 @@ export default class Post extends React.Component {
       <div className="text-post">
         <span className='text-title'><h2>{title}</h2></span>
         <span className='text-body'>{body}</span>
+      </div>
+    )
+  }
+
+  renderPhoto({ photos }){
+    const render = photos.map(photo => {
+      return <img src={photo} className="photos-post-photo" />
+    })
+
+    return (
+      <div className="photo-post">
+        {render}
       </div>
     )
   }
@@ -48,6 +60,9 @@ export default class Post extends React.Component {
     switch (post.post_type_id) {
       case 1:
         return this.renderText(post);
+
+      case 2:
+        return this.renderPhoto(post);
 
       case 3:
         return this.renderQuote(post);
