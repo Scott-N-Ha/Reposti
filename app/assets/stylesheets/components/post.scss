@@ -1,11 +1,22 @@
 .post-div {
   border-radius: 3px;
   background-color: #ffffff;
+  width: 540px;
+  // display: flex;
+  // justify-content: space-between;
+}
+
+.post-div div {
+
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
 .post-footer {
   display: flex;
   justify-content: space-between;
+  height: 45px;
+  vertical-align: baseline;
 }
 
 .post-footer-options {

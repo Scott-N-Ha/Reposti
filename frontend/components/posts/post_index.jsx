@@ -29,7 +29,7 @@ export default class PostIndex extends React.Component {
 
   postCreate(postType){
     let links = document.getElementsByClassName('top-links')[0];
-    let test = document.getElementsByClassName('test-link-div')[0];
+    let test = document.getElementsByClassName('input-div')[0];
 
     links.classList.add('hidden');
     test.classList.remove('hidden');
@@ -43,7 +43,7 @@ export default class PostIndex extends React.Component {
     event.preventDefault();
 
     let links = document.getElementsByClassName('top-links')[0];
-    let test = document.getElementsByClassName('test-link-div')[0];
+    let test = document.getElementsByClassName('input-div')[0];
 
     links.classList.remove('hidden');
     test.classList.add('hidden');
@@ -120,34 +120,35 @@ export default class PostIndex extends React.Component {
     return(
       <div className='main-feed'>
 
-        <div className='top-links-container'>
-          <div className='top-links'>
-            <div className="top-link" onClick={() => this.postCreate(1)}><i class="fas fa-font"></i> Text</div>
-            <div className="top-link" onClick={() => this.postCreate(2)}><i class="fas fa-camera"></i> Photo</div>
-            <div className="top-link" onClick={() => this.postCreate(3)}><i class="fas fa-quote-left"></i> Quote</div>
-            <div className="top-link" onClick={() => this.postCreate(4)}><i class="fas fa-link"></i> Link</div>
-            <div className="top-link" onClick={() => this.postCreate(5)}><i class="fas fa-comment-dots"></i> Chat</div>
-            <div className="top-link" onClick={() => this.postCreate(6)}><i class="fas fa-headphones"></i> Audio</div>
-            <div className="top-link" onClick={() => this.postCreate(7)}><i class="fas fa-video"></i> Video</div>
-          </div>
-
-          <div className="test-link-div hidden">
-            <form>
-              Peekaboo {this.state.post_type_id} <br/>
-              {this.chooseRender()} <br/>
-
-              <div>
-                <button onClick={this.postCancel} >Cancel</button>
-                <button onClick={this.handleSubmit} >Post</button>
+        <ul>
+          <li className="top-container">
+            <UserProfileImg userId={currUser.id} />
+            <div className='top-links-container'>
+              <div className='top-links'>
+                <div className="top-link" onClick={() => this.postCreate(1)}><i class="fas fa-font"></i> Text</div>
+                <div className="top-link" onClick={() => this.postCreate(2)}><i class="fas fa-camera"></i> Photo</div>
+                <div className="top-link" onClick={() => this.postCreate(3)}><i class="fas fa-quote-left"></i> Quote</div>
+                <div className="top-link" onClick={() => this.postCreate(4)}><i class="fas fa-link"></i> Link</div>
+                <div className="top-link" onClick={() => this.postCreate(5)}><i class="fas fa-comment-dots"></i> Chat</div>
+                <div className="top-link" onClick={() => this.postCreate(6)}><i class="fas fa-headphones"></i> Audio</div>
+                <div className="top-link" onClick={() => this.postCreate(7)}><i class="fas fa-video"></i> Video</div>
               </div>
 
-            </form>
+            <div className="input-div hidden">
+              <form>
+                {this.chooseRender()} <br/>
 
+                <div className="input-buttons-div">
+                  <button onClick={this.postCancel} >Cancel</button>
+                  <button onClick={this.handleSubmit} >Post</button>
+                </div>
+
+              </form>
+
+            </div>
           </div>
-        </div>
-
-        <h2>Feed:</h2>
-        <ul>
+        </li>
+        
           {posts}
         </ul>
       </div>

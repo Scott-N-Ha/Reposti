@@ -21,7 +21,7 @@ const logoutInfo = (currentUser, logout) => (
 
 const NavBar = ({ currentUser, logout }) => {
   return (
-    <div>
+    <div className="nav-bar">
       {currentUser === undefined ? loginInfo() : logoutInfo(currentUser, logout)}
     </div>
   );
