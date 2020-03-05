@@ -8,12 +8,6 @@ export default class User extends React.Component {
     super(props);
   }
 
-  // componentWillUpdate(prevProps){
-  //   // debugger
-  // }
-  
-//&& this.props.match.params.username !== undefined
-
   componentDidUpdate(prevProps){
     if (prevProps.match.params.username !== this.props.match.params.username ){
       this.props.fetchSingleUser(this.props.match.params.username)
