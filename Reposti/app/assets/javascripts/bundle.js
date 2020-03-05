@@ -958,9 +958,13 @@ var Post = /*#__PURE__*/function (_React$Component) {
         key: post.id
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
         to: "/".concat(author.username)
-      }, author.username), postRender, likes.length, " notes ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_like_like_container_js__WEBPACK_IMPORTED_MODULE_2__["default"], {
+      }, author.username), postRender, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "post-footer"
+      }, likes.length, " notes ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "post-footer-options"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_like_like_container_js__WEBPACK_IMPORTED_MODULE_2__["default"], {
         post: post
-      }), currUser.id === author.id ? this.deleteRender() : null);
+      }), currUser.id === author.id ? this.deleteRender() : null)));
     }
   }]);
 
@@ -1201,6 +1205,7 @@ var PostIndex = /*#__PURE__*/function (_React$Component) {
         return b.id - a.id;
       }).map(function (post) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+          className: "post-index-post",
           key: post.id
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_users_user_profile_img_container_js__WEBPACK_IMPORTED_MODULE_3__["default"], {
           userId: post.author_id

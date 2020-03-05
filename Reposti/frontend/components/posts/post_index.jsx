@@ -107,7 +107,7 @@ export default class PostIndex extends React.Component {
 
     const posts = this.props.posts.sort((a,b) => b.id - a.id).map(post => {
       return (
-        <li key={post.id}>
+        <li className="post-index-post" key={post.id}>
           {/* <Link to={`/${currUser.username}`}><img className="feed-image-icon" src={currUser.profileImgUrl} alt={currUser.username} /></Link> */}
           <UserProfileImg userId={post.author_id} />
           <PostContainer post={post} />

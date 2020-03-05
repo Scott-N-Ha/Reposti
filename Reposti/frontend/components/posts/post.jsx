@@ -73,9 +73,14 @@ export default class Post extends React.Component {
 
         {postRender}
 
-        {likes.length} notes <br/>
-        <LikeContainer post={post} />
-        { (currUser.id === author.id) ? this.deleteRender() : null }
+        <div className="post-footer">
+            {likes.length} notes <br/>
+
+          <div className="post-footer-options">
+            <LikeContainer post={post} />
+          { (currUser.id === author.id) ? this.deleteRender() : null }
+          </div>
+        </div>
       </div>
     )
   }
