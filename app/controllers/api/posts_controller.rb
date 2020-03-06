@@ -22,10 +22,17 @@ class Api::PostsController < ApplicationController
   end
 
   def create
-    debugger
     @post = Post.new(post_params)
+    debugger
     
     if @post.save
+
+      # unless params['post']['photos'].empty?
+      #   params['post']['photos'].each do |photo|
+      #     @post.attach()
+      #   end
+      # end
+
       render :show
     else
       flash.now[:errors] = @post.errors.full_messages

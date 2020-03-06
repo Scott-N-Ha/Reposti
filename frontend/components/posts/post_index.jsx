@@ -109,18 +109,18 @@ export default class PostIndex extends React.Component {
   handleSubmit(e){
     e.preventDefault();
 
-    if (this.state.post_type_id === 2) {
-      const formData = new FormData();
+    const { post_type_id, photos } = this.state;
+    const { currUser } = this.props;
+
+    if ( post_type_id === 2) {
+      let formData = new FormData();
       
       formData.append('post[post_type_id]', 2);
-      formData.append('post[author_id]', this.props.currUser.id);
-      formData.append('post[photos]', this.state.photos);
+      formData.append('post[author_id]', currUser.id);
 
-      debugger
-      
-      // formData['post[post_type_id]'] = 2;
-      // formData['post[author_id]'] = this.props.currUser.id;
-      // formData['post[photos]'] = this.state.photos;
+      for (let i = 0; i < photos.length; i++) {
+        formData.append("post[photos][]", photos[i]);
+      }
 
       this.props.createPhotoPost(formData).then(() => this.postCancel());
     } else {
