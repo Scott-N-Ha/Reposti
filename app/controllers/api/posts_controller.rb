@@ -22,6 +22,7 @@ class Api::PostsController < ApplicationController
   end
 
   def create
+    debugger
     @post = Post.new(post_params)
     
     if @post.save
@@ -49,7 +50,7 @@ class Api::PostsController < ApplicationController
   end
 
   def destroy
-    @post = fetch_post
+    @post = Post.find_by(id: post_id)
 
     if @post
       @post.destroy
@@ -62,7 +63,7 @@ class Api::PostsController < ApplicationController
 
   private
   def post_params
-    params.require(:post).permit(:post_type_id, :title, :body, :author_id, photos: [], :video)
+    params.require(:post).permit(:post_type_id, :title, :body, :author_id, :video, photos: [])
   end
 
   def post_id

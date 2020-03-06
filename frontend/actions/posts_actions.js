@@ -25,13 +25,19 @@ const deletePostAction = payload => ({
 // Thunk Actions
 export const createPost = post => dispatch => (
   PostsAPI.createPost(post)
-  .then(post => dispatch(createPostAction(post)),
-  errors => dispatch(receiveErrors(errors)))
-  );
+    .then(post => dispatch(createPostAction(post)),
+      errors => dispatch(receiveErrors(errors)))
+);
+
+export const createPhotoPost = post => dispatch => (
+  PostsAPI.createPhotoPost(post)
+    .then(post => dispatch(createPostAction(post)),
+      errors => dispatch(receiveErrors(errors)))
+);
   
-  export const updatePost = post => dispatch => (
-    PostsAPI.updatePost(post)
-    .then(post => dispatch(updatePostAction(post)),
+export const updatePost = post => dispatch => (
+  PostsAPI.updatePost(post)
+  .then(post => dispatch(updatePostAction(post)),
     errors => dispatch(receiveErrors(errors)))
 );
 

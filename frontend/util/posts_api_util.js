@@ -9,9 +9,7 @@ export const createPost = post => (
   $.ajax({
     url: `/api/posts/`,
     method: 'POST',
-    data: { post },
-    contentType: false,
-    processData: false
+    data: { post }
   })
 );
 
@@ -22,3 +20,16 @@ export const updatePost = post => (
     data: { post }
   })
 );
+
+export const createPhotoPost = post => {
+
+  debugger 
+
+  return $.ajax({
+    method: 'POST',
+    url: '/api/posts',
+    data: post,
+    contentType: false,
+    processData: false,
+  });
+};

@@ -12,14 +12,15 @@ export default class PostIndex extends React.Component {
       post_type_id: 1,
       title: "",
       body: "",
+      photoUrls: [],
+      photos: []
     }
-
-    
 
     this.postCreate = this.postCreate.bind(this);
     this.postCancel = this.postCancel.bind(this);
     this.chooseRender = this.chooseRender.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.handleFile = this.handleFile.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
@@ -51,6 +52,8 @@ export default class PostIndex extends React.Component {
     this.setState({
       title: "",
       body: "",
+      photoUrls: [],
+      photos: []
     });
   }
 
@@ -60,13 +63,69 @@ export default class PostIndex extends React.Component {
     })
   }
 
+  handleFile(e){
+    const files = e.currentTarget.files;
+    
+    if (files.length > 8) {
+      document.getElementById('photos-uploader').value = "";
+      return null;
+    }
+    
+    Object.keys(files).forEach(id => {
+      let file = files[id];
+
+      const photoReader = new FileReader();
+
+      let that = this;
+
+      photoReader.onloadend = () => {
+        const currentArr = that.state.photoUrls;
+        currentArr.push(photoReader.result);
+        that.setState({photoUrls: currentArr});
+      }
+      
+      if (file) {
+        const currentPhotos = that.state.photos;
+        currentPhotos.push(file);
+        that.setState({photos: currentPhotos});
+        photoReader.readAsDataURL(file);
+      }
+    })
+  }
+
+  inputImageClick(photoUrlIdx){
+    if (this.state.photoUrls[photoUrlIdx] && this.state.photos[photoUrlIdx]){
+      let photoUrl = this.state.photoUrls[photoUrlIdx];
+      let photo = this.state.photos[photoUrlIdx];
+      return () => {
+        this.setState({
+          photoUrls: this.state.photoUrls.filter(pU => pU !== photoUrl),
+          photos: this.state.photos.filter(p => p !== photo),
+        });
+      }
+    }
+  }
+
   handleSubmit(e){
     e.preventDefault();
 
-    // const { title, body, post_type_id } = this.state;
-    // const { currUser }
+    if (this.state.post_type_id === 2) {
+      const formData = new FormData();
+      
+      formData.append('post[post_type_id]', 2);
+      formData.append('post[author_id]', this.props.currUser.id);
+      formData.append('post[photos]', this.state.photos);
 
-    this.props.createPost(Object.assign(this.state, {author_id: this.props.currUser.id})).then(() => this.postCancel())
+      debugger
+      
+      // formData['post[post_type_id]'] = 2;
+      // formData['post[author_id]'] = this.props.currUser.id;
+      // formData['post[photos]'] = this.state.photos;
+
+      this.props.createPhotoPost(formData).then(() => this.postCancel());
+    } else {
+      this.props.createPost(Object.assign(this.state, {author_id: this.props.currUser.id})).then(() => this.postCancel())
+    }
   }
 
   chooseRender(){
@@ -82,12 +141,20 @@ export default class PostIndex extends React.Component {
         );
 
       case 2:
-        return (
-          <div className="photo-post">
-            <input type="image" src="" alt=""/> <br/>
-            <input type="file" name="" id=""/>
-          </div>
-        );
+        const photos = this.state.photoUrls.map((photoUrl, pu_idx) => {
+          return <img src={photoUrl} className="photos-post-photo photo-preview" onClick={this.inputImageClick(pu_idx)} />
+        })
+
+        if (this.state.photoUrls.length < 8){
+          return (
+            <div className="photo-post">
+              {photos}
+              <input type="file" name="photos" id="photos-uploader" multiple accept="image/*" onChange={this.handleFile} />
+            </div>
+          );
+        } else {
+          return null;
+        }
 
       case 3:
         return (
