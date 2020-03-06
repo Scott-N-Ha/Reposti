@@ -1,0 +1,33 @@
+.nav-bar {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  z-index: 9000;
+  background: fixed;
+  background-color: #001935;
+  font-size: x-large;
+}
+
+.nav-bar-logged-in {
+  width: 100%;
+  min-height: 54px;
+
+  position: relative;
+  left: 0;
+  top: 0;
+  /* padding-left: 54px; */
+  /* padding-right: 54px; */
+  box-shadow: 0 0 0 1px hsla(0, 0%, 100%, .13);
+  z-index: 90;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.nav-bar a, a:visited, a:hover, a:active {
+  text-decoration: none;
+  color: whitesmoke;
+}

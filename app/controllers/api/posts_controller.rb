@@ -1,6 +1,13 @@
 class Api::PostsController < ApplicationController
   def index
-    @posts = Post.all.includes(:author).includes(:likes).includes(:likers).includes(:photos).includes(:video).includes(:audio)
+    @posts = Post
+              .all
+              .includes(:author)
+              .includes(:likes)
+              .includes(:likers)
+              .includes(:photos)
+              .includes(:video)
+              .includes(:audio)
 
     if @posts
       render :index
@@ -62,7 +69,7 @@ class Api::PostsController < ApplicationController
 
   private
   def post_params
-    params.require(:post).permit(:post_type_id, :title, :body, :author_id, :video, photos: [])
+    params.require(:post).permit(:post_type_id, :title, :body, :author_id, :video, :audio, photos: [])
   end
 
   def post_id

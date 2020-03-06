@@ -5,13 +5,13 @@
 }
 
 .post-div div {
-  // padding-left: 20px;
-  // padding-right: 20px;
+
 }
 
 .post-footer {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   height: 45px;
   vertical-align: baseline;
 }
@@ -23,4 +23,17 @@
 .photos-post-photo {
   width: 100%;
   height: auto;
+}
+
+.post-image-icon {
+  position: relative;
+}
+
+.profile-img-icon {
+  position: sticky;
+  position: -webkit-sticky;
+}
+
+.unliked {
+  color: #ff492f;
 }

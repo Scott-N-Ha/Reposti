@@ -65,6 +65,10 @@ export default class PostIndex extends React.Component {
       audioUrl: "",
       audio: null,
     });
+
+    document.querySelectorAll('.input-button').forEach(btn => {
+      btn.disabled = false;
+    });
   }
 
   handleChange(e){
@@ -151,6 +155,10 @@ export default class PostIndex extends React.Component {
   handleSubmit(e){
     e.preventDefault();
 
+    document.querySelectorAll('.input-button').forEach(btn => {
+      btn.disabled = true;
+    });
+
     const { post_type_id, photos, video, audio, title, body } = this.state;
     const { currUser, createPost, createMediaPost } = this.props;
 
@@ -168,7 +176,7 @@ export default class PostIndex extends React.Component {
 
         createMediaPost(formData)
           .then(() => this.postCancel())
-          .catch(() => this.postCancel());
+          .fail(() => this.postCancel());
         break;
 
       case 6:
@@ -176,7 +184,7 @@ export default class PostIndex extends React.Component {
 
         createMediaPost(formData)
           .then(() => this.postCancel())
-          .catch(() => this.postCancel());
+          .fail(() => this.postCancel());
         break;
 
       case 7:
@@ -184,7 +192,7 @@ export default class PostIndex extends React.Component {
 
         createMediaPost(formData)
           .then(() => this.postCancel())
-          .catch(() => this.postCancel());
+          .fail(() => this.postCancel());
         break;
 
       default:
@@ -197,7 +205,7 @@ export default class PostIndex extends React.Component {
 
         createPost(newState)
           .then(() => this.postCancel())
-          .catch(() => this.postCancel());
+          .fail(() => this.postCancel());
         break;
     }
   }
@@ -266,7 +274,7 @@ export default class PostIndex extends React.Component {
       case 7:
           let video;
           if(this.state.videoUrl !== ""){
-            video = <video width="540" height="304" controls className="video-player">
+            video = <video width="540" height="304" controls className="video-player" autoPictureInPicture preload>
               <source src={this.state.videoUrl} />
               Your browser does not support this type of video.
             </video>
@@ -303,7 +311,7 @@ export default class PostIndex extends React.Component {
     return(
       <div className='main-feed'>
 
-        <ul>
+        <ul className="main-feed-ul">
           <li className="top-container">
             <UserProfileImg userId={currUser.id} />
             <div className='top-links-container'>
@@ -322,8 +330,8 @@ export default class PostIndex extends React.Component {
                 {this.chooseRender()} <br/>
 
                 <div className="input-buttons-div">
-                  <button onClick={this.postCancel} >Cancel</button>
-                  <button onClick={this.handleSubmit} >Post</button>
+                  <button onClick={this.postCancel} className="input-button cancel-btn">Cancel</button>
+                  <button onClick={this.handleSubmit} className="input-button post-btn" >Post</button>
                 </div>
 
               </form>

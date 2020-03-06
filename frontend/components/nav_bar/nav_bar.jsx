@@ -11,11 +11,14 @@ const loginInfo = () => {
 };
 
 const logoutInfo = (currentUser, logout) => (
-  <div className='logout-info'>
+  <div className='nav-bar-logged-in'>
+    <NavLink to="/"><i class="fab fa-resolving"></i></NavLink>
     <h2>Welcome {currentUser.username}</h2>
-    <NavLink to="/"><i class="fas fa-home"></i></NavLink> 
-    <NavLink to="/settings"><i class="fas fa-user"></i></NavLink>
-    <button onClick={logout}>Log Out</button>
+    <div className="logout-info">
+      <NavLink to="/"><i class="fas fa-home"></i></NavLink> 
+      <NavLink to="/settings"><i class="fas fa-user"></i></NavLink>
+      <button onClick={logout}>Log Out</button>
+    </div>
   </div>
 )
 

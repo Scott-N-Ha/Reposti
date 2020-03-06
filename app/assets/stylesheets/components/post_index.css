@@ -1,5 +1,10 @@
 .main-feed {
   max-width: 625px;
+  position: relative;
+}
+
+.main-feed-ul {
+
 }
 
 .top-container {
@@ -19,6 +24,10 @@
 .top-links {
   display: flex;
   right: 0;
+}
+
+.top-links.hidden {
+  display: none;
 }
 
 .top-link {

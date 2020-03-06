@@ -15,10 +15,7 @@ import PostIndexContainer from './posts/post_index_container.js';
 const App = (props) => {
   return (
   <div className="app">
-    <header>
-      <h1>Reposti</h1>
-      <NavBarContainer />
-    </header>
+    <NavBarContainer />
 
     <Switch>
       <AuthRoute path="/login" component={LoginFormContainer} />

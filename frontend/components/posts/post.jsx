@@ -37,7 +37,7 @@ export default class Post extends React.Component {
   }
 
   renderVideo({ video }){
-    return <video width="540" height="304" controls className="video-player" >
+    return <video width="540" height="304" controls className="video-player" autoPictureInPicture preload >
       <source src={video} />
       Your browser does not support this type of video.
     </video>
