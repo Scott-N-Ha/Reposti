@@ -36,6 +36,20 @@ export default class Post extends React.Component {
     )
   }
 
+  renderVideo({ video }){
+    return <video width="540" height="304" controls className="video-player" >
+      <source src={video} />
+      Your browser does not support this type of video.
+    </video>
+  }
+
+  renderAudio({ audio }){
+    return <audio controls className="audio-player" >
+      <source src={audio} />
+      Your browser does not support this type of audio.
+    </audio>
+  }
+
   renderQuote({title, body}){
     return (
       <div className="quote-post">
@@ -69,6 +83,12 @@ export default class Post extends React.Component {
 
       case 4:
         return this.renderLink(post);
+
+      case 6:
+        return this.renderAudio(post);
+
+      case 7:
+        return this.renderVideo(post);
     
       default:
         return <div>This component has not been coded yet</div>;

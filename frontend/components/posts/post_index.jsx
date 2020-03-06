@@ -13,15 +13,21 @@ export default class PostIndex extends React.Component {
       title: "",
       body: "",
       photoUrls: [],
-      photos: []
+      photos: [],
+      videoUrl: "",
+      video: null,
+      audioUrl: "",
+      audio: null,
     }
 
     this.postCreate = this.postCreate.bind(this);
     this.postCancel = this.postCancel.bind(this);
     this.chooseRender = this.chooseRender.bind(this);
     this.handleChange = this.handleChange.bind(this);
-    this.handleFile = this.handleFile.bind(this);
+    this.handlePhotos = this.handlePhotos.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleVideo = this.handleVideo.bind(this);
+    this.handleAudio = this.handleAudio.bind(this);
   }
 
   componentDidMount(){
@@ -53,7 +59,11 @@ export default class PostIndex extends React.Component {
       title: "",
       body: "",
       photoUrls: [],
-      photos: []
+      photos: [],
+      videoUrl: "",
+      video: null,
+      audioUrl: "",
+      audio: null,
     });
   }
 
@@ -63,7 +73,7 @@ export default class PostIndex extends React.Component {
     })
   }
 
-  handleFile(e){
+  handlePhotos(e){
     const files = e.currentTarget.files;
     
     if (files.length > 8) {
@@ -93,6 +103,38 @@ export default class PostIndex extends React.Component {
     })
   }
 
+  handleVideo(e){
+    const file = e.currentTarget.files[0];
+
+    const videoReader = new FileReader();
+    let that = this;
+
+    videoReader.onloadend = () => {
+      that.setState({videoUrl: videoReader.result});
+    }
+
+    if (file){
+      this.setState({video: file});
+      videoReader.readAsDataURL(file);
+    }
+  }
+
+  handleAudio(e){
+    const file = e.currentTarget.files[0];
+
+    const audioReader = new FileReader();
+    let that = this;
+
+    audioReader.onloadend = () => {
+      that.setState({audioUrl: audioReader.result});
+    }
+
+    if (file){
+      this.setState({audio: file});
+      audioReader.readAsDataURL(file);
+    }
+  }
+
   inputImageClick(photoUrlIdx){
     if (this.state.photoUrls[photoUrlIdx] && this.state.photos[photoUrlIdx]){
       let photoUrl = this.state.photoUrls[photoUrlIdx];
@@ -109,22 +151,39 @@ export default class PostIndex extends React.Component {
   handleSubmit(e){
     e.preventDefault();
 
-    const { post_type_id, photos } = this.state;
-    const { currUser } = this.props;
+    const { post_type_id, photos, video, audio } = this.state;
+    const { currUser, createPost, createPhotoPost, createMediaPost } = this.props;
 
-    if ( post_type_id === 2) {
-      let formData = new FormData();
-      
-      formData.append('post[post_type_id]', 2);
-      formData.append('post[author_id]', currUser.id);
+    let formData = new FormData();
+    formData.append('post[post_type_id]', post_type_id);
+    formData.append('post[author_id]', currUser.id);
 
-      for (let i = 0; i < photos.length; i++) {
-        formData.append("post[photos][]", photos[i]);
-      }
+    debugger
 
-      this.props.createPhotoPost(formData).then(() => this.postCancel());
-    } else {
-      this.props.createPost(Object.assign(this.state, {author_id: this.props.currUser.id})).then(() => this.postCancel())
+    switch (post_type_id) {
+      case 2:
+        for (let i = 0; i < photos.length; i++) {
+          formData.append("post[photos][]", photos[i]);
+        }
+
+        createPhotoPost(formData).then(() => this.postCancel());
+        break;
+      case 6:
+        debugger
+        formData.append("post[audio]", audio);
+
+        createMediaPost(formData).then(() => this.postCancel());
+        break;
+
+      case 7:
+        formData.append("post[video]", video);
+
+        createMediaPost(formData).then(() => this.postCancel());
+        break;
+
+      default:
+        createPost(Object.assign(this.state, {author_id: currUser.id})).then(() => this.postCancel());
+        break;
     }
   }
 
@@ -149,7 +208,7 @@ export default class PostIndex extends React.Component {
           return (
             <div className="photo-post">
               {photos}
-              <input type="file" name="photos" id="photos-uploader" multiple accept="image/*" onChange={this.handleFile} />
+              <input type="file" name="photos" id="photos-uploader" multiple accept="image/*" onChange={this.handlePhotos} />
             </div>
           );
         } else {
@@ -169,6 +228,40 @@ export default class PostIndex extends React.Component {
           <div className="link-post">
             <input type="text" name="title" value={title} onChange={this.handleChange} placeholder="Type or paste a URL" /> <br/>
             <input name="body" value={body} onChange={this.handleChange} placeholder="Add a description, if you like" /> <br/>
+          </div>
+        )
+
+      case 6:
+        let audio;
+          if(this.state.audioUrl !== ""){
+            audio = <audio controls className="audio-player">
+              <source src={this.state.audioUrl} />
+              Your browser does not support this type of audio.
+            </audio>
+          } else {
+            audio = <input type="file" name="audio-uploader" accept="audio/*" onChange={this.handleAudio} />
+          }
+
+        return (
+          <div className="audio-post">
+            {audio}
+          </div>
+        )
+
+      case 7:
+          let video;
+          if(this.state.videoUrl !== ""){
+            video = <video width="540" height="304" controls className="video-player">
+              <source src={this.state.videoUrl} />
+              Your browser does not support this type of video.
+            </video>
+          } else {
+            video = <input type="file" name="video-uploader" accept="video/*" onChange={this.handleVideo} />
+          }
+
+        return (
+          <div className="video-post">
+            {video}
           </div>
         )
     

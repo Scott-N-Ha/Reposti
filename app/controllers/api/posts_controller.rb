@@ -1,6 +1,6 @@
 class Api::PostsController < ApplicationController
   def index
-    @posts = Post.all.includes(:author).includes(:likes).includes(:likers).includes(:photos).includes(:video)
+    @posts = Post.all.includes(:author).includes(:likes).includes(:likers).includes(:photos).includes(:video).includes(:audio)
 
     if @posts
       render :index
@@ -23,16 +23,8 @@ class Api::PostsController < ApplicationController
 
   def create
     @post = Post.new(post_params)
-    debugger
     
     if @post.save
-
-      # unless params['post']['photos'].empty?
-      #   params['post']['photos'].each do |photo|
-      #     @post.attach()
-      #   end
-      # end
-
       render :show
     else
       flash.now[:errors] = @post.errors.full_messages
@@ -84,6 +76,7 @@ class Api::PostsController < ApplicationController
       .includes(:likers)
       .includes(:photos)
       .includes(:video)
+      .includes(:audio)
       .find_by(id: post_id)
   end
 end

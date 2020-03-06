@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom';
 
 import PostIndex from './post_index.jsx';
 import { fetchSingleUser } from '../../actions/users_actions.js';
-import { createPost, createPhotoPost } from '../../actions/posts_actions.js';
+import { createPost, createPhotoPost, createMediaPost } from '../../actions/posts_actions.js';
 
 const mapStateToProps = ({entities: { users, posts, follows }, session: { id }}, ownProps) => {
   let currUser = users[id];
@@ -19,6 +19,7 @@ const mapDispatchToProps = dispatch => ({
   fetchSingleUser: user => dispatch(fetchSingleUser(user)),
   createPost: post => dispatch(createPost(post)),
   createPhotoPost: post => dispatch(createPhotoPost(post)),
+  createMediaPost: post => dispatch(createMediaPost(post)),
 });
 
 export default withRouter(connect(

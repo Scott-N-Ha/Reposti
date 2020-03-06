@@ -26,6 +26,6 @@ class Post < ApplicationRecord
     source: :liker
   
   has_many_attached :photos
-
   has_one_attached :video
+  has_one_attached :audio
 end

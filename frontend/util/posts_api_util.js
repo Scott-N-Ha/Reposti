@@ -22,9 +22,16 @@ export const updatePost = post => (
 );
 
 export const createPhotoPost = post => {
+  return $.ajax({
+    method: 'POST',
+    url: '/api/posts',
+    data: post,
+    contentType: false,
+    processData: false,
+  });
+};
 
-  debugger 
-
+export const createMediaPost = post => {
   return $.ajax({
     method: 'POST',
     url: '/api/posts',
