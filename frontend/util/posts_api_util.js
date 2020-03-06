@@ -5,13 +5,13 @@ export const destroyPost = post => (
   })
 );
 
-export const createPost = post => (
-  $.ajax({
+export const createPost = post => {
+  return $.ajax({
     url: `/api/posts/`,
     method: 'POST',
     data: { post }
-  })
-);
+  });
+};
 
 export const updatePost = post => (
   $.ajax({
@@ -20,16 +20,6 @@ export const updatePost = post => (
     data: { post }
   })
 );
-
-export const createPhotoPost = post => {
-  return $.ajax({
-    method: 'POST',
-    url: '/api/posts',
-    data: post,
-    contentType: false,
-    processData: false,
-  });
-};
 
 export const createMediaPost = post => {
   return $.ajax({

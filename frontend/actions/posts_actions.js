@@ -29,12 +29,6 @@ export const createPost = post => dispatch => (
       errors => dispatch(receiveErrors(errors)))
 );
 
-export const createPhotoPost = post => dispatch => (
-  PostsAPI.createPhotoPost(post)
-    .then(post => dispatch(createPostAction(post)),
-      errors => dispatch(receiveErrors(errors)))
-);
-
 export const createMediaPost = post => dispatch => (
   PostsAPI.createMediaPost(post)
     .then(post => dispatch(createPostAction(post)),

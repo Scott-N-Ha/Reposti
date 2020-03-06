@@ -151,14 +151,14 @@ export default class PostIndex extends React.Component {
   handleSubmit(e){
     e.preventDefault();
 
-    const { post_type_id, photos, video, audio } = this.state;
-    const { currUser, createPost, createPhotoPost, createMediaPost } = this.props;
+    const { post_type_id, photos, video, audio, title, body } = this.state;
+    const { currUser, createPost, createMediaPost } = this.props;
 
     let formData = new FormData();
     formData.append('post[post_type_id]', post_type_id);
     formData.append('post[author_id]', currUser.id);
-
-    debugger
+    if (title !== "") formData.append('post[title]', title);
+    if (body !== "") formData.append('post[body]', body);
 
     switch (post_type_id) {
       case 2:
@@ -166,23 +166,38 @@ export default class PostIndex extends React.Component {
           formData.append("post[photos][]", photos[i]);
         }
 
-        createPhotoPost(formData).then(() => this.postCancel());
+        createMediaPost(formData)
+          .then(() => this.postCancel())
+          .catch(() => this.postCancel());
         break;
+
       case 6:
-        debugger
         formData.append("post[audio]", audio);
 
-        createMediaPost(formData).then(() => this.postCancel());
+        createMediaPost(formData)
+          .then(() => this.postCancel())
+          .catch(() => this.postCancel());
         break;
 
       case 7:
         formData.append("post[video]", video);
 
-        createMediaPost(formData).then(() => this.postCancel());
+        createMediaPost(formData)
+          .then(() => this.postCancel())
+          .catch(() => this.postCancel());
         break;
 
       default:
-        createPost(Object.assign(this.state, {author_id: currUser.id})).then(() => this.postCancel());
+        let newState = {
+          post_type_id: post_type_id,
+          author_id: currUser.id,
+          title: title,
+          body: body,
+        }
+
+        createPost(newState)
+          .then(() => this.postCancel())
+          .catch(() => this.postCancel());
         break;
     }
   }
