@@ -274,7 +274,7 @@ export default class PostIndex extends React.Component {
       case 7:
           let video;
           if(this.state.videoUrl !== ""){
-            video = <video width="540" height="304" controls className="video-player" autoPictureInPicture preload>
+            video = <video width="540" height="304" controls className="video-player" >
               <source src={this.state.videoUrl} />
               Your browser does not support this type of video.
             </video>
@@ -316,13 +316,13 @@ export default class PostIndex extends React.Component {
             <UserProfileImg userId={currUser.id} />
             <div className='top-links-container'>
               <div className='top-links'>
-                <div className="top-link" onClick={() => this.postCreate(1)}><i class="fas fa-font"></i> Text</div>
-                <div className="top-link" onClick={() => this.postCreate(2)}><i class="fas fa-camera"></i> Photo</div>
-                <div className="top-link" onClick={() => this.postCreate(3)}><i class="fas fa-quote-left"></i> Quote</div>
-                <div className="top-link" onClick={() => this.postCreate(4)}><i class="fas fa-link"></i> Link</div>
-                <div className="top-link" onClick={() => this.postCreate(5)}><i class="fas fa-comment-dots"></i> Chat</div>
-                <div className="top-link" onClick={() => this.postCreate(6)}><i class="fas fa-headphones"></i> Audio</div>
-                <div className="top-link" onClick={() => this.postCreate(7)}><i class="fas fa-video"></i> Video</div>
+                <div className="top-link" onClick={() => this.postCreate(1)}><i className="fas fa-font"></i> Text</div>
+                <div className="top-link" onClick={() => this.postCreate(2)}><i className="fas fa-camera"></i> Photo</div>
+                <div className="top-link" onClick={() => this.postCreate(3)}><i className="fas fa-quote-left"></i> Quote</div>
+                <div className="top-link" onClick={() => this.postCreate(4)}><i className="fas fa-link"></i> Link</div>
+                <div className="top-link" onClick={() => this.postCreate(5)}><i className="fas fa-comment-dots"></i> Chat</div>
+                <div className="top-link" onClick={() => this.postCreate(6)}><i className="fas fa-headphones"></i> Audio</div>
+                <div className="top-link" onClick={() => this.postCreate(7)}><i className="fas fa-video"></i> Video</div>
               </div>
 
             <div className="input-div hidden">

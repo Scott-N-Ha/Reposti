@@ -47,6 +47,14 @@
   cursor: pointer;
 }
 
+.input-div {
+  width: 100%;
+}
+
+.input-div input {
+  width: 100%;
+}
+
 .post-index-post {
   width: 625px;
   display: flex;

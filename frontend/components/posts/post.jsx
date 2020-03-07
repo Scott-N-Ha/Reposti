@@ -12,7 +12,7 @@ export default class Post extends React.Component {
   }
 
   deleteRender(){
-    return <div onClick={() => this.props.deletePost(this.props.post)}><i class="fas fa-cog"></i></div>
+    return <div onClick={() => this.props.deletePost(this.props.post)}><i className="fas fa-cog"></i></div>
   }
 
   renderText({title, body}){
@@ -37,7 +37,7 @@ export default class Post extends React.Component {
   }
 
   renderVideo({ video }){
-    return <video width="540" height="304" controls className="video-player" autoPictureInPicture preload >
+    return <video width="540" height="304" controls className="video-player" >
       <source src={video} />
       Your browser does not support this type of video.
     </video>
