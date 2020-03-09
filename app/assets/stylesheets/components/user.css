@@ -3,3 +3,9 @@
   height: 96px;
   width: 96px;
 }
+
+.settings-div {
+  width: 575px;
+  border-radius: 3px;
+  background-color: #ffffff;
+}
