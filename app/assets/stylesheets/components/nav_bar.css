@@ -31,3 +31,21 @@
   text-decoration: none;
   color: whitesmoke;
 }
+
+.nav-bar i {
+  color: whitesmoke;
+}
+
+.user-dropdown {
+  position: fixed;
+  top: 44px;
+  right: 10px;
+  z-index: 9001;
+  width: 240px;
+  min-height: 20px;
+  background-color: whitesmoke;
+}
+
+.fa-user {
+  padding: 1px;
+}

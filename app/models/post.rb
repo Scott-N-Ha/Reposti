@@ -19,7 +19,8 @@ class Post < ApplicationRecord
 
   belongs_to :post_type
 
-  has_many :likes
+  has_many :likes,
+    dependent: :destroy
 
   has_many :likers,
     through: :likes,

@@ -1,7 +1,8 @@
 import { RECEIVE_CURRENT_USER, LOGOUT_CURRENT_USER } from "../actions/session_actions.js";
 
 let initialState = {
-  id: null
+  id: null,
+  username: "",
 };
 
 const sessionReducer = (state = initialState, action) => {

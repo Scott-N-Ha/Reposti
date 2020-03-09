@@ -19,7 +19,8 @@ document.addEventListener("DOMContentLoaded", () => {
         }
       },
       session: {
-        id: window.currentUser.id
+        id: window.currentUser.id,
+        username: window.currentUser.username,
       }
     };
   }

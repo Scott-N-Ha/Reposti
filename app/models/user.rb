@@ -50,15 +50,18 @@ class User < ApplicationRecord
   has_one_attached :profile_image
   
   has_many :posts,
-  foreign_key: :author_id
+    foreign_key: :author_id,
+    dependent: :destroy
   
   has_many :leaders_link,
     foreign_key: :follower_id,
-    class_name: :Follow
+    class_name: :Follow,
+    dependent: :destroy
   
   has_many :followers_link, 
     foreign_key: :leader_id,
-    class_name: :Follow
+    class_name: :Follow,
+    dependent: :destroy
 
   has_many :leaders,
     through: :leaders_link,

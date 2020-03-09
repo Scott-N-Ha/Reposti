@@ -12,6 +12,8 @@ export default class SessionForm extends React.Component {
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleDemo = this.handleDemo.bind(this);
+    this.demoLogin = this.demoLogin.bind(this);
   }
 
   handleChange(e){
@@ -21,7 +23,7 @@ export default class SessionForm extends React.Component {
   handleSubmit(e){
     e.preventDefault();
 
-    this.props.action(this.state)
+    this.props.action(this.state);
   }
 
   showEmail(){
@@ -34,6 +36,25 @@ export default class SessionForm extends React.Component {
     )
   }
 
+  handleDemo(e){
+    e.preventDefault();
+
+    this.setState({username: 'test', password: 'password'});
+    
+    const demo = {
+      username: 'test',
+      password: 'password'
+    }
+
+    this.props.action(demo);
+  }
+
+  demoLogin(){
+    return (
+      <button onClick={this.handleDemo}>Demo Login</button>
+    );
+  }
+
   render(){
     let buttonText = this.props.formType === 'signup' ? 'Sign Up' : 'Log In';
     return (
@@ -41,11 +62,12 @@ export default class SessionForm extends React.Component {
         <label>Username:
           <input type="text" name="username" onChange={this.handleChange} value={this.state.username} />
         </label><br/>
-        {(this.props.formType === 'signup') ? this.showEmail() : <div></div>}
+        { this.props.formType === 'signup' ? this.showEmail() : null }
         <label>Password: 
           <input type="password" name="password" onChange={this.handleChange} value={this.state.password} />
         </label><br/>
         <button onClick={this.handleSubmit}>{buttonText}</button>
+        { this.props.formType === 'login' ? this.demoLogin() : null }
       </form>
     );
   }
