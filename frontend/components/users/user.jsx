@@ -43,7 +43,7 @@ export default class User extends React.Component {
         <h2>{user.username}</h2>
         <img
           className="profile-pic-user-show"
-          src={ user.profileImgUrl === "" ? "https://68.media.tumblr.com/9f9b498bf798ef43dddeaa78cec7b027/tumblr_o51oavbMDx1ugpbmuo7_500.png" : user.profileImgUrl }
+          src={ user.profile_image_url === "" ? "https://68.media.tumblr.com/9f9b498bf798ef43dddeaa78cec7b027/tumblr_o51oavbMDx1ugpbmuo7_500.png" : user.profile_image_url }
           alt={user.username} />
         {this.props.currUsername !== this.props.match.params.username ? <FollowContainer /> : null}
         <h3>Following: {followings.length}</h3>

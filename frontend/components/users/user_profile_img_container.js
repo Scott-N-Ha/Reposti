@@ -1,15 +1,15 @@
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
-import UserProfileImg from './user_profile_img.jsx';
+import UserProfileImage from './user_profile_img.jsx';
 
 const mapStateToProps = ({entities: { users }}, ownProps) => {
   let user = users[ownProps.userId];
 
   return {
     username: user.username,
-    profileImgUrl: user.profileImgUrl,
+    profile_image_url: user.profile_image_url,
   }
 };
 
-export default withRouter(connect(mapStateToProps)(UserProfileImg));
+export default withRouter(connect(mapStateToProps)(UserProfileImage));

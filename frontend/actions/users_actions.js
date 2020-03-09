@@ -16,3 +16,15 @@ export const fetchSingleUser = username => dispatch => (
     .then(user => dispatch(receiveSingleUser(user)),
       errors => dispatch(receiveErrors(errors)))
 );
+
+export const updateSingleUser = user => dispatch => (
+  UserAPI.updateSingleUser(user)
+    .then(user => dispatch(receiveSingleUser(user)),
+      errors => dispatch(receiveErrors(errors)))
+);
+
+export const updateSingleUserWithImage = user => dispatch => (
+  UserAPI.updateSingleUserWithImage(user)
+    .then(user => dispatch(receiveSingleUser(user)),
+      errors => dispatch(receiveErrors(errors)))
+);

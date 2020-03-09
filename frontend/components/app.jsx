@@ -7,6 +7,7 @@ import LoginFormContainer from './session/login_form_container.js';
 import SignupFormContainer from './session/signup_form_container.js';
 import UserContainer from './users/user_container.js';
 import PostIndexContainer from './posts/post_index_container.js';
+import SettingsContainer from './users/settings_container.js';
 
 // testing
 
@@ -20,6 +21,7 @@ const App = (props) => {
     <Switch>
       <AuthRoute path="/login" component={LoginFormContainer} />
       <AuthRoute path="/signup" component={SignupFormContainer} />
+      <ProtectedRoute exact path={'/settings'} component={SettingsContainer} />
       <ProtectedRoute exact path={`/:username`} component={UserContainer} />
       <ProtectedRoute exact path={'/'} component={PostIndexContainer} />
     </Switch>

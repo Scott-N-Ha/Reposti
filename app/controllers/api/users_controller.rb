@@ -31,9 +31,26 @@ class Api::UsersController < ApplicationController
     end
   end
 
+  def update
+    debugger
+    @user = User.find_by(username: user_username)
+
+    if @user
+      if @user.update(user_params)
+        render :show
+      else
+        flash.now[:errors] = @user.errors.full_messages
+        render json: @user.errors.full_messages, status: 418
+      end
+    else
+      flash.now[:errors] = @user.errors.full_messages
+      render json: @user.errors.full_messages, status: :not_found
+    end
+  end
+
   private
   def user_params
-    params.require(:user).permit(:username, :email, :password)
+    params.require(:user).permit(:username, :email, :password, :profile_image)
   end
 
   def user_username

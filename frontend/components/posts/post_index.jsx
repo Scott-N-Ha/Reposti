@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import PostContainer from './post_container.js';
-import UserProfileImg from '../users/user_profile_img_container.js';
+import UserProfileImageContainer from '../users/user_profile_img_container.js';
 
 export default class PostIndex extends React.Component {
   constructor(props){
@@ -301,8 +301,8 @@ export default class PostIndex extends React.Component {
     const posts = this.props.posts.sort((a,b) => b.id - a.id).map(post => {
       return (
         <li className="post-index-post" key={post.id}>
-          {/* <Link to={`/${currUser.username}`}><img className="feed-image-icon" src={currUser.profileImgUrl} alt={currUser.username} /></Link> */}
-          <UserProfileImg userId={post.author_id} />
+          {/* <Link to={`/${currUser.username}`}><img className="feed-image-icon" src={currUser.profile_image_url} alt={currUser.username} /></Link> */}
+          <UserProfileImageContainer userId={post.author_id} />
           <PostContainer post={post} />
         </li>
         );
@@ -312,8 +312,8 @@ export default class PostIndex extends React.Component {
       <div className='main-feed'>
 
         <ul className="main-feed-ul">
-          <li className="top-container">
-            <UserProfileImg userId={currUser.id} />
+          <li className="top-container" key="-1">
+            <UserProfileImageContainer userId={currUser.id} />
             <div className='top-links-container'>
               <div className='top-links'>
                 <div className="top-link" onClick={() => this.postCreate(1)}><i className="fas fa-font"></i> Text</div>
@@ -339,7 +339,6 @@ export default class PostIndex extends React.Component {
             </div>
           </div>
         </li>
-        
           {posts}
         </ul>
       </div>
