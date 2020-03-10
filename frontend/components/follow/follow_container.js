@@ -10,6 +10,7 @@ const mapStateToProps = (state, ownProps) => {
   let currentUser = state.session.id;
 
   // The User Page we are currently on
+  debugger
   let currPageUsername = ownProps.match.params.username;
   let currPageUserId = Object.values(state.entities.users).filter(user => user.username === currPageUsername)[0].id;
 

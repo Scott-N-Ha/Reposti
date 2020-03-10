@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 export default class NavBar extends React.Component{
   constructor(props){
@@ -35,7 +35,7 @@ export default class NavBar extends React.Component{
   loginInfo(){
     return (
       <div className='login-info'>
-        <NavLink activeClassName="currentPage" to='/signup'>Sign Up</NavLink> or <NavLink activeClassName="currentPage" to='/login'>Log In</NavLink>
+        <Link activeClassName="currentPage" to='/signup'>Sign Up</Link> or <Link activeClassName="currentPage" to='/login'>Log In</Link>
       </div>
     )
   }
@@ -46,15 +46,11 @@ export default class NavBar extends React.Component{
     if (currentUser === undefined || currentUser.likes === undefined) return null;
 
     return (
-      <div className='nav-bar-logged-in'>
-        <NavLink to="/"><i className="fab fa-resolving"></i></NavLink>
-        <h2>Welcome {currentUser.username}</h2>
-        <div className="logout-info">
-          <NavLink to="/"><i className="fas fa-home"></i></NavLink> 
-          {/* <NavLink to="/settings"><i className="fas fa-user"></i></NavLink> */}
-          <i className="fas fa-user" onClick={this.handleUserDropdown}></i>
-          { this.state.dropdown ? this.userDropdown() : null }
-        </div>
+      <div className="logout-info">
+        <Link to={`/${currentUser.username}`}><i className="fas fa-home"></i></Link> 
+        {/* <Link to="/settings"><i className="fas fa-user"></i></Link> */}
+        <i className="fas fa-user" onClick={this.handleUserDropdown}></i>
+        { this.state.dropdown ? this.userDropdown() : null }
       </div>
     )
   }
@@ -66,13 +62,23 @@ export default class NavBar extends React.Component{
 
     return (
       <div className="user-dropdown">
-        <div className="user-dropdown-account">
-          Account <button onClick={this.handleLogout}>Log Out</button> <br/>
-          Likes { currentUser.likes.length }<br/>
-          Following { currentUser.leaders.length }<br/>
-          Settings <br/>
-          Help 
-        </div>
+        <ul className="user-dropdown-account">
+          <li className="dropdown-account">
+            <span>Account</span> <span className="account-logout" onClick={this.handleLogout}>Log out</span>
+          </li>
+          <li>
+            Likes { currentUser.likes.length }<br/>
+          </li>
+          <li>
+            <Link to="/following">Following { currentUser.leaders.length }</Link><br/>
+          </li>
+          <li>
+            Settings <br/>
+          </li>
+          <li>
+            Help 
+          </li>
+        </ul>
         <br/>
         <div className="user-dropdown-tumblrs">
 
@@ -100,11 +106,10 @@ export default class NavBar extends React.Component{
   render(){
     const { currentUser } = this.props;
 
-    if (currentUser === undefined || currentUser.likes === undefined) return null;
-
     return (
       <div className="nav-bar">
-        {currentUser === undefined ? this.loginInfo() : this.logoutInfo()}
+        <Link to="/"><i className="fab fa-resolving"></i></Link>
+        { (currentUser === undefined || currentUser.likes === undefined) ? this.loginInfo() : this.logoutInfo()}
       </div>
     );
   }

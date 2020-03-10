@@ -36,11 +36,15 @@ export default class Post extends React.Component {
     )
   }
 
-  renderVideo({ video }){
-    return <video width="540" height="304" controls className="video-player" >
-      <source src={video} />
-      Your browser does not support this type of video.
-    </video>
+  renderVideo({ video, title, body }){
+    return <div>
+      <video width="540" height="304" controls className="video-player" >
+        <source src={video} />
+        Your browser does not support this type of video.
+      </video>
+      <h2>{title}</h2>
+      <p>{body}</p>
+    </div>
   }
 
   renderAudio({ audio }){
@@ -62,8 +66,7 @@ export default class Post extends React.Component {
   renderLink({title, body}){
     return (
       <div className="link-post">
-        <a href={body} className="link-link">
-          <span className='link-title'>{title}</span> <br/>
+        <a href={title} className="link-link" target="_blank">
           <span className='link-body'>{body}</span> <br/>
         </a>
       </div>

@@ -285,6 +285,8 @@ export default class PostIndex extends React.Component {
         return (
           <div className="video-post">
             {video}
+            <input type="text" name="title" value={title} onChange={this.handleChange} placeholder="Title of the video" /> <br/>
+            <input name="body" value={body} onChange={this.handleChange} placeholder="Add a description, if you like" /> <br/>
           </div>
         )
     
@@ -301,7 +303,6 @@ export default class PostIndex extends React.Component {
     const posts = this.props.posts.sort((a,b) => b.id - a.id).map(post => {
       return (
         <li className="post-index-post" key={post.id}>
-          {/* <Link to={`/${currUser.username}`}><img className="feed-image-icon" src={currUser.profile_image_url} alt={currUser.username} /></Link> */}
           <UserProfileImageContainer userId={post.author_id} />
           <PostContainer post={post} />
         </li>

@@ -1,6 +1,7 @@
 .main-feed {
   max-width: 625px;
   position: relative;
+  margin-top: 20px;
 }
 
 .main-feed-ul {

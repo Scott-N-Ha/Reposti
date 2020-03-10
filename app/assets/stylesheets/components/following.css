@@ -1,0 +1,19 @@
+.followings {
+  margin-top: 20px;
+  width: 540px;
+  min-height: 200px;
+  border-radius: 3px;
+  background-color: white;
+}
+
+.followings ul {
+  width: 100%;
+}
+
+.followings-follow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  width: 100%;
+}
