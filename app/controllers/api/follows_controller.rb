@@ -1,4 +1,14 @@
 class Api::FollowsController < ApplicationController
+  def show
+    @follows = Follow.includes(:leader).where(follower_id: user_user_id)
+
+    if @follows
+      render :index
+    else
+      render json: @follows.errors.full_messages, status: :not_found
+    end
+  end
+
   def create
     @follow = Follow.new(follow_params)
 
@@ -24,5 +34,9 @@ class Api::FollowsController < ApplicationController
   private
   def follow_params
     params.require(:follow).permit(:leader_id, :follower_id)
+  end
+
+  def user_user_id
+    params[:id]
   end
 end

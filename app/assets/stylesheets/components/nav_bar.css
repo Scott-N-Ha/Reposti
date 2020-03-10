@@ -61,6 +61,8 @@
   border-radius: 3px;
   background-color: whitesmoke;
   color: #444444;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 14px;
 }
 
 .user-dropdown a, .user-dropdown a:visited, .user-dropdown a:hover, .user-dropdown a:active {
@@ -72,11 +74,13 @@
 }
 
 .dropdown-account {
-  width: 100%;
   background-color: lightgray;
+  padding: 0px 20px 0px 10px;
+}
+
+.dropdown-account>div {
   display: flex;
   justify-content: space-between;
-  align-items: center;
 }
 
 .account-logout:hover {

@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import UserProfileImageContainer from '../users/user_profile_img_container.js';
+import FollowContainer from './follow_container.js';
 
 export default class Following extends React.Component {
   constructor(props){
@@ -9,9 +10,9 @@ export default class Following extends React.Component {
   }
 
   componentDidMount(){
-    const { currentUser, getUser } = this.props;
-
-    // getUser(currentUser);
+    const { currentUser, fetchFollows } = this.props;
+    
+    fetchFollows(currentUser);
   }
 
   render(){
@@ -25,6 +26,7 @@ export default class Following extends React.Component {
           <Link to={`${l.username}`}>
             <UserProfileImageContainer userId={l.id} />
             {l.username}
+            {/* <FollowContainer /> */}
           </Link>
         </li>
       )

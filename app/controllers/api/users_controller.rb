@@ -32,7 +32,7 @@ class Api::UsersController < ApplicationController
   end
 
   def update
-    debugger
+    
     @user = User.find_by(username: user_username)
 
     if @user

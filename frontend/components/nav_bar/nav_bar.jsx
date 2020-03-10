@@ -35,7 +35,7 @@ export default class NavBar extends React.Component{
   loginInfo(){
     return (
       <div className='login-info'>
-        <Link activeClassName="currentPage" to='/signup'>Sign Up</Link> or <Link activeClassName="currentPage" to='/login'>Log In</Link>
+        <Link className="currentPage" to='/signup'>Sign Up</Link> or <Link className="currentPage" to='/login'>Log In</Link>
       </div>
     )
   }
@@ -64,7 +64,9 @@ export default class NavBar extends React.Component{
       <div className="user-dropdown">
         <ul className="user-dropdown-account">
           <li className="dropdown-account">
-            <span>Account</span> <span className="account-logout" onClick={this.handleLogout}>Log out</span>
+            <div>
+              <span>Account</span> <span className="account-logout" onClick={this.handleLogout}>Log out</span>
+            </div>
           </li>
           <li>
             Likes { currentUser.likes.length }<br/>

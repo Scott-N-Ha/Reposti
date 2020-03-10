@@ -107,7 +107,7 @@ export default class Post extends React.Component {
 
     return (
       <div className='post-div' key={post.id}>
-        <Link to={`/${author.username}`}>{author.username}</Link>
+        <div className="input-username"><Link to={`/${author.username}`}>{author.username}</Link></div>
 
         {postRender}
 

@@ -10,8 +10,9 @@ const mapStateToProps = (state, ownProps) => {
   let currentUser = state.session.id;
 
   // The User Page we are currently on
-  debugger
-  let currPageUsername = ownProps.match.params.username;
+  
+  // let currPageUsername = ownProps.match.params.username;
+  let currPageUsername = ownProps.userId;
   let currPageUserId = Object.values(state.entities.users).filter(user => user.username === currPageUsername)[0].id;
 
   let follow = Object.values(state.entities.follows).filter(follow => follow.leader_id === currPageUserId && follow.follower_id === currentUser)[0];

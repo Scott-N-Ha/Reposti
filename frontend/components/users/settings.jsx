@@ -94,7 +94,7 @@ export default class Settings extends React.Component {
   }
 
   handleEmail(e){
-    debugger
+    
     this.setState = { editEmail: true };
   }
 

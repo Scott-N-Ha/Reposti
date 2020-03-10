@@ -1,6 +1,6 @@
 import { RECEIVE_CURRENT_USER } from '../actions/session_actions.js';
 import { RECEIVE_SINGLE_USER } from '../actions/users_actions.js';
-import { CREATE_FOLLOW, DELETE_FOLLOW } from '../actions/follows_action.js';
+import { CREATE_FOLLOW, DELETE_FOLLOW, RECEIVE_FOLLOWS } from '../actions/follows_action.js';
 
 const initialState = {
 
@@ -24,6 +24,8 @@ const followsReducer = (state = initialState, action) => {
       followId = Object.keys(action.payload)[0];
       delete nextState[followId];
       return nextState;
+    case RECEIVE_FOLLOWS:
+      return Object.assign(nextState, action.payload.follows);
     default:
       return state;
   }

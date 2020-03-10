@@ -159,6 +159,8 @@ export default class PostIndex extends React.Component {
       btn.disabled = true;
     });
 
+    // document.querySelectorAll('')
+
     const { post_type_id, photos, video, audio, title, body } = this.state;
     const { currUser, createPost, createMediaPost } = this.props;
 
@@ -211,38 +213,48 @@ export default class PostIndex extends React.Component {
   }
 
   chooseRender(){
-    const { post_type_id, title, body } = this.state;
+    const { post_type_id, title, body, photoUrls } = this.state;
 
     switch (post_type_id) {
       case 1:
         return (
           <div className="text-post">
-            <input type="text" name="title" value={title} onChange={this.handleChange} placeholder="Title" /> <br/>
-            <textarea name="body" cols="30" rows="10" value={body} onChange={this.handleChange} placeholder="Your text here" />
+            <input className="text-title" type="text" name="title" value={title} onChange={this.handleChange} placeholder="Title" /> <br/>
+            <textarea className="text-body" name="body" cols="30" rows="10" value={body} onChange={this.handleChange} placeholder="Your text here" />
           </div>
         );
 
       case 2:
-        const photos = this.state.photoUrls.map((photoUrl, pu_idx) => {
+
+        const photos = photoUrls.map((photoUrl, pu_idx) => {
           return <img src={photoUrl} className="photos-post-photo photo-preview" onClick={this.inputImageClick(pu_idx)} />
         })
 
-        if (this.state.photoUrls.length < 8){
+        if (photoUrls.length < 8){
           return (
             <div className="photo-post">
               {photos}
-              <input type="file" name="photos" id="photos-uploader" multiple accept="image/*" onChange={this.handlePhotos} />
+              <div className="photo-button">
+                <label className="photo-button-text" htmlFor="photos-uploader">
+                  <i className="fas fa-camera"></i>
+                  <div>Upload {photoUrls.length < 1 ? "a Photo" : "more Photos"}</div>
+                  <div>{":)"}</div>
+                </label>
+                  <div className="hidden">
+                  <input className="photo-input" type="file" name="photos" id="photos-uploader" multiple accept="image/*" onChange={this.handlePhotos} />
+                  </div>
+              </div>
             </div>
           );
         } else {
-          return null;
+          return <div>Too many photos attempted to upload. Please cancel or finish uploading.</div>;
         }
 
       case 3:
         return (
           <div className="quote-post">
-            <h2>"<input name="body" value={body} onChange={this.handleChange} placeholder="Quote" />"</h2> <br/>
-            &mdash; <input type="text" name="title" value={title} onChange={this.handleChange} placeholder="Source" /> <br/>
+            <h2>"<input className="quote-body" name="body" value={body} onChange={this.handleChange} placeholder="Quote" />"</h2> <br/>
+            &mdash; <input className="quote-title" type="text" name="title" value={title} onChange={this.handleChange} placeholder="Source" /> <br/>
           </div>
         );
 
@@ -256,14 +268,14 @@ export default class PostIndex extends React.Component {
 
       case 6:
         let audio;
-          if(this.state.audioUrl !== ""){
-            audio = <audio controls className="audio-player">
-              <source src={this.state.audioUrl} />
-              Your browser does not support this type of audio.
-            </audio>
-          } else {
-            audio = <input type="file" name="audio-uploader" accept="audio/*" onChange={this.handleAudio} />
-          }
+        if(this.state.audioUrl !== ""){
+          audio = <audio controls className="audio-player">
+            <source src={this.state.audioUrl} />
+            Your browser does not support this type of audio.
+          </audio>
+        } else {
+          audio = <input type="file" name="audio-uploader" accept="audio/*" onChange={this.handleAudio} />
+        }
 
         return (
           <div className="audio-post">
@@ -272,15 +284,15 @@ export default class PostIndex extends React.Component {
         )
 
       case 7:
-          let video;
-          if(this.state.videoUrl !== ""){
-            video = <video width="540" height="304" controls className="video-player" >
-              <source src={this.state.videoUrl} />
-              Your browser does not support this type of video.
-            </video>
-          } else {
-            video = <input type="file" name="video-uploader" accept="video/*" onChange={this.handleVideo} />
-          }
+        let video;
+        if(this.state.videoUrl !== ""){
+          video = <video width="540" height="304" controls className="video-player" >
+            <source src={this.state.videoUrl} />
+            Your browser does not support this type of video.
+          </video>
+        } else {
+          video = <input type="file" name="video-uploader" accept="video/*" onChange={this.handleVideo} />
+        }
 
         return (
           <div className="video-post">
@@ -318,20 +330,21 @@ export default class PostIndex extends React.Component {
             <div className='top-links-container'>
               <div className='top-links'>
                 <div className="top-link" onClick={() => this.postCreate(1)}><i className="fas fa-font"></i> Text</div>
-                <div className="top-link" onClick={() => this.postCreate(2)}><i className="fas fa-camera"></i> Photo</div>
-                <div className="top-link" onClick={() => this.postCreate(3)}><i className="fas fa-quote-left"></i> Quote</div>
-                <div className="top-link" onClick={() => this.postCreate(4)}><i className="fas fa-link"></i> Link</div>
-                <div className="top-link" onClick={() => this.postCreate(5)}><i className="fas fa-comment-dots"></i> Chat</div>
-                <div className="top-link" onClick={() => this.postCreate(6)}><i className="fas fa-headphones"></i> Audio</div>
-                <div className="top-link" onClick={() => this.postCreate(7)}><i className="fas fa-video"></i> Video</div>
+                <div className="top-link" onClick={() => this.postCreate(2)}><i className="fas fa-camera" style={{color: "#ff5c44"}}></i> Photo</div>
+                <div className="top-link" onClick={() => this.postCreate(3)}><i className="fas fa-quote-left" style={{color: "#ff961a"}}></i> Quote</div>
+                <div className="top-link" onClick={() => this.postCreate(4)}><i className="fas fa-link" style={{color: "#1ad44a"}}></i> Link</div>
+                <div className="top-link" onClick={() => this.postCreate(5)}><i className="fas fa-comment-dots" style={{color: "#1abfff"}}></i> Chat</div>
+                <div className="top-link" onClick={() => this.postCreate(6)}><i className="fas fa-headphones" style={{color: "#896dff"}}></i> Audio</div>
+                <div className="top-link" onClick={() => this.postCreate(7)}><i className="fas fa-video" style={{color: "#ff72d3"}}></i> Video</div>
               </div>
 
             <div className="input-div hidden">
+              <div className="input-username">{currUser.username}</div>
               <form>
                 {this.chooseRender()} <br/>
 
                 <div className="input-buttons-div">
-                  <button onClick={this.postCancel} className="input-button cancel-btn">Cancel</button>
+                  <button onClick={this.postCancel} className="input-button cancel-btn">Close</button>
                   <button onClick={this.handleSubmit} className="input-button post-btn" >Post</button>
                 </div>
 
