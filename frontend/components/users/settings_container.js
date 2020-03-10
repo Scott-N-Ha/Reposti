@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
 import Settings from './settings.jsx';
-import { updateSingleUser, updateSingleUserWithImage } from '../../actions/users_actions.js';
+import { updateSingleUserWithImage } from '../../actions/users_actions.js';
 
 const mapStateToProps = (state, ownProps) => {
   let currUserId = state.session.id;
@@ -12,8 +12,7 @@ const mapStateToProps = (state, ownProps) => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  updateSingleUser: user => dispatch(updateSingleUser(user)),
-  updateSingleUserWithImage: user => dispatch(updateSingleUserWithImage(user)),
+  updateSingleUserWithImage: (user, data) => dispatch(updateSingleUserWithImage(user, data)),
 });
 
 export default withRouter(connect(

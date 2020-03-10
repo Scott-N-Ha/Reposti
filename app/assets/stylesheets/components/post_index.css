@@ -27,6 +27,10 @@
   display: none;
 }
 
+.top-links:hover {
+  cursor: pointer;
+}
+
 .top-link {
   text-align: center;
   line-height: 21px;
@@ -40,10 +44,16 @@
   align-items: center;
   justify-content: center;
   flex-direction: column;
+
+  transition: all 333ms ease-in-out;
 }
 
-.top-links:hover {
-  cursor: pointer;
+.top-link:hover {
+  transform: scale(1.6);
+}
+
+.top-link i:hover {
+  transform: none;
 }
 
 .input-div {
@@ -69,6 +79,8 @@
 
 .input-username {
   padding: 20px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 20px;
 }
 
 .input-buttons-div {

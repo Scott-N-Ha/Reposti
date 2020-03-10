@@ -4,11 +4,12 @@ export const fetchSingleUser = username => (
   })
 );
 
-export const updateSingleUserWithImage = user => {
+export const updateSingleUserWithImage = (user, data) => {
+  debugger
   return $.ajax({
     method: 'PATCH',
-    user: `/api/users/${user.username}`,
-    data: user,
+    url: `/api/users/${user.username}`,
+    data: data,
     contentType: false,
     processData: false,
   })
@@ -17,7 +18,7 @@ export const updateSingleUserWithImage = user => {
 export const updateSingleUser = user => {
   return $.ajax({
     method: 'PATCH',
-    user: `/api/users/${user.username}`,
+    url: `/api/users/${user.username}`,
     data: { user },
   })
 };

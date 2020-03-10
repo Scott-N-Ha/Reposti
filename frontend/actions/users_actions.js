@@ -23,8 +23,8 @@ export const updateSingleUser = user => dispatch => (
       errors => dispatch(receiveErrors(errors)))
 );
 
-export const updateSingleUserWithImage = user => dispatch => (
-  UserAPI.updateSingleUserWithImage(user)
+export const updateSingleUserWithImage = (user, data) => dispatch => (
+  UserAPI.updateSingleUserWithImage(user, data)
     .then(user => dispatch(receiveSingleUser(user)),
       errors => dispatch(receiveErrors(errors)))
 );

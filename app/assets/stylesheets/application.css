@@ -14,13 +14,28 @@
  *= require_tree .
  */
 
-html {
-  background-color: #001935;
+* {
   font-family: Arial, Helvetica, sans-serif;
   font-size: 14px;
+}
+
+html {
+  background-color: #001935;
   padding: 10px;
 }
  
+img, i, button {
+  transition: all 333ms ease-in-out;
+}
+
+img:hover, button:hover {
+  transform: scale(1.1);
+}
+
+i:hover {
+  transform: scale(1.4);
+}
+
 .hidden {
   display: none;
 }

@@ -1,11 +1,29 @@
-.profile-pic-user-show {
-  border-radius: 50%;
-  height: 96px;
-  width: 96px;
+.user-info {
+  margin-top: 125px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: white;
+  border-radius: 3px;
+  width: 540px;
+  vertical-align: bottom;
+  margin-left: 20px;
 }
 
-.settings-div {
-  width: 575px;
+.profile-pic-user-show {
   border-radius: 3px;
-  background-color: #ffffff;
+  height: 192px;
+  width: 192px;
+  margin-top: -100px;
+}
+
+.user-username {
+  font-size: 48px;
+  font-family: Arial, Helvetica, sans-serif;
+  padding: 20px;
+}
+
+.user-posts {
+  margin-top: 20px;
+  box-sizing: border-box;
 }

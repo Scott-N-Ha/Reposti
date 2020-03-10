@@ -1,0 +1,17 @@
+.settings-div {
+  box-sizing: border-box;
+  margin-top: 20px;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 575px;
+  border-radius: 3px;
+  background-color: #ffffff;
+}
+
+.profile-pic-user-show-settings {
+  width: 196px;
+  height: 196px;
+  border-radius: 3px;
+}

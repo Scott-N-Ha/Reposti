@@ -59,14 +59,24 @@
   width: 240px;
   min-height: 20px;
   border-radius: 3px;
-  background-color: whitesmoke;
+  background-color: #FFFFFF;
   color: #444444;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 14px;
+  box-shadow: 1px 1px 10px 1px #888888;
+}
+
+.user-dropdown i {
+  color: #444444;
 }
 
 .user-dropdown a, .user-dropdown a:visited, .user-dropdown a:hover, .user-dropdown a:active {
   color: #444444;
+}
+
+.user-dropdown-account .dropdown-li {
+  /* margin: 15px 0px 15px 0px; */
+  padding: 15px;
 }
 
 .fa-user {
@@ -74,13 +84,18 @@
 }
 
 .dropdown-account {
-  background-color: lightgray;
+  background-color: #F2F2F2;
   padding: 0px 20px 0px 10px;
+  line-height: 24px;
 }
 
 .dropdown-account>div {
   display: flex;
   justify-content: space-between;
+}
+
+.dropdown-li:hover {
+  background-color: #E6EFF7;
 }
 
 .account-logout:hover {

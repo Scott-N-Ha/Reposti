@@ -17,8 +17,9 @@ export default class NavBar extends React.Component{
     this.handleLogout = this.handleLogout.bind(this);
   }
 
-  componentDidMount(){
-    // this.props.getUser(this.props.currentUser.username);
+  componentDidMount(prevProps){
+    this.props.getUser(this.props.currentUser.username);
+
     document.addEventListener('click', event => {
       if (!event.target.classList.contains('user-dropdown') && !event.target.classList.contains("fa-user")) this.hideDropdown();
     });
@@ -68,20 +69,19 @@ export default class NavBar extends React.Component{
               <span>Account</span> <span className="account-logout" onClick={this.handleLogout}>Log out</span>
             </div>
           </li>
-          <li>
-            Likes { currentUser.likes.length }<br/>
+          <li className="dropdown-li">
+          <i className="fas fa-heart"></i> Likes { currentUser.likes.length }<br/>
           </li>
-          <li>
-            <Link to="/following">Following { currentUser.leaders.length }</Link><br/>
-          </li>
-          <li>
-            Settings <br/>
-          </li>
-          <li>
-            Help 
+          <Link to="/following"><li className="dropdown-li">
+          <i className="far fa-address-book"></i> Following { currentUser.leaders.length }
+          </li></Link>
+          <Link to="/settings"><li className="dropdown-li">
+          <i className="fas fa-cog"></i> Settings
+          </li></Link>
+          <li className="dropdown-li">
+          <i className="fas fa-question-circle"></i> Help 
           </li>
         </ul>
-        <br/>
         <div className="user-dropdown-tumblrs">
 
         </div>
