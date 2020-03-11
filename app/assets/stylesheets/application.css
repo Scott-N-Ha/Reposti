@@ -36,6 +36,36 @@ i:hover {
   transform: scale(1.4);
 }
 
+.underline-magic {
+  transition: all 1s ease-in-out;
+  position: relative;
+}
+
+.underline-magic:after {
+  content: "";
+  display: block;
+  height: 1px;
+  position: absolute;
+  left: 49%;
+  width: 0px;
+  bottom: -2px;
+  transform: scaleY(1.5);
+  opacity: 0;
+  transition: all 300ms ease-in-out;
+  background-color: darkgray;
+}
+
+.underline-magic:hover:after {
+  width: 100%;
+  left: 0;
+  opacity: 1;
+}
+
 .hidden {
   display: none;
+  /* transition: opacity 1s ease-out;
+  transition: height 1s ease-out;
+  height: 0;
+  overflow: hidden;
+  opacity: 0; */
 }

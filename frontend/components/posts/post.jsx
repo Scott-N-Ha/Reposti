@@ -85,7 +85,7 @@ export default class Post extends React.Component {
     return (
       <div className="link-post">
         <a href={title} className="link-link" target="_blank">
-          <span className='link-body'>{body}</span> <br/>
+          <span className='link-body underline-magic'>{body}</span> <br/>
         </a>
       </div>
     )
@@ -125,7 +125,7 @@ export default class Post extends React.Component {
 
     return (
       <div className='post-div' key={post.id}>
-        <div className="input-username"><Link to={`/${author.username}`}>{author.username}</Link></div>
+        <div className="input-username"><Link to={`/${author.username}`} className="underline-magic">{author.username}</Link></div>
 
         {postRender}
 

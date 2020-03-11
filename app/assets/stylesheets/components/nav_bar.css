@@ -7,9 +7,7 @@
   background: fixed;
   background-color: #001935;
   font-size: x-large;
-
-  /* padding-left: 15px;
-  padding-right: 15px; */
+  box-sizing: border-box;
 
   display: flex;
   justify-content: space-between;
@@ -25,22 +23,6 @@
 .login-info, .logout-info {
   margin-right: 20px;
 }
-
-/* .nav-bar-logged-in {
-  width: 100%;
-
-  position: relative;
-  left: 0;
-  top: 0;
-  padding-left: 54px; 
-  padding-right: 54px; 
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: center;
-  box-sizing: border-box;
-} */
 
 .nav-bar a, .nav-bar a:visited, .nav-bar a:hover, .nav-bar a:active {
   text-decoration: none;
@@ -75,7 +57,6 @@
 }
 
 .user-dropdown-account .dropdown-li {
-  /* margin: 15px 0px 15px 0px; */
   padding: 15px;
 }
 
@@ -87,6 +68,7 @@
   background-color: #F2F2F2;
   padding: 0px 20px 0px 10px;
   line-height: 24px;
+  font-size: 11px;
 }
 
 .dropdown-account>div {
@@ -95,6 +77,51 @@
 }
 
 .dropdown-li:hover {
+  background-color: #E6EFF7;
+}
+
+.dropdown-li {
+  display: flex;
+  justify-content: space-between;
+}
+
+.tumblrs-info-main {
+  box-sizing: border-box;
+  margin: 5px;
+}
+
+.tumblrs-info-main img {
+  height: 36px;
+  width: 36px;
+  margin-bottom: 5px;
+  float: left;
+}
+
+.tumblrs-info-username {
+  margin: 5px;
+  padding-left: 40px;
+  padding-top: 10px;
+}
+
+.tumblrs-li:nth-child(2) {
+  margin-top: 25px;
+}
+
+.tumblrs-li:last-child {
+  margin-bottom: 10px;
+}
+
+.tumblrs-li {
+  margin-left: 30px;
+  margin-right: 30px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  box-sizing: border-box;
+}
+
+.tumblrs-li:hover {
   background-color: #E6EFF7;
 }
 

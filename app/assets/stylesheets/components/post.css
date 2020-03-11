@@ -69,6 +69,10 @@
   margin-bottom: 10px;
 }
 
+.quote-title {
+  font-style: italic;
+}
+
 .unliked {
   color: #ff492f;
 }

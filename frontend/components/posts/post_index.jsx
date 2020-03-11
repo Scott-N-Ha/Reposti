@@ -351,15 +351,29 @@ export default class PostIndex extends React.Component {
           <li className="top-container" key="-1">
             <UserProfileImageContainer userId={currUser.id} />
             <div className='top-links-container'>
-              <div className='top-links'>
-                <div className="top-link" onClick={() => this.postCreate(1)}><i className="fas fa-font"></i> Text</div>
-                <div className="top-link" onClick={() => this.postCreate(2)}><i className="fas fa-camera" style={{color: "#ff5c44"}}></i> Photo</div>
-                <div className="top-link" onClick={() => this.postCreate(3)}><i className="fas fa-quote-left" style={{color: "#ff961a"}}></i> Quote</div>
-                <div className="top-link" onClick={() => this.postCreate(4)}><i className="fas fa-link" style={{color: "#1ad44a"}}></i> Link</div>
-                <div className="top-link" onClick={() => this.postCreate(5)}><i className="fas fa-comment-dots" style={{color: "#1abfff"}}></i> Chat</div>
-                <div className="top-link" onClick={() => this.postCreate(6)}><i className="fas fa-headphones" style={{color: "#896dff"}}></i> Audio</div>
-                <div className="top-link" onClick={() => this.postCreate(7)}><i className="fas fa-video" style={{color: "#ff72d3"}}></i> Video</div>
-              </div>
+              <ul className='top-links'>
+                <div className="top-link-wrap">
+                <li className="top-link" onClick={() => this.postCreate(1)}><i className="fas fa-font"></i> Text</li>
+                </div>
+                <div className="top-link-wrap">
+                <li className="top-link" onClick={() => this.postCreate(2)}><i className="fas fa-camera" style={{color: "#ff5c44"}}></i> Photo</li>
+                </div>
+                <div className="top-link-wrap">
+                <li className="top-link" onClick={() => this.postCreate(3)}><i className="fas fa-quote-left" style={{color: "#ff961a"}}></i> Quote</li>
+                </div>
+                <div className="top-link-wrap">
+                <li className="top-link" onClick={() => this.postCreate(4)}><i className="fas fa-link" style={{color: "#1ad44a"}}></i> Link</li>
+                </div>
+                <div className="top-link-wrap">
+                <li className="top-link" onClick={() => this.postCreate(5)}><i className="fas fa-comment-dots" style={{color: "#1abfff"}}></i> Chat</li>
+                </div>
+                <div className="top-link-wrap">
+                <li className="top-link" onClick={() => this.postCreate(6)}><i className="fas fa-headphones" style={{color: "#896dff"}}></i> Audio</li>
+                </div>
+                <div className="top-link-wrap">
+                <li className="top-link" onClick={() => this.postCreate(7)}><i className="fas fa-video" style={{color: "#ff72d3"}}></i> Video</li>
+                </div>
+              </ul>
             <div className="input-div hidden">
               <div className="input-username">{currUser.username}</div>
               <form>

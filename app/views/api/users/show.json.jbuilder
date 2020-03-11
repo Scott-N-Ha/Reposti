@@ -1,8 +1,6 @@
 json.users do
   json.set! @user.id do
     json.partial! "api/users/user", user: @user
-    json.followers @user.followers_link.map(&:id)
-    json.leaders @user.leaders_link.map(&:id)
   end
 end 
 

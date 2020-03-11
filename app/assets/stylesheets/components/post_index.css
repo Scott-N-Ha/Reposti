@@ -21,10 +21,16 @@
 .top-links {
   display: flex;
   right: 0;
+  padding-top: 25px;
+  padding-bottom: 25px;
 }
 
 .top-links.hidden {
   display: none;
+  /* transition: opacity 1s ease-out;
+  height: 0;
+  overflow: hidden;
+  opacity: 0; */
 }
 
 .top-links:hover {
@@ -38,7 +44,7 @@
   font-family: Arial, Helvetica, sans-serif;
   color: #696969;
   width: 75px;
-  min-height: 99px;
+  min-height: 50px;
   
   display: flex;
   align-items: center;
@@ -46,6 +52,14 @@
   flex-direction: column;
 
   transition: all 333ms ease-in-out;
+}
+
+.top-link-wrap:last-child {
+  border: none;
+}
+
+.top-link-wrap {
+  border-right: 1px solid lightgray;
 }
 
 .top-link:hover {
@@ -295,8 +309,4 @@ video:focus, audio:focus {
 
 audio {
   width: 100%;
-}
-
-.hidden {
-  display: none;
 }

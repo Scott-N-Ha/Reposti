@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+import UserProfileImageContainer from '../users/user_profile_img_container.js';
+
 export default class NavBar extends React.Component{
   constructor(props){
     super(props);
@@ -48,8 +50,7 @@ export default class NavBar extends React.Component{
 
     return (
       <div className="logout-info">
-        <Link to={`/${currentUser.username}`}><i className="fas fa-home"></i></Link> 
-        {/* <Link to="/settings"><i className="fas fa-user"></i></Link> */}
+        <Link to="/"><i className="fas fa-home"></i></Link> 
         <i className="fas fa-user" onClick={this.handleUserDropdown}></i>
         { this.state.dropdown ? this.userDropdown() : null }
       </div>
@@ -66,25 +67,59 @@ export default class NavBar extends React.Component{
         <ul className="user-dropdown-account">
           <li className="dropdown-account">
             <div>
-              <span>Account</span> <span className="account-logout" onClick={this.handleLogout}>Log out</span>
+              <span>ACCOUNT</span> <span className="account-logout" onClick={this.handleLogout}>Log out</span>
             </div>
           </li>
           <Link to="/likes"><li className="dropdown-li">
-          <i className="fas fa-heart"></i> Likes { currentUser.likes.length }<br/>
+            <div className="dropdown-account-separator">
+              <i className="fas fa-heart"></i> Likes
+            </div>
+            { currentUser.likes.length }
           </li></Link>
           <Link to="/following"><li className="dropdown-li">
-          <i className="far fa-address-book"></i> Following { currentUser.leaders.length }
+            <div>
+              <i className="far fa-address-book"></i> Following
+            </div>
+            { currentUser.leaders.length }
           </li></Link>
           <Link to="/settings"><li className="dropdown-li">
-          <i className="fas fa-cog"></i> Settings
+            <div>
+              <i className="fas fa-cog"></i> Settings
+            </div>
           </li></Link>
-          <li className="dropdown-li">
-          <i className="fas fa-question-circle"></i> Help 
+          <a href="https://www.appacademy.io/"><li className="dropdown-li">
+            <div>
+              <i className="fas fa-question-circle"></i> Help 
+            </div>
+          </li></a>
+          <li className="dropdown-account">
+            TUMBLRS
+          </li>
+          <li>
+            <ul className="tumblrs-info">
+              <li className="tumblrs-info-main">
+                <Link to={`/${currentUser.username}`} >
+                  <UserProfileImageContainer userId={currentUser.id} />
+                  <div className="tumblrs-info-username">
+                    {currentUser.username}
+                  </div>
+                </Link>
+              </li>
+              <li className="tumblrs-li">
+                <div>
+                  Post
+                </div>
+                {currentUser.posts.length}
+              </li>
+              <li className="tumblrs-li">
+                <div>
+                  Followers
+                </div>
+                {currentUser.followers.length}
+              </li>
+            </ul>
           </li>
         </ul>
-        <div className="user-dropdown-tumblrs">
-
-        </div>
       </div>
     );
   }

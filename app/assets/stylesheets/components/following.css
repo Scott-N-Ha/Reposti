@@ -1,19 +1,42 @@
 .followings {
   margin-top: 20px;
   width: 540px;
-  min-height: 200px;
+  min-height: 120px;
   border-radius: 3px;
   background-color: white;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 24px;
+  padding: 20px;
+  box-sizing: border-box;
+  text-align: center;
+  vertical-align: middle;
 }
 
-.followings ul {
-  width: 100%;
+.followings img {
+  height: 32px;
+  width: 32px;
+}
+
+.followings a {
+  text-decoration: none;
+}
+
+.followings-link {
+  width: 100px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .followings-follow {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  /* align-items: center; */
   padding: 10px;
   width: 100%;
+  border-bottom: 1px solid lightgray;
+}
+
+.followings-follow:last-child {
+  border-bottom: none;
 }

@@ -18,19 +18,25 @@ export default class Following extends React.Component {
   render(){
     const { leaders } = this.props;
 
-    if (leaders === undefined || leaders.length < 1) return null;
+    if (leaders === undefined) return null;
 
     const leads = leaders.map(l => {
       return (
-        <li key={l.id} className="followings-follow">
-          <Link to={`${l.username}`}>
+        <li key={l.id} className="followings-follow" >
+          <Link to={`${l.username}`} className="followings-link" >
             <UserProfileImageContainer userId={l.id} />
-            {l.username}
-            {/* <FollowContainer /> */}
+            {l.username} 
           </Link>
+          <FollowContainer userId={l.username} />
         </li>
       )
     });
+
+    if (leads.length < 1) return (
+      <div className="followings">
+        You are not following anyone.
+      </div>
+    )
 
     return (
       <div className="followings">
