@@ -91,11 +91,10 @@
 
 .input-button {
   padding: 5px 7px 5px 7px;
-  /* height: 18px;
-  width: 36px; */
   text-align: center;
   border: none;
   color: white;
+  border-radius: 3px;
 }
 
 .cancel-btn {
@@ -104,6 +103,10 @@
 
 .post-btn {
   background-color: #00b8ff;
+}
+
+.post-btn.disabled {
+  background-color: #9da6af;
 }
 
 .cancel-btn:focus, .post-btn:focus {
@@ -126,6 +129,19 @@
   width: 100%;
 }
 
+
+.quote-post {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.quote-body {
+  font-family: Georgia,serif;
+  font-size: 48px;
+  min-height: 60px;
+  width: auto;
+}
+
 .photo-preview:hover {
   box-sizing: border-box;
   border: 1px solid red;
@@ -142,15 +158,16 @@
 }
 
 .photo-button {
+  font-family: Arial, Helvetica, sans-serif;
   color: #989898;
   background-color: #f2f2f2;
   border: 3px dashed #cfcfcf;
-  /* display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center; */
   text-align: center;
   padding: 20px;
+}
+
+.photo-button:hover, .photo-button *:hover {
+  cursor: pointer;
 }
 
 .photo-button-text {
@@ -166,16 +183,98 @@
   font-size: 10000px;
 }
 
-.quote-post {
-  padding-left: 20px;
-  padding-right: 20px;
+.audio-input {
+  outline: 0;
+  width: 100%;
+  height: 100%;
 }
 
-.quote-body {
-  font-family: Georgia,serif;
-  font-size: 48px;
-  min-height: 60px;
-  width: auto;
+#audio-uploader {
+  display: none;
+}
+
+.audio-button {
+  font-family: Arial, Helvetica, sans-serif;
+  color: #989898;
+  background-color: #f2f2f2;
+  border: 3px dashed #cfcfcf;
+  text-align: center;
+  padding: 20px;
+}
+
+.audio-button:hover, .audio-button *:hover {
+  cursor: pointer;
+}
+
+.audio-button-text {
+  width: 100%;
+  height: 100%;
+}
+
+.audio-button-text input[type=file] {
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0%;
+  font-size: 10000px;
+}
+
+.video-input {
+  outline: 0;
+  width: 100%;
+  height: 100%;
+}
+
+#video-uploader {
+  display: none;
+}
+
+.video-button {
+  font-family: Arial, Helvetica, sans-serif;
+  color: #989898;
+  background-color: #f2f2f2;
+  border: 3px dashed #cfcfcf;
+  text-align: center;
+  padding: 20px;
+}
+
+.video-button:hover, .video-button *:hover {
+  cursor: pointer;
+}
+
+.video-button-text {
+  width: 100%;
+  height: 100%;
+}
+
+.video-button-text input[type=file] {
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0%;
+  font-size: 10000px;
+}
+
+.media-input-title {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 36px;
+  width: 100%;
+  padding: 10px !important;
+  box-sizing: border-box;
+
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.media-input-body {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 18px;
+  width: 100%;
+  padding: 10px !important;
+  box-sizing: border-box;
+
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 .post-index-post {

@@ -47,6 +47,28 @@
   position: -webkit-sticky;
 }
 
+.media-post-title {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 36px;
+  width: 100%;
+  padding: 10px !important;
+  box-sizing: border-box;
+
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.media-post-body {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 18px;
+  width: 100%;
+  padding: 10px !important;
+  box-sizing: border-box;
+
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
 .unliked {
   color: #ff492f;
 }

@@ -1,6 +1,6 @@
 .settings-div {
   box-sizing: border-box;
-  margin-top: 20px;
+  margin-top: 125px;
   padding: 20px;
   display: flex;
   justify-content: center;
@@ -8,10 +8,35 @@
   width: 575px;
   border-radius: 3px;
   background-color: #ffffff;
+  text-align: center;
 }
 
 .profile-pic-user-show-settings {
   width: 196px;
   height: 196px;
   border-radius: 3px;
+  margin-top: -100px;
+  border: 3px solid white;
+  background-color: whitesmoke;
+}
+
+#photos-uploader {
+  width: 90px;
+}
+
+.update-btn {
+  padding: 5px 7px 5px 7px;
+  text-align: center;
+  border: none;
+  color: white;
+  border-radius: 3px;
+  background-color: #00b8ff;
+}
+
+.update-btn:focus {
+  outline: none;
+}
+
+.update-btn.disabled {
+  background-color: #9da6af;
 }

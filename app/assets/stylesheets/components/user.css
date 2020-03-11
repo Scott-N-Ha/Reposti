@@ -15,12 +15,37 @@
   height: 192px;
   width: 192px;
   margin-top: -100px;
+  border: 3px solid white;
 }
 
 .user-username {
   font-size: 48px;
   font-family: Arial, Helvetica, sans-serif;
   padding: 20px;
+}
+
+.follow-component {
+  margin: 20px;
+}
+
+.follow-btn {
+  padding: 5px 7px 5px 7px;
+  text-align: center;
+  border: none;
+  color: white;
+  border-radius: 3px;
+}
+
+.follow-btn.follow {
+  background-color: #00b8ff;
+}
+
+.follow-btn.unfollow {
+  background-color: #9da6af;
+}
+
+.follow-btn:focus {
+  outline: none;
 }
 
 .user-posts {

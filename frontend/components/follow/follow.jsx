@@ -8,12 +8,12 @@ export default class Follow extends React.Component {
 
   follow(){
     const { currentUser, pageUserId, createFollow } = this.props;
-    return <button onClick={() => createFollow({follower_id: currentUser, leader_id: pageUserId})}>Follow</button>
+    return <button className="follow-btn follow" onClick={() => createFollow({follower_id: currentUser, leader_id: pageUserId})}>Follow</button>
   }
 
   unfollow(){
     const { follow, deleteFollow } = this.props;
-    return <button onClick={() => deleteFollow(follow)}>Unfollow</button>
+    return <button className="follow-btn unfollow" onClick={() => deleteFollow(follow)}>Unfollow</button>
   }
 
   render(){

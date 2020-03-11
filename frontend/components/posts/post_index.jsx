@@ -68,7 +68,10 @@ export default class PostIndex extends React.Component {
 
     document.querySelectorAll('.input-button').forEach(btn => {
       btn.disabled = false;
+      btn.classList.remove('disabled');
     });
+    
+    document.querySelector('.input-button.post-btn').textContent = "Post";
   }
 
   handleChange(e){
@@ -157,9 +160,10 @@ export default class PostIndex extends React.Component {
 
     document.querySelectorAll('.input-button').forEach(btn => {
       btn.disabled = true;
+      btn.classList.add('disabled');
     });
 
-    // document.querySelectorAll('')
+    document.querySelector('.input-button.post-btn').textContent = "Uploading Post...";
 
     const { post_type_id, photos, video, audio, title, body } = this.state;
     const { currUser, createPost, createMediaPost } = this.props;
@@ -244,6 +248,8 @@ export default class PostIndex extends React.Component {
                   <input className="photo-input" type="file" name="photos" id="photos-uploader" multiple accept="image/*" onChange={this.handlePhotos} />
                   </div>
               </div>
+              <input className="media-input-title" type="text" name="title" value={title} onChange={this.handleChange} placeholder="Title of the Photos" /> <br/>
+              <input className="media-input-body" name="body" value={body} onChange={this.handleChange} placeholder="Add a description, if you'd like" /> <br/>
             </div>
           );
         } else {
@@ -262,7 +268,7 @@ export default class PostIndex extends React.Component {
         return (
           <div className="link-post">
             <input type="text" name="title" value={title} onChange={this.handleChange} placeholder="Type or paste a URL" /> <br/>
-            <input name="body" value={body} onChange={this.handleChange} placeholder="Add a description, if you like" /> <br/>
+            <input name="body" value={body} onChange={this.handleChange} placeholder="Add a description, if you'd like" /> <br/>
           </div>
         )
 
@@ -274,12 +280,22 @@ export default class PostIndex extends React.Component {
             Your browser does not support this type of audio.
           </audio>
         } else {
-          audio = <input type="file" name="audio-uploader" accept="audio/*" onChange={this.handleAudio} />
+          audio = <div className="audio-button">
+              <label className="audio-button-text" htmlFor="audio-uploader" >
+                <i className="fas fa-file-audio"></i>
+                <div>Upload an audio file</div>
+              </label>
+              <div className="hidden">
+                <input className="audio-input" type="file" id="audio-uploader" name="audio-uploader" accept="audio/*" onChange={this.handleAudio} />
+              </div>
+            </div>
         }
 
         return (
           <div className="audio-post">
             {audio}
+            <input className="media-input-title" type="text" name="title" value={title} onChange={this.handleChange} placeholder="Title of the Audio" /> <br/>
+            <input className="media-input-body" name="body" value={body} onChange={this.handleChange} placeholder="Add a description, if you'd like" /> <br/>
           </div>
         )
 
@@ -291,14 +307,22 @@ export default class PostIndex extends React.Component {
             Your browser does not support this type of video.
           </video>
         } else {
-          video = <input type="file" name="video-uploader" accept="video/*" onChange={this.handleVideo} />
+          video = <div className="video-button">
+              <label className="video-button-text" htmlFor="video-uploader" >
+                <i className="fas fa-file-video"></i>
+                <div>Upload a video file</div>
+              </label>
+              <div className="hidden">
+                <input className="video-input" type="file" id="video-uploader" name="video-uploader" accept="video/*" onChange={this.handleVideo} />
+              </div>
+            </div>
         }
 
         return (
           <div className="video-post">
             {video}
-            <input type="text" name="title" value={title} onChange={this.handleChange} placeholder="Title of the video" /> <br/>
-            <input name="body" value={body} onChange={this.handleChange} placeholder="Add a description, if you like" /> <br/>
+            <input className="media-input-title" type="text" name="title" value={title} onChange={this.handleChange} placeholder="Title of the video" /> <br/>
+            <input className="media-input-body" name="body" value={body} onChange={this.handleChange} placeholder="Add a description, if you'd like" /> <br/>
           </div>
         )
     
@@ -323,7 +347,6 @@ export default class PostIndex extends React.Component {
 
     return(
       <div className='main-feed'>
-
         <ul className="main-feed-ul">
           <li className="top-container" key="-1">
             <UserProfileImageContainer userId={currUser.id} />
@@ -337,19 +360,15 @@ export default class PostIndex extends React.Component {
                 <div className="top-link" onClick={() => this.postCreate(6)}><i className="fas fa-headphones" style={{color: "#896dff"}}></i> Audio</div>
                 <div className="top-link" onClick={() => this.postCreate(7)}><i className="fas fa-video" style={{color: "#ff72d3"}}></i> Video</div>
               </div>
-
             <div className="input-div hidden">
               <div className="input-username">{currUser.username}</div>
               <form>
                 {this.chooseRender()} <br/>
-
                 <div className="input-buttons-div">
                   <button onClick={this.postCancel} className="input-button cancel-btn">Close</button>
                   <button onClick={this.handleSubmit} className="input-button post-btn" >Post</button>
                 </div>
-
               </form>
-
             </div>
           </div>
         </li>

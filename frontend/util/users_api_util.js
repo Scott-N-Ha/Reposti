@@ -5,7 +5,6 @@ export const fetchSingleUser = username => (
 );
 
 export const updateSingleUserWithImage = (user, data) => {
-  debugger
   return $.ajax({
     method: 'PATCH',
     url: `/api/users/${user.username}`,

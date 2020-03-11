@@ -11,6 +11,18 @@ export default class Post extends React.Component {
     this.deleteRender = this.deleteRender.bind(this);
   }
 
+  titleRender(title){
+    return <div className="media-post-title">
+      {title}
+    </div>
+  }
+
+  bodyRender(body){
+    return <div className="media-post-body">
+      {body}
+    </div>
+  }
+
   deleteRender(){
     return <div onClick={() => this.props.deletePost(this.props.post)}><i className="fas fa-cog"></i></div>
   }
@@ -24,14 +36,16 @@ export default class Post extends React.Component {
     )
   }
 
-  renderPhoto({ photos }){
+  renderPhoto({ photos, title, body }){
     const render = photos.map(photo => {
       return <img src={photo} className="photos-post-photo" />
-    })
+    });
 
     return (
       <div className="photo-post">
         {render}
+        {title !== null ? this.titleRender(title) : null}
+        {body !== null ? this.bodyRender(body) : null}
       </div>
     )
   }
@@ -42,16 +56,20 @@ export default class Post extends React.Component {
         <source src={video} />
         Your browser does not support this type of video.
       </video>
-      <h2>{title}</h2>
-      <p>{body}</p>
+      {title !== null ? this.titleRender(title) : null}
+      {body !== null ? this.bodyRender(body) : null}
     </div>
   }
 
-  renderAudio({ audio }){
-    return <audio controls className="audio-player" >
-      <source src={audio} />
-      Your browser does not support this type of audio.
-    </audio>
+  renderAudio({ audio, title, body }){
+    return <div>
+        <audio controls className="audio-player" >
+          <source src={audio} />
+          Your browser does not support this type of audio.
+        </audio>
+        {title !== null ? this.titleRender(title) : null}
+        {body !== null ? this.bodyRender(body) : null}
+      </div>
   }
 
   renderQuote({title, body}){
