@@ -13,7 +13,7 @@ json.follows do
 end
 
 json.likes do
-  (@user.likes).each do |like|
+  (@user.likes + @user.likes_through_posts).each do |like|
     json.set! like.id do 
       json.partial! 'api/likes/like', like: like
     end

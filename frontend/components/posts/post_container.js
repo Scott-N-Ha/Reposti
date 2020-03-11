@@ -6,12 +6,11 @@ import { deletePost } from '../../actions/posts_actions.js';
 
 const mapStateToProps = ({entities: { users, likes }, session: { id }}, ownProps) => {
   let currUser = users[id];
-  let likesOnPost = Object.values(likes).filter(like => like.post_id === ownProps.post.id)
+  // let likesOnPost = Object.values(likes).filter(like => like.post_id === ownProps.post.id)
 
   return {
     author: users[ownProps.post.author_id],
     currUser: currUser,
-    likes: likesOnPost,
   }
 }
 

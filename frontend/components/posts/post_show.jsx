@@ -19,7 +19,7 @@ export default class PostShow extends React.Component {
   }
 
   render(){
-    const { post } = this.props;
+    const { post, likers } = this.props;
 
     if (post === undefined) return this.postNotFound();
     
@@ -28,10 +28,20 @@ export default class PostShow extends React.Component {
       <PostContainer post={post} />
     </li>
 
+    const postLikers = likers === undefined ? null : likers.map(user => {
+      return <li className="likers-likers">
+        <UserProfileImageContainer userId={user.id} />
+        <span className="likers-span">{user.username} liked.</span>
+      </li>
+    })
+
     return (
       <div className="main-feed">
         <ul className="main-feed-ul">
           {postShow}
+        </ul>
+        <ul className="post-likers">
+          {postLikers}
         </ul>
       </div>
     )

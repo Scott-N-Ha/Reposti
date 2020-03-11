@@ -13,7 +13,9 @@ json.likes do
 end
 
 json.users do
-  json.set! @post.author.id do
-    json.partial! 'api/users/user', user: @post.author
+  ([@post.author] + @post.likers).each do |user|
+    json.set! user.id do
+      json.partial! 'api/users/user', user: user
+    end
   end
 end

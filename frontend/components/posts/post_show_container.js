@@ -10,16 +10,19 @@ const mapStateToProps = (state, ownProps) => {
 
   let author;
   let likes;
+  let likers;
 
   if (post !== undefined){
     author = state.entities.users[post.author_id];
     likes = post.likes.map(like_id => state.entities.likes[like_id]);
+    likers = post.likers.map(liker_id => state.entities.users[liker_id]);
   }
 
   return {
     post: post,
     author: author,
     likes: likes,
+    likers: likers,
   }
 };
 

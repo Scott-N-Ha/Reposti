@@ -2,7 +2,7 @@ class Api::UsersController < ApplicationController
   def show
     if user_username
       @user = User
-                .includes(:posts, :followers, :leaders, :leaders_link, :followers_link, :followed_posts, :likes, :liked_posts)
+                .includes(:posts, :likes_through_posts, :followers, :leaders, :leaders_link, :followers_link, :followed_posts, :likes, :liked_posts)
                 .find_by(username: user_username)
                 
       render :show

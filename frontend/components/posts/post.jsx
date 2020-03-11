@@ -130,7 +130,7 @@ export default class Post extends React.Component {
         {postRender}
 
         <div className="post-footer">
-            {likes.length} notes <br/>
+            <Link to={`/post/${post.id}`}>{post.likes.length} note{post.likes.length === 1 ? null : 's'}</Link>
 
           <div className="post-footer-options">
             <LikeContainer post={post} />

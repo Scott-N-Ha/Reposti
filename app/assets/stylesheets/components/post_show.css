@@ -1,0 +1,38 @@
+.post-likers {
+  width: 540px;
+  min-height: 20px;
+  border-radius: 3px;
+  background-color: white;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  margin-left: 85px;
+  box-sizing: border-box;
+}
+
+.likers-likers {
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+  display: flex;
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+  text-align: center;
+  align-items: center;
+}
+
+.likers-likers img {
+  width: 32px;
+  height: 32px;
+  margin-right: 20px;
+  vertical-align: middle;
+}
+
+.likers-likers:hover {
+  background-color: #E6EFF7;
+}
+
+.likers-span {
+  display: inline-block;
+  vertical-align: middle;
+  text-align: center;
+}
