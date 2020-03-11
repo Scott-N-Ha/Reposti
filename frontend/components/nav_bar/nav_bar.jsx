@@ -11,6 +11,7 @@ export default class NavBar extends React.Component{
       dropdown: false,
     }
 
+    this.loginInfo = this.loginInfo.bind(this);
     this.logoutInfo = this.logoutInfo.bind(this);
     this.userDropdown = this.userDropdown.bind(this);
     this.handleUserDropdown = this.handleUserDropdown.bind(this);
@@ -38,7 +39,7 @@ export default class NavBar extends React.Component{
   loginInfo(){
     return (
       <div className='login-info'>
-        <Link className="currentPage" to='/signup'>Sign Up</Link> or <Link className="currentPage" to='/login'>Log In</Link>
+        {this.props.location.pathname === "/login" ? <Link className="nav-bar-button" to='/signup'>Sign Up</Link> : <Link className="nav-bar-button" to='/login'>Log In</Link>}
       </div>
     )
   }

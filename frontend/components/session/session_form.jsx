@@ -14,6 +14,8 @@ export default class SessionForm extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleDemo = this.handleDemo.bind(this);
     this.demoLogin = this.demoLogin.bind(this);
+    this.loginButtonRender = this.loginButtonRender.bind(this);
+    this.handleRerouteToLogin = this.handleRerouteToLogin.bind(this);
   }
 
   handleChange(e){
@@ -29,9 +31,7 @@ export default class SessionForm extends React.Component {
   showEmail(){
     return (
       <div>
-        <label>Email:
-          <input type="text" name="email" onChange={this.handleChange} value={this.state.email} />
-        </label><br/>
+          <input type="text" name="email" onChange={this.handleChange} value={this.state.email} placeholder="Email" />
       </div>
     )
   }
@@ -55,19 +55,28 @@ export default class SessionForm extends React.Component {
     );
   }
 
+  handleRerouteToLogin(e){
+    e.preventDefault();
+
+    this.props.history.push("/login");
+  }
+
+  loginButtonRender(){
+    return (
+      <button onClick={this.handleRerouteToLogin} className="session-login-button">Log In</button>
+    );
+  }
+
   render(){
     let buttonText = this.props.formType === 'signup' ? 'Sign Up' : 'Log In';
     return (
       <form className="session-form">
-        <label>Username:
-          <input type="text" name="username" onChange={this.handleChange} value={this.state.username} />
-        </label><br/>
-        { this.props.formType === 'signup' ? this.showEmail() : null }
-        <label>Password: 
-          <input type="password" name="password" onChange={this.handleChange} value={this.state.password} />
-        </label><br/>
-        <button onClick={this.handleSubmit}>{buttonText}</button>
-        { this.props.formType === 'login' ? this.demoLogin() : null }
+        <span className="reposti">reposti</span>
+          <input type="text" name="username" onChange={this.handleChange} value={this.state.username} placeholder="Username" />
+        { this.props.formType === 'signup' ? this.showEmail() : null } 
+          <input type="password" name="password" onChange={this.handleChange} value={this.state.password} placeholder="Password" />
+        <button onClick={this.handleSubmit} className="main-button" >{buttonText}</button>
+        { this.props.formType === 'login' ? this.demoLogin() : this.loginButtonRender() }
       </form>
     );
   }

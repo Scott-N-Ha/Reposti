@@ -6,6 +6,7 @@
   z-index: 9000;
   background: fixed;
   background-color: #001935;
+  font-family: Arial, Helvetica, sans-serif;
   font-size: x-large;
   box-sizing: border-box;
 
@@ -20,6 +21,20 @@
   margin-left: 20px;
 }
 
+.fa-resolving:hover {
+  background-image: repeating-linear-gradient(90deg, #e11a1a, #e1791a, #e0e11a, #54e11a, #1a2be1);
+  background-size: 1000% 1000%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: rainbow 4s ease-in-out infinite;
+}
+
+@keyframes rainbow {
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}
+
 .login-info, .logout-info {
   margin-right: 20px;
 }
@@ -31,6 +46,27 @@
 
 .nav-bar i {
   color: whitesmoke;
+}
+
+.nav-bar-button {
+  font-size: 12px;
+  color: white;
+  background-color: #00b8ff;
+  min-width: 75px;
+  min-height: 32px;
+  box-sizing: border-box;
+  padding: 10px;
+  border-radius: 3px;
+  border: none;
+  transition: all 333ms ease-in-out;
+}
+
+.nav-bar-button:hover {
+  transform: scale(1.1);
+}
+
+.nav-bar-button:focus {
+  outline: none;
 }
 
 .user-dropdown {
