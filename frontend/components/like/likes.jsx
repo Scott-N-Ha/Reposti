@@ -46,4 +46,4 @@ export default class Likes extends React.Component {
       </div>
     )
   }
-}
+};

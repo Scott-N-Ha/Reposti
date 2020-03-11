@@ -5,9 +5,6 @@ class Api::PostsController < ApplicationController
               .includes(:author)
               .includes(:likes)
               .includes(:likers)
-              .includes(:photos)
-              .includes(:video)
-              .includes(:audio)
 
     if @posts
       render :index
@@ -81,9 +78,6 @@ class Api::PostsController < ApplicationController
       .includes(:author)
       .includes(:likes)
       .includes(:likers)
-      .includes(:photos)
-      .includes(:video)
-      .includes(:audio)
       .find_by(id: post_id)
   end
 end

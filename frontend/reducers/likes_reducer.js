@@ -1,6 +1,7 @@
 import { RECEIVE_CURRENT_USER } from '../actions/session_actions.js';
 import { RECEIVE_SINGLE_USER } from '../actions/users_actions.js';
 import { CREATE_LIKE, DELETE_LIKE, RECEIVE_LIKES } from '../actions/likes_actions.js';
+import { RECEIVE_POST } from '../actions/posts_actions.js';
 
 const initialState = {
 
@@ -29,6 +30,9 @@ const likesReducer = (state = initialState, action) => {
       return nextState;
 
     case RECEIVE_LIKES:
+      return Object.assign(nextState, action.payload.likes);
+
+    case RECEIVE_POST:
       return Object.assign(nextState, action.payload.likes);
       
     default:

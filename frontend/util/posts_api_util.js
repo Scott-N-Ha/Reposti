@@ -30,3 +30,9 @@ export const createMediaPost = post => {
     processData: false,
   });
 };
+
+export const fetchSinglePost = postId => (
+  $.ajax({
+    url: `/api/posts/${postId}`,
+  })
+);

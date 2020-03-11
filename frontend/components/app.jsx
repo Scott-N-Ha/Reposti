@@ -10,6 +10,7 @@ import PostIndexContainer from './posts/post_index_container.js';
 import SettingsContainer from './users/settings_container.js';
 import FollowingContainer from './follow/following_container.js';
 import LikesContainer from './like/likes_container.js';
+import PostShowContainer from './posts/post_show_container.js';
 
 // testing
 
@@ -23,6 +24,7 @@ const App = (props) => {
     <Switch>
       <AuthRoute path="/login" component={LoginFormContainer} />
       <AuthRoute path="/signup" component={SignupFormContainer} />
+      <ProtectedRoute exact path="/post/:postId" component={PostShowContainer} />
       <ProtectedRoute exact path="/following" component={FollowingContainer} />
       <ProtectedRoute exact path='/settings' component={SettingsContainer} />
       <ProtectedRoute exact path="/likes" component={LikesContainer} />

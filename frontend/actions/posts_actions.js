@@ -5,6 +5,7 @@ import { receiveErrors } from './errors_actions.js';
 export const CREATE_POST = "CREATE_POST";
 export const UPDATE_POST = "UPDATE_POST";
 export const DELETE_POST = "DELETE_POST";
+export const RECEIVE_POST = "RECEIVE_POST";
 
 // Regular Actions
 const createPostAction = payload => ({
@@ -19,6 +20,11 @@ const updatePostAction = payload => ({
 
 const deletePostAction = payload => ({
   type: DELETE_POST,
+  payload
+});
+
+const receiveSinglePostAction = payload => ({
+  type: RECEIVE_POST,
   payload
 });
 
@@ -44,5 +50,11 @@ export const updatePost = post => dispatch => (
 export const deletePost = post => dispatch => (
   PostsAPI.destroyPost(post)
     .then(post => dispatch(deletePostAction(post)),
+      errors => dispatch(receiveErrors(errors)))
+);
+
+export const fetchSinglePost = postId => dispatch => (
+  PostsAPI.fetchSinglePost(postId)
+    .then(post => dispatch(receiveSinglePostAction(post)),
       errors => dispatch(receiveErrors(errors)))
 );

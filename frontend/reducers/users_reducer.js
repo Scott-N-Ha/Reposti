@@ -1,8 +1,8 @@
 import { RECEIVE_CURRENT_USER } from "../actions/session_actions.js";
 import { RECEIVE_SINGLE_USER } from "../actions/users_actions.js";
-import { CREATE_LIKE, DELETE_LIKE } from '../actions/likes_actions.js';
+import { CREATE_LIKE, DELETE_LIKE, RECEIVE_LIKES } from '../actions/likes_actions.js';
 import { CREATE_FOLLOW, DELETE_FOLLOW, RECEIVE_FOLLOWS } from '../actions/follows_action.js';
-import { RECEIVE_LIKES } from '../actions/likes_actions.js';
+import { RECEIVE_POST } from '../actions/posts_actions.js';
 
 const initialState = {
 };
@@ -71,6 +71,11 @@ const usersReducer = (state = initialState, action) => {
           }
         });
       }
+      return nextState;
+
+    case RECEIVE_POST:
+      userId = Object.keys(action.payload.users)[0];
+      if (nextState[userId] === undefined) nextState[userId] = action.payload.users[userId];
       return nextState;
       
     default:

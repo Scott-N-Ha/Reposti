@@ -1,10 +1,8 @@
 json.users do
   json.set! @user.id do
     json.partial! "api/users/user", user: @user
-    json.posts @user.posts.sort {|a, b| b.created_at <=> a.created_at}.map(&:id)
     json.followers @user.followers_link.map(&:id)
     json.leaders @user.leaders_link.map(&:id)
-    json.likes @user.likes.map(&:id)
   end
 end 
 

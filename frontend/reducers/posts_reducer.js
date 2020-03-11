@@ -1,6 +1,6 @@
 import { RECEIVE_SINGLE_USER } from '../actions/users_actions.js';
 import { RECEIVE_CURRENT_USER } from '../actions/session_actions.js';
-import { DELETE_POST, CREATE_POST, UPDATE_POST } from '../actions/posts_actions.js';
+import { DELETE_POST, CREATE_POST, UPDATE_POST, RECEIVE_POST } from '../actions/posts_actions.js';
 import { RECEIVE_LIKES } from '../actions/likes_actions.js';
 
 const initialState = {
@@ -29,6 +29,10 @@ const postsReducer = (state = initialState, action) => {
     case DELETE_POST:
       delete nextState[Object.keys(action.payload.posts)[0]];
       return nextState;
+
+    case RECEIVE_POST:
+      
+      return Object.assign(nextState, action.payload.posts);
 
     case RECEIVE_LIKES:
       return Object.assign(nextState, action.payload.posts);
