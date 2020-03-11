@@ -18,7 +18,6 @@ export default class NavBar extends React.Component{
   }
 
   componentDidMount(){
-    debugger
     if (this.props.currentUser !== undefined) this.props.getUser(this.props.currentUser.username);
 
     document.addEventListener('click', event => {
@@ -70,9 +69,9 @@ export default class NavBar extends React.Component{
               <span>Account</span> <span className="account-logout" onClick={this.handleLogout}>Log out</span>
             </div>
           </li>
-          <li className="dropdown-li">
+          <Link to="/likes"><li className="dropdown-li">
           <i className="fas fa-heart"></i> Likes { currentUser.likes.length }<br/>
-          </li>
+          </li></Link>
           <Link to="/following"><li className="dropdown-li">
           <i className="far fa-address-book"></i> Following { currentUser.leaders.length }
           </li></Link>

@@ -65,7 +65,8 @@ export default class Settings extends React.Component {
       formData.append('user[profile_image]', profile_image);
 
       updateSingleUserWithImage(user, formData)
-        .then(() => this.cancelEdit());
+        .then(() => this.cancelEdit())
+        .catch(() => this.cancelEdit());
     }
   }
 

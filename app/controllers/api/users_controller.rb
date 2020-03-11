@@ -2,14 +2,7 @@ class Api::UsersController < ApplicationController
   def show
     if user_username
       @user = User
-                .includes(:posts)
-                .includes(:followers)
-                .includes(:leaders)
-                .includes(:leaders_link)
-                .includes(:followers_link)
-                .includes(:followed_posts)
-                .includes(:likes)
-                .includes(:liked_posts)
+                .includes(:posts, :followers, :leaders, :leaders_link, :followers_link, :followed_posts, :likes, :liked_posts)
                 .find_by(username: user_username)
                 
       render :show
@@ -18,6 +11,18 @@ class Api::UsersController < ApplicationController
       render json: ['Cannot find this user'], status: :not_found
     end
   end
+
+  # def liked_show
+  #   @user = User
+  #             .includes(:posts, :followers, :leaders, :leaders_link, :followers_link, :followed_posts, :likes, :liked_posts)
+  #             .where(username: params[:username])
+
+  #   if @user
+  #     render json: @user
+  #   else
+  #     render json: @user.errors.full_messages, status: 418
+  #   end
+  # end
 
   def create
     @user = User.new(user_params)

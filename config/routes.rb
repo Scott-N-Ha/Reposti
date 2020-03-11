@@ -9,4 +9,7 @@ Rails.application.routes.draw do
     resources :follows, only: [:create, :destroy, :show]
     resources :likes, only: [:create, :destroy]
   end
+
+  # get 'api/users/:username/likes', :to => 'api/users#liked_show'
+  get 'api/likes/:user_id/', :to => 'api/likes#user_show'
 end

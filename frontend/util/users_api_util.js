@@ -4,6 +4,12 @@ export const fetchSingleUser = username => (
   })
 );
 
+// export const fetchAllLikedPostsForUser = user => (
+//   $,ajax({
+//     url: `api/users/${user.username}/likes`,
+//   })
+// )
+
 export const updateSingleUserWithImage = (user, data) => {
   return $.ajax({
     method: 'PATCH',
@@ -11,7 +17,7 @@ export const updateSingleUserWithImage = (user, data) => {
     data: data,
     contentType: false,
     processData: false,
-  })
+  });
 };
 
 export const updateSingleUser = user => {
@@ -19,5 +25,5 @@ export const updateSingleUser = user => {
     method: 'PATCH',
     url: `/api/users/${user.username}`,
     data: { user },
-  })
+  });
 };

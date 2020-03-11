@@ -2,6 +2,7 @@ import { RECEIVE_CURRENT_USER } from "../actions/session_actions.js";
 import { RECEIVE_SINGLE_USER } from "../actions/users_actions.js";
 import { CREATE_LIKE, DELETE_LIKE } from '../actions/likes_actions.js';
 import { CREATE_FOLLOW, DELETE_FOLLOW, RECEIVE_FOLLOWS } from '../actions/follows_action.js';
+import { RECEIVE_LIKES } from '../actions/likes_actions.js';
 
 const initialState = {
 };
@@ -53,11 +54,23 @@ const usersReducer = (state = initialState, action) => {
       return nextState;
 
     case RECEIVE_FOLLOWS:
-      Object.keys(action.payload.users).forEach(id => {
-        if (nextState[id] === undefined){
-          nextState[id] = action.payload.users[id];
-        }
-      });
+      if (Object.values(action.payload).length > 0){
+        Object.keys(action.payload.users).forEach(id => {
+          if (nextState[id] === undefined){
+            nextState[id] = action.payload.users[id];
+          }
+        });
+      }
+      return nextState;
+
+    case RECEIVE_LIKES:
+      if (Object.values(action.payload).length > 0){
+        Object.keys(action.payload.users).forEach(id => {
+          if (nextState[id] === undefined){
+            nextState[id] = action.payload.users[id];
+          }
+        });
+      }
       return nextState;
       
     default:

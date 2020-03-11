@@ -18,6 +18,10 @@ class Like < ApplicationRecord
     foreign_key: :liker_id,
     class_name: :User
 
+  has_one :post_author,
+    through: :post,
+    source: :author
+
   def multi_like_check
     like_check = Like.find_by(post_id: self.post_id, liker_id: self.liker_id)
 

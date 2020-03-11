@@ -10,6 +10,16 @@ class Api::LikesController < ApplicationController
     end
   end
 
+  def user_show
+    @likes = Like.includes(:post, :post_author).where(liker_id: params[:user_id])
+
+    if @likes
+      render :user_show
+    else
+      render json: @likes.errors.full_messages, status: :not_found
+    end
+  end
+
   def destroy
     @like = Like.find_by(id: params[:id])
     

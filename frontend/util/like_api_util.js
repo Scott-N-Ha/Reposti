@@ -12,3 +12,9 @@ export const deleteLike = like => (
     method: 'DELETE'
   })
 );
+
+export const fetchAllLikesForUser = user => (
+  $.ajax({
+    url: `api/likes/${user.id}`
+  })
+);
