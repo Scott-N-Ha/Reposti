@@ -17,8 +17,9 @@ export default class NavBar extends React.Component{
     this.handleLogout = this.handleLogout.bind(this);
   }
 
-  componentDidMount(prevProps){
-    this.props.getUser(this.props.currentUser.username);
+  componentDidMount(){
+    debugger
+    if (this.props.currentUser !== undefined) this.props.getUser(this.props.currentUser.username);
 
     document.addEventListener('click', event => {
       if (!event.target.classList.contains('user-dropdown') && !event.target.classList.contains("fa-user")) this.hideDropdown();

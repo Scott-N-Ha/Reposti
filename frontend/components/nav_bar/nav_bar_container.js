@@ -6,7 +6,6 @@ import { fetchSingleUser } from '../../actions/users_actions.js';
 import NavBar from './nav_bar.jsx';
 
 const mapStateToProps = (state, ownProps) => {
-  // 
   return {
     currentUser: state.entities.users[state.session.id]
   };
