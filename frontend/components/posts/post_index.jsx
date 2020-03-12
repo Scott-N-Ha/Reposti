@@ -267,8 +267,8 @@ export default class PostIndex extends React.Component {
       case 4:
         return (
           <div className="link-post">
-            <input type="text" name="title" value={title} onChange={this.handleChange} placeholder="Type or paste a URL" /> <br/>
-            <input name="body" value={body} onChange={this.handleChange} placeholder="Add a description, if you'd like" /> <br/>
+            <input className="link-title" type="text" name="title" value={title} onChange={this.handleChange} placeholder="Type or paste a URL" /> <br/>
+            <input className="link-body" name="body" value={body} onChange={this.handleChange} placeholder="Add a description, if you'd like" /> <br/>
           </div>
         )
 

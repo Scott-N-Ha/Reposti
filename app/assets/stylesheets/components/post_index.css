@@ -127,12 +127,16 @@
   outline: none;
 }
 
-.text-post {
+.text-post, .quote-post, .link-post {
   padding-left: 20px;
   padding-right: 20px;
 }
 
-.text-title {
+.link-post {
+  box-sizing: border-box;
+}
+
+.text-title, .link-title {
   font-size: 48px;
   width: 100%;
 }
@@ -143,17 +147,15 @@
   width: 100%;
 }
 
-
-.quote-post {
-  padding-left: 20px;
-  padding-right: 20px;
-}
-
 .quote-body {
   font-family: Georgia,serif;
   font-size: 48px;
   min-height: 60px;
   width: auto;
+}
+
+.link-body {
+  width: 100%;
 }
 
 .photo-preview:hover {
@@ -301,6 +303,15 @@
 
 .post-div {
   margin-left: 20px;
+}
+
+.sticky-test {
+  position: sticky;
+
+}
+
+.profile-img-icon {
+  position: sticky;
 }
 
 video:focus, audio:focus {

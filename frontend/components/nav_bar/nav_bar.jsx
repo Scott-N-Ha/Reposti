@@ -106,12 +106,12 @@ export default class NavBar extends React.Component{
                   </div>
                 </Link>
               </li>
-              <li className="tumblrs-li">
-                <div>
-                  Post
-                </div>
-                {currentUser.posts.length}
-              </li>
+                <li className="tumblrs-li">
+                  <div>
+                    Post
+                  </div>
+                  {currentUser.posts.length}
+                </li>
               <li className="tumblrs-li">
                 <div>
                   Followers
