@@ -28,7 +28,7 @@ export default class User extends React.Component {
     if (user === undefined || user.followers === undefined || user.leaders === undefined) return this.userNotFound();
 
     const userPosts = posts.sort((a,b) => b.id - a.id).map(post => {
-      if (post.id !== undefined){
+      if (post !== undefined && post.id !== undefined){
         return (
           <li key={post.id}>
             <PostContainer post={post} />

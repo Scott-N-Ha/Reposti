@@ -4,10 +4,6 @@ import ReactDOM from 'react-dom';
 import configureStore from './store/store.js';
 import Root from './components/root.jsx';
 
-// testing
-
-// testing
-
 document.addEventListener("DOMContentLoaded", () => {
   let preloadedState;
 
@@ -29,10 +25,6 @@ document.addEventListener("DOMContentLoaded", () => {
   delete window.currentUser;
   const bootstrapScript = document.getElementById('bootstrap-script')
   if (bootstrapScript !== null) bootstrapScript.remove();
-
-  // testing
-  window.store = store;
-  // testing
 
   const root = document.getElementById('root');
   ReactDOM.render(

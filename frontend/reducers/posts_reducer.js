@@ -1,7 +1,7 @@
 import { RECEIVE_SINGLE_USER } from '../actions/users_actions.js';
 import { RECEIVE_CURRENT_USER } from '../actions/session_actions.js';
 import { DELETE_POST, CREATE_POST, UPDATE_POST, RECEIVE_POST } from '../actions/posts_actions.js';
-import { RECEIVE_LIKES } from '../actions/likes_actions.js';
+import { CREATE_LIKE, DELETE_LIKE, RECEIVE_LIKES } from '../actions/likes_actions.js';
 
 const initialState = {
 
@@ -10,6 +10,7 @@ const initialState = {
 const postsReducer = (state = initialState, action) => {
   Object.freeze(state);
   let nextState = Object.assign({}, state);
+  let like;
 
   switch (action.type) {
     case RECEIVE_CURRENT_USER:
@@ -31,8 +32,17 @@ const postsReducer = (state = initialState, action) => {
       return nextState;
 
     case RECEIVE_POST:
-      
       return Object.assign(nextState, action.payload.posts);
+
+    case CREATE_LIKE:
+      like = Object.values(action.payload)[0];
+      nextState[like.post_id].likes.push(like.id);
+      return nextState;
+
+    case DELETE_LIKE:
+      like = Object.values(action.payload)[0];
+      nextState[like.post_id].likes = nextState[like.post_id].likes.filter(like_id => like_id !== like.id);
+      return nextState;
 
     case RECEIVE_LIKES:
       return Object.assign(nextState, action.payload.posts);

@@ -4,13 +4,16 @@ import { withRouter } from 'react-router-dom';
 import Post from './post.jsx';
 import { deletePost } from '../../actions/posts_actions.js';
 
-const mapStateToProps = ({entities: { users, likes }, session: { id }}, ownProps) => {
+const mapStateToProps = ({entities: { users, likes, posts }, session: { id }}, { post }) => {
   let currUser = users[id];
-  // let likesOnPost = Object.values(likes).filter(like => like.post_id === ownProps.post.id)
+
+  let postLikes = Object.values(likes).filter(like => like.post_id === post.id);
 
   return {
-    author: users[ownProps.post.author_id],
+    author: users[post.author_id],
     currUser: currUser,
+    statePost: posts[post.id],
+    likes: postLikes,
   }
 }
 

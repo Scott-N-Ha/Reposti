@@ -6,9 +6,13 @@ import LikeContainer from '../like/like_container.js';
 export default class Post extends React.Component {
   constructor(props){
     super(props);
-    this.state = this.props.post;
+    this.state = this.props.statePost;
 
     this.deleteRender = this.deleteRender.bind(this);
+  }
+
+  componentDidUpdate(prevProps){
+    
   }
 
   titleRender(title){
@@ -81,6 +85,14 @@ export default class Post extends React.Component {
     )
   }
 
+  renderChat({body}){
+    return (
+      <div className="chat-post">
+        <span className="chat-body">{body}</span>
+      </div>
+    )
+  }
+
   renderLink({title, body}){
     return (
       <div className="link-post">
@@ -105,6 +117,9 @@ export default class Post extends React.Component {
       case 4:
         return this.renderLink(post);
 
+      case 5:
+        return this.renderChat(post);
+
       case 6:
         return this.renderAudio(post);
 
@@ -117,7 +132,9 @@ export default class Post extends React.Component {
   }
 
   render () {
-    const { post, author, currUser, likes } = this.props;
+    const { statePost, author, currUser, likes } = this.props;
+
+    const post = statePost;
 
     if (!([post, author, currUser].every(el => el !== undefined))) return null;
 
@@ -126,15 +143,12 @@ export default class Post extends React.Component {
     return (
       <div className='post-div' key={post.id}>
         <div className="input-username"><Link to={`/${author.username}`} className="underline-magic">{author.username}</Link></div>
-
         {postRender}
-
         <div className="post-footer">
-            <Link to={`/post/${post.id}`} className="underline-magic" >{post.likes.length} note{post.likes.length === 1 ? null : 's'}</Link>
-
+          <Link to={`/post/${post.id}`} className="underline-magic" >{post.likes.length} note{post.likes.length === 1 ? null : 's'}</Link>
           <div className="post-footer-options">
             <LikeContainer post={post} />
-          { (currUser.id === author.id) ? this.deleteRender() : null }
+            { (currUser.id === author.id) ? this.deleteRender() : null }
           </div>
         </div>
       </div>

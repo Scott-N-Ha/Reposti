@@ -23,6 +23,7 @@ const mapStateToProps = (state, ownProps) => {
     author: author,
     likes: likes,
     likers: likers,
+    stateLikes: state.entities.likes,
   }
 };
 

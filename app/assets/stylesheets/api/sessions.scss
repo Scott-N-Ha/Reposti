@@ -28,7 +28,7 @@
   outline: none;
 }
 
-.session-form input, .session-form button {
+.session-form-input, .session-form button {
   margin-top: 3px;
   margin-bottom: 3px;
   width: 300px;
@@ -39,8 +39,27 @@
   border: none;
 }
 
-.session-form input {
+.session-form-input {
   background-color: white;
+}
+
+.session-form-input:focus {
+  border: 3px solid #00b8ff;
+  padding: 7px;
+  color: inherit;
+}
+
+.session-form-input:focus::placeholder {
+  color: inherit;
+}
+
+.input-errors {
+  border: 3px solid #FF3347;
+  padding: 7px;
+}
+
+.input-errors::placeholder {
+  color: #FF3347;
 }
 
 .main-button {
@@ -48,3 +67,17 @@
   background-color: #00b8ff;
 }
 
+.session-errors-list {
+  background-color: rgba($color: #000000, $alpha: 0.5);
+  width: 300px;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+  color: white;
+  border-radius: 3px;
+  // margin: 0 auto;
+}
+
+.session-error {
+  text-align: center;
+  margin: 10px;
+}

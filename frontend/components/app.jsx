@@ -12,10 +12,6 @@ import FollowingContainer from './follow/following_container.js';
 import LikesContainer from './like/likes_container.js';
 import PostShowContainer from './posts/post_show_container.js';
 
-// testing
-
-// testing
-
 const App = (props) => {
   return (
   <div className="app">

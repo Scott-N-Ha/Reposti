@@ -206,10 +206,12 @@ export default class PostIndex extends React.Component {
         break;
 
       default:
+        let link = (post_type_id === 4 && title.slice(0,4) !== "http");
+
         let newState = {
           post_type_id: post_type_id,
           author_id: currUser.id,
-          title: title,
+          title: (link ? "https://" : "") + title,
           body: body,
         }
 
@@ -273,6 +275,13 @@ export default class PostIndex extends React.Component {
           <div className="link-post">
             <input className="link-title" type="text" name="title" value={title} onChange={this.handleChange} placeholder="Type or paste a URL" /> <br/>
             <input className="link-body" name="body" value={body} onChange={this.handleChange} placeholder="Add a description, if you'd like" /> <br/>
+          </div>
+        )
+
+      case 5:
+        return (
+          <div className="chat-post">
+            <textarea className="text-body" name="body" cols="30" rows="10" value={body} onChange={this.handleChange} placeholder="Your chat here" />
           </div>
         )
 

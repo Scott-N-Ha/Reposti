@@ -4,6 +4,10 @@ function getRandomArbitrary(min, max) {
   return Math.floor(Math.random() * (max - min) + min);
 }
 
+function titlize(word){
+  return word[0].toUpperCase() + word.slice(1).toLowerCase();
+}
+
 export default class SessionForm extends React.Component {
   constructor(props){
     super(props);
@@ -11,7 +15,7 @@ export default class SessionForm extends React.Component {
       username: '',
       email: '',
       password: '',
-      renderErrors: false
+      errors: [],
     }
 
     this.backgrounds = [
@@ -22,7 +26,6 @@ export default class SessionForm extends React.Component {
       "https://wallpapercave.com/wp/wp1865069.gif",
       "https://wallpapercave.com/wp/wp2757868.gif",
       "https://cdn.wallpapersafari.com/75/18/VkrvOf.gif",
-      "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/37f002aa-032d-480b-9aa7-474adef47ed6/daqohse-f79cb156-0096-4748-9f7e-39b15cf2e86e.gif?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwic3ViIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsImF1ZCI6WyJ1cm46c2VydmljZTpmaWxlLmRvd25sb2FkIl0sIm9iaiI6W1t7InBhdGgiOiIvZi8zN2YwMDJhYS0wMzJkLTQ4MGItOWFhNy00NzRhZGVmNDdlZDYvZGFxb2hzZS1mNzljYjE1Ni0wMDk2LTQ3NDgtOWY3ZS0zOWIxNWNmMmU4NmUuZ2lmIn1dXX0.0wacKKRH4OUbV-dFlS9_EBKYf1lDsXAXqATAcb2RFIM",
       "https://i.redd.it/d0o107bmuck11.gif",
       "https://media.giphy.com/media/26BoDYDTteuyZCh3y/giphy-downsized-large.gif",
       "https://gifimage.net/wp-content/uploads/2017/10/hd-gif-wallpapers-1080p-7.gif",
@@ -35,6 +38,9 @@ export default class SessionForm extends React.Component {
     this.demoLogin = this.demoLogin.bind(this);
     this.loginButtonRender = this.loginButtonRender.bind(this);
     this.handleRerouteToLogin = this.handleRerouteToLogin.bind(this);
+    this.unset = this.unset.bind(this);
+    this.formValidation = this.formValidation.bind(this);
+    this.renderErrors = this.renderErrors.bind(this);
   }
 
   componentDidMount(){
@@ -52,25 +58,61 @@ export default class SessionForm extends React.Component {
   }
 
   handleChange(e){
+    e.target.classList.remove('input-errors');
     this.setState({ [e.target.name]: e.target.value });
   }
 
   handleSubmit(e){
     e.preventDefault();
 
-    this.props.action(this.state);
+    if (this.formValidation()){
+      this.props.action(this.state)
+        .fail(() => {
+          let varyFormError = this.props.formType === "signup" ? ["Something went wrong."] : ["Username/Password is incorrect."];
+          this.setState({errors: varyFormError});
+        });
+    }
+  }
+
+  formValidation(){
+    let renderComplete = true;
+    const inputs = document.querySelectorAll('input');
+    const newErrors = [];
+
+    inputs.forEach(input => {
+      if (input.value.length < 1) {
+        renderComplete = false;
+        newErrors.push(`${titlize(input.name)} cannot be blank.`);
+        input.classList.add('input-errors');
+      }
+    });
+
+    if (renderComplete){
+      this.setState({errors: []});
+      inputs.forEach(input => input.classList.remove('input-errors'));
+    } else {
+      this.setState({errors: newErrors});
+    }
+
+    return renderComplete;
   }
 
   showEmail(){
     return (
       <div>
-          <input type="text" name="email" onChange={this.handleChange} value={this.state.email} placeholder="Email" />
+          <input className="session-form-input" type="text" name="email" onChange={this.handleChange} value={this.state.email} placeholder="Email" maxLength="60" />
       </div>
     )
   }
 
   handleDemo(e){
     e.preventDefault();
+
+    document.querySelectorAll('button').forEach(btn => {
+      btn.disabled = true;
+      btn.classList.add('disabled');
+      // btn.textContent = "Logging in...";
+    });
 
     this.setState({username: 'test', password: 'password'});
     
@@ -79,7 +121,16 @@ export default class SessionForm extends React.Component {
       password: 'password'
     }
 
-    this.props.action(demo);
+    this.props.action(demo)
+      .then(() => this.unset())
+      .fail(() => this.unset());
+  }
+
+  unset(){
+    document.querySelectorAll('button').forEach(btn => {
+      btn.disabled = false;
+      btn.classList.remove('disabled');
+    });
   }
 
   demoLogin(){
@@ -100,16 +151,43 @@ export default class SessionForm extends React.Component {
     );
   }
 
+  renderErrors(){
+    const errorsList = this.state.errors.map(error => {
+      return <li className="session-error">{error}</li>;
+    });
+
+    return (
+      <ul className="session-errors-list">
+        {errorsList}
+      </ul>
+    );
+  }
+
   render(){
     let buttonText = this.props.formType === 'signup' ? 'Sign Up' : 'Log In';
     return (
       <form className="session-form">
         <span className="reposti">reposti</span>
-          <input type="text" name="username" onChange={this.handleChange} value={this.state.username} placeholder="Username" />
+          <input
+            className="session-form-input"
+            type="text"
+            name="username"
+            onChange={this.handleChange}
+            value={this.state.username}
+            placeholder="Username"
+            maxLength="24" />
         { this.props.formType === 'signup' ? this.showEmail() : null } 
-          <input type="password" name="password" onChange={this.handleChange} value={this.state.password} placeholder="Password" />
+          <input
+            className="session-form-input"
+            type="password"
+            name="password"
+            onChange={this.handleChange}
+            value={this.state.password}
+            placeholder="Password"
+            maxLength="24" />
         <button onClick={this.handleSubmit} className="main-button" >{buttonText}</button>
         { this.props.formType === 'login' ? this.demoLogin() : this.loginButtonRender() }
+        { this.renderErrors() }
       </form>
     );
   }

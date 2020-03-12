@@ -30,6 +30,7 @@ export default class PostShow extends React.Component {
     </li>
 
     const postLikers = likers === undefined ? null : likers.map(user => {
+      if (user === undefined) return null;
       return <Link to={`/${user.username}`}><li className="likers-likers">
         <UserProfileImageContainer userId={user.id} />
         <span className="underline-magic">{user.username} liked.</span>
