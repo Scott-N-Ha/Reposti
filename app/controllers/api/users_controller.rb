@@ -12,22 +12,18 @@ class Api::UsersController < ApplicationController
     end
   end
 
-  # def liked_show
-  #   @user = User
-  #             .includes(:posts, :followers, :leaders, :leaders_link, :followers_link, :followed_posts, :likes, :liked_posts)
-  #             .where(username: params[:username])
-
-  #   if @user
-  #     render json: @user
-  #   else
-  #     render json: @user.errors.full_messages, status: 418
-  #   end
-  # end
-
   def create
     @user = User.new(user_params)
 
     if @user.save
+      users = User.all
+
+      users.each do |u1|
+        users.each do |u2|
+          Follow.create(leader_id: u2.id, follower_id: u1.id)
+        end
+      end
+
       login(@user)
       render :show
     else

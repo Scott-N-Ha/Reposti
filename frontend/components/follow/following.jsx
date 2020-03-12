@@ -21,6 +21,7 @@ export default class Following extends React.Component {
     if (leaders === undefined) return null;
 
     const leads = leaders.map(l => {
+      if (l === null || l === undefined) return null;
       return (
         <li key={l.id} className="followings-follow" >
           <Link to={`${l.username}`} className="followings-link" >

@@ -76,3 +76,26 @@
 .unliked {
   color: #ff492f;
 }
+
+.post-menu {
+  border-radius: 3px;
+  background-color: white;
+  box-sizing: border-box;
+  position: absolute;
+  /* float: right; */
+  z-index: 5;
+  box-shadow: 1px 1px 5px 1px #888888;
+}
+
+.post-menu li:first-child {
+  color: lightgray;
+}
+
+.post-menu li {
+  padding: 10px;
+}
+
+.post-menu li:hover {
+  cursor: pointer;
+  background-color: #E6EFF7;
+}

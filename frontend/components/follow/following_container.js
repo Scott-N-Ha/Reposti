@@ -11,6 +11,7 @@ const mapStateToProps = ({ entities: { users, follows }, session }, ownProps) =>
   if (currentUser.leaders){
     leaders = currentUser.leaders.map(leadId => {
       let lead = follows[leadId];
+      if (lead === undefined) return null;
       return users[lead.leader_id];
     });
   }

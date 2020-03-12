@@ -6,13 +6,17 @@ import LikeContainer from '../like/like_container.js';
 export default class Post extends React.Component {
   constructor(props){
     super(props);
-    this.state = this.props.statePost;
+    this.state = Object.assign(this.props.statePost, {menu: false});
 
-    this.deleteRender = this.deleteRender.bind(this);
+    this.settingsRender = this.settingsRender.bind(this);
+    this.settingsMenuRender = this.settingsMenuRender.bind(this);
+    this.triggerSettingsMenu = this.triggerSettingsMenu.bind(this);
   }
 
-  componentDidUpdate(prevProps){
-    
+  componentDidMount(){
+    // document.addEventListener('click', event => {
+    //   if(event.target.classList.contains('post-menu')) this.triggerSettingsMenu();
+    // });
   }
 
   titleRender(title){
@@ -27,8 +31,23 @@ export default class Post extends React.Component {
     </div>
   }
 
-  deleteRender(){
-    return <div onClick={() => this.props.deletePost(this.props.post)}><i className="fas fa-cog"></i></div>
+  settingsMenuRender(){
+    return <ul className="post-menu">
+      <li disabled>Edit</li>
+      <li onClick={() => this.props.deletePost(this.props.post)}>Delete</li>
+    </ul>
+  }
+
+  triggerSettingsMenu(){
+    this.setState({menu: !this.state.menu});
+  }
+
+  settingsRender(){
+    return <div>
+        {/* <div onClick={() => this.props.deletePost(this.props.post)}><i className="fas fa-cog"></i></div> */}
+        <div onClick={this.triggerSettingsMenu}><i className="fas fa-cog"></i></div>
+        { this.state.menu ? this.settingsMenuRender() : null }
+      </div>
   }
 
   renderText({title, body}){
@@ -148,7 +167,7 @@ export default class Post extends React.Component {
           <Link to={`/post/${post.id}`} className="underline-magic" >{post.likes.length} note{post.likes.length === 1 ? null : 's'}</Link>
           <div className="post-footer-options">
             <LikeContainer post={post} />
-            { (currUser.id === author.id) ? this.deleteRender() : null }
+            { (currUser.id === author.id) ? this.settingsRender() : null }
           </div>
         </div>
       </div>
