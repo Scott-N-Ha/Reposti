@@ -47,7 +47,6 @@ export default class SessionForm extends React.Component {
     sessionForm.style.backgroundRepeat = 'no-repeat';
 
     let navBar = document.querySelector('.nav-bar');
-    navBar.style.border = 'none';
     navBar.style.backgroundColor = "transparent";
     navBar.style.boxShadow = "none";
   }

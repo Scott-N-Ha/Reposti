@@ -32,6 +32,10 @@ export default class PostIndex extends React.Component {
 
   componentDidMount(){
     this.props.fetchSingleUser(this.props.currUser.username);
+
+    let navBar = document.querySelector('.nav-bar');
+    navBar.style.backgroundColor = "#001935";
+    navBar.style.boxShadow = "0 0 0 1px hsla(0, 0%, 100%, .13)";
   }
 
   postCreate(postType){

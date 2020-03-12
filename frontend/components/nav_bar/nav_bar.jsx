@@ -21,11 +21,21 @@ export default class NavBar extends React.Component{
   }
 
   componentDidMount(){
-    if (this.props.currentUser !== undefined) this.props.getUser(this.props.currentUser.username);
+    const { currentUser, getUser, location } = this.props;
+    if (currentUser !== undefined) getUser(currentUser.username);
 
     document.addEventListener('click', event => {
       if (!event.target.classList.contains('user-dropdown') && !event.target.classList.contains("fa-user")) this.hideDropdown();
     });
+  }
+
+  componentWillUpdate(){
+    let navBar = document.querySelector('.nav-bar');
+    if (location.pathname === "/login" || location.pathname === "/signup"){
+      navBar.classList.add('session-main-page');
+    } else {
+      navBar.classList.remove('session-main-page');
+    }
   }
 
   showDropdown(){
