@@ -18,6 +18,7 @@ export default class PostIndex extends React.Component {
       video: null,
       audioUrl: "",
       audio: null,
+      errors: [],
     }
 
     this.postCreate = this.postCreate.bind(this);
@@ -28,6 +29,9 @@ export default class PostIndex extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleVideo = this.handleVideo.bind(this);
     this.handleAudio = this.handleAudio.bind(this);
+    this.validation = this.validation.bind(this);
+    this.contentError = this.contentError.bind(this);
+    this.renderErrors = this.renderErrors.bind(this);
   }
 
   componentDidMount(){
@@ -36,6 +40,69 @@ export default class PostIndex extends React.Component {
     let navBar = document.querySelector('.nav-bar');
     navBar.style.backgroundColor = "#001935";
     navBar.style.boxShadow = "0 0 0 1px hsla(0, 0%, 100%, .13)";
+  }
+
+  contentError(content){
+    const newErrors = this.state.errors;
+    const errorCode = `${content} can't be blank.`
+    if (!newErrors.includes(errorCode)){
+      newErrors.push(errorCode);
+      this.setState({errors: newErrors});
+    }
+  }
+
+  validation(){
+    switch(this.state.post_type_id){
+      case 1:
+        if (this.state.title.length < 1){
+          this.contentError("Title");
+          return false;
+        }
+      case 2:
+        if (this.state.photos.length < 1){
+          this.contentError("Photo");
+          return false;
+        }
+      case 3:
+        let quotePass = true;
+        if (this.state.body.length < 1){
+          this.contentError("Quote");
+          quotePass = false;
+        }
+        if (this.state.title.length < 1){
+          this.contentError("Source");
+          quotePass = false;
+        }
+        return quotePass;
+      case 4:
+        let linkPass = true;
+        if (this.state.title.length < 1){
+          this.contentError("URL");
+          linkPass = false;
+        }
+        if (this.state.body.length < 1){
+          this.contentError("URL Title")
+          linkPass = false;
+        }
+        return linkPass;
+      case 5:
+        if (this.state.body.length < 1){
+          this.contentError("Chat");
+          return false;
+        }
+      case 6:
+        if (this.state.audio === null){
+          this.contentError("Audio");
+          return false;
+        }
+      case 7:
+        if (this.state.video === null){
+          this.contentError("Video");
+          return false;
+        }
+      default:
+        return true;
+    }
   }
 
   postCreate(postType){
@@ -68,6 +135,7 @@ export default class PostIndex extends React.Component {
       video: null,
       audioUrl: "",
       audio: null,
+      errors: [],
     });
 
     document.querySelectorAll('.input-button').forEach(btn => {
@@ -162,64 +230,66 @@ export default class PostIndex extends React.Component {
   handleSubmit(e){
     e.preventDefault();
 
-    document.querySelectorAll('.input-button').forEach(btn => {
-      btn.disabled = true;
-      btn.classList.add('disabled');
-    });
+    if (this.validation()){
+      document.querySelectorAll('.input-button').forEach(btn => {
+        btn.disabled = true;
+        btn.classList.add('disabled');
+      });
 
-    document.querySelector('.input-button.post-btn').textContent = "Uploading Post...";
+      document.querySelector('.input-button.post-btn').textContent = "Uploading Post...";
 
-    const { post_type_id, photos, video, audio, title, body } = this.state;
-    const { currUser, createPost, createMediaPost } = this.props;
+      const { post_type_id, photos, video, audio, title, body } = this.state;
+      const { currUser, createPost, createMediaPost } = this.props;
 
-    let formData = new FormData();
-    formData.append('post[post_type_id]', post_type_id);
-    formData.append('post[author_id]', currUser.id);
-    if (title !== "") formData.append('post[title]', title);
-    if (body !== "") formData.append('post[body]', body);
+      let formData = new FormData();
+      formData.append('post[post_type_id]', post_type_id);
+      formData.append('post[author_id]', currUser.id);
+      if (title !== "") formData.append('post[title]', title);
+      if (body !== "") formData.append('post[body]', body);
 
-    switch (post_type_id) {
-      case 2:
-        for (let i = 0; i < photos.length; i++) {
-          formData.append("post[photos][]", photos[i]);
+      switch (post_type_id) {
+        case 2:
+          for (let i = 0; i < photos.length; i++) {
+            formData.append("post[photos][]", photos[i]);
+          }
+
+          createMediaPost(formData)
+            .then(() => this.postCancel())
+            .fail(() => this.postCancel());
+          break;
+
+        case 6:
+          formData.append("post[audio]", audio);
+
+          createMediaPost(formData)
+            .then(() => this.postCancel())
+            .fail(() => this.postCancel());
+          break;
+
+        case 7:
+          formData.append("post[video]", video);
+
+          createMediaPost(formData)
+            .then(() => this.postCancel())
+            .fail(() => this.postCancel());
+          break;
+
+        default:
+          let link = (post_type_id === 4 && title.slice(0,4) !== "http");
+
+          let newState = {
+            post_type_id: post_type_id,
+            author_id: currUser.id,
+            title: (link ? "https://" : "") + title,
+            body: body,
+          }
+
+          createPost(newState)
+            .then(() => this.postCancel())
+            .fail(() => this.postCancel());
+          break;
         }
-
-        createMediaPost(formData)
-          .then(() => this.postCancel())
-          .fail(() => this.postCancel());
-        break;
-
-      case 6:
-        formData.append("post[audio]", audio);
-
-        createMediaPost(formData)
-          .then(() => this.postCancel())
-          .fail(() => this.postCancel());
-        break;
-
-      case 7:
-        formData.append("post[video]", video);
-
-        createMediaPost(formData)
-          .then(() => this.postCancel())
-          .fail(() => this.postCancel());
-        break;
-
-      default:
-        let link = (post_type_id === 4 && title.slice(0,4) !== "http");
-
-        let newState = {
-          post_type_id: post_type_id,
-          author_id: currUser.id,
-          title: (link ? "https://" : "") + title,
-          body: body,
-        }
-
-        createPost(newState)
-          .then(() => this.postCancel())
-          .fail(() => this.postCancel());
-        break;
-    }
+      }
   }
 
   chooseRender(){
@@ -274,7 +344,7 @@ export default class PostIndex extends React.Component {
         return (
           <div className="link-post">
             <input className="link-title" type="text" name="title" value={title} onChange={this.handleChange} placeholder="Type or paste a URL" /> <br/>
-            <input className="link-body" name="body" value={body} onChange={this.handleChange} placeholder="Add a description, if you'd like" /> <br/>
+            <input className="link-body" name="body" value={body} onChange={this.handleChange} placeholder="Title your URL link" /> <br/>
           </div>
         )
 
@@ -343,6 +413,12 @@ export default class PostIndex extends React.Component {
         return <div>This component has not been coded yet</div>;
     }
   }
+
+  renderErrors(){
+    return this.state.errors.map(error => {
+      return <li className="post-errors"><span className="rainbow-effect2">{error}</span></li>
+    });
+  }
   
   render(){
     if (this.props.posts === undefined) return null;
@@ -399,6 +475,7 @@ export default class PostIndex extends React.Component {
             </div>
           </div>
         </li>
+          {this.renderErrors()}
           {posts}
         </ul>
       </div>
