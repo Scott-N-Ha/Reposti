@@ -13,8 +13,10 @@ import LikesContainer from './like/likes_container.js';
 import PostShowContainer from './posts/post_show_container.js';
 
 function topFunction(){
-  document.body.scrollTop = 0;
-  document.documentElement.scrollTop = 0;
+  // document.body.scrollTop = 0;
+  // document.documentElement.scrollTop = 0;
+
+  $('html,body').animate({ scrollTop: 0 }, 'slow');
 }
 
 function scroll(){
