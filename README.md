@@ -92,5 +92,8 @@ _HTML Button_
 ### [Tony Ye](https://github.com/sionar)
 - Validation Checking
 
+### [Sara Sampson](https://github.com/sara-ls)
+- Dropdown Menu Interaction
+
 ### [StackOverflow](https://stackoverflow.com/)
 - Being there for me even more than my own father
