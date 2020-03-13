@@ -62,6 +62,20 @@ i:hover {
   opacity: 1;
 }
 
+.rainbow-effect:hover {
+  background-image: repeating-linear-gradient(90deg, #e11a1a, #e1791a, #e0e11a, #54e11a, #1a2be1);
+  background-size: 1000% 1000%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: rainbow 4s ease-in-out infinite;
+}
+
+@keyframes rainbow {
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}
+
 .hidden {
   display: none;
   /* transition: opacity 1s ease-out;

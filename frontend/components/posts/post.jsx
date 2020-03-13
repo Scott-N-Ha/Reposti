@@ -116,7 +116,7 @@ export default class Post extends React.Component {
     return (
       <div className="link-post">
         <a href={title} className="link-link" target="_blank">
-          <span className='link-body underline-magic'>{body}</span> <br/>
+          <span className='link-body underline-magic rainbow-effect'>{body}</span> <br/>
         </a>
       </div>
     )

@@ -98,7 +98,7 @@ export default class NavBar extends React.Component{
               <i className="fas fa-cog"></i> Settings
             </div>
           </li></Link>
-          <a href="https://www.appacademy.io/"><li className="dropdown-li">
+          <a href="https://github.com/AA-ScottHa/" target="_blank"><li className="dropdown-li">
             <div>
               <i className="fas fa-question-circle"></i> Help 
             </div>
@@ -156,7 +156,7 @@ export default class NavBar extends React.Component{
 
     return (
       <div className="nav-bar">
-        <Link to="/"><i className="fab fa-resolving"></i></Link>
+        <Link to="/"><i className="fab fa-resolving rainbow-effect"></i></Link>
         { (currentUser === undefined || currentUser.likes === undefined) ? this.loginInfo() : this.logoutInfo()}
       </div>
     );

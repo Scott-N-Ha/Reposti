@@ -265,7 +265,7 @@ export default class PostIndex extends React.Component {
       case 3:
         return (
           <div className="quote-post">
-            <h2>"<input className="quote-body" name="body" value={body} onChange={this.handleChange} placeholder="Quote" />"</h2> <br/>
+            <h2><input className="quote-body" name="body" value={body} onChange={this.handleChange} placeholder="Quote" /></h2> <br/>
             &mdash; <input className="quote-title" type="text" name="title" value={title} onChange={this.handleChange} placeholder="Source" /> <br/>
           </div>
         );
