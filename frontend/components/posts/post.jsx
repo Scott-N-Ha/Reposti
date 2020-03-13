@@ -44,7 +44,6 @@ export default class Post extends React.Component {
 
   settingsRender(){
     return <div>
-        {/* <div onClick={() => this.props.deletePost(this.props.post)}><i className="fas fa-cog"></i></div> */}
         <div onClick={this.triggerSettingsMenu}><i className="fas fa-cog"></i></div>
         { this.state.menu ? this.settingsMenuRender() : null }
       </div>
