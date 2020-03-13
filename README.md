@@ -79,6 +79,7 @@ _HTML Button_
 
 - The ability to edit existing posts. Right now, the creator only has the option to delete the post. The Edit functionality is missing.
 - See followers and follow them if wanted.
+- Add fetching screens to webpages as it loads content.
 
 ## Code Shoutouts
 
