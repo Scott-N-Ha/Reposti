@@ -79,3 +79,18 @@ _HTML Button_
 
 - The ability to edit existing posts. Right now, the creator only has the option to delete the post. The Edit functionality is missing.
 - See followers and follow them if wanted.
+
+## Code Shoutouts
+
+### [Nathan Mendes](https://github.com/mendesnathanj)
+- Assisted with a lot of Component Interactions
+- Assisted with a lot of CSS design
+
+### [Victoria Campbell](https://github.com/v-campbell)
+- Rainbow Effect
+
+### [Tony Ye](https://github.com/sionar)
+- Validation Checking
+
+### [StackOverflow](https://stackoverflow.com/)
+- Being there for me even more than my own father
