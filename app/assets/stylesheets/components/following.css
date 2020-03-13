@@ -1,5 +1,5 @@
 .followings {
-  margin-top: 20px;
+  /* margin-top: 20px; */
   width: 540px;
   min-height: 120px;
   border-radius: 3px;
@@ -22,10 +22,13 @@
 }
 
 .followings-link {
-  width: 100px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+.followings-link img {
+  margin-right: 25px;
 }
 
 .followings-follow {

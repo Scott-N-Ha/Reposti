@@ -37,11 +37,13 @@ const postsReducer = (state = initialState, action) => {
     case CREATE_LIKE:
       like = Object.values(action.payload)[0];
       nextState[like.post_id].likes.push(like.id);
+      nextState[like.post_id].likers.push(like.liker_id);
       return nextState;
 
     case DELETE_LIKE:
       like = Object.values(action.payload)[0];
       nextState[like.post_id].likes = nextState[like.post_id].likes.filter(like_id => like_id !== like.id);
+      nextState[like.post_id].likers = nextState[like.post_id].likers.filter(liker_id => liker_id !== like.liker_id);
       return nextState;
 
     case RECEIVE_LIKES:

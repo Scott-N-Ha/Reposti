@@ -5,6 +5,8 @@ import UserProfileImage from './user_profile_img.jsx';
 
 const mapStateToProps = ({entities: { users }}, ownProps) => {
   let user = users[ownProps.userId];
+  
+  if (user === undefined) return {};
 
   return {
     username: user.username,
