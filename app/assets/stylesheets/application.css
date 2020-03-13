@@ -76,6 +76,16 @@ i:hover {
   100%{background-position:0% 50%}
 }
 
+.top-btn {
+  display: none;
+  position: fixed;
+  bottom: 20px;
+  right: 30px;
+  z-index: 9002;
+  font-size: xx-large;
+  color: white;
+}
+
 .hidden {
   display: none;
   /* transition: opacity 1s ease-out;
