@@ -58,11 +58,13 @@ export default class PostIndex extends React.Component {
           this.contentError("Title");
           return false;
         }
+        return true;
       case 2:
         if (this.state.photos.length < 1){
           this.contentError("Photo");
           return false;
         }
+        return true;
       case 3:
         let quotePass = true;
         if (this.state.body.length < 1){
@@ -90,16 +92,19 @@ export default class PostIndex extends React.Component {
           this.contentError("Chat");
           return false;
         }
+        return true;
       case 6:
         if (this.state.audio === null){
           this.contentError("Audio");
           return false;
         }
+        return true;
       case 7:
         if (this.state.video === null){
           this.contentError("Video");
           return false;
         }
+        return true;
       default:
         return true;
     }
