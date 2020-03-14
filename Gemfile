@@ -38,6 +38,7 @@ gem 'jquery-rails'
 gem 'aws-sdk-s3', require: false
 gem 'friendly_id'
 # gem 'rails_12factor'
+gem 'pry-rails'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -54,7 +55,7 @@ group :development do
 
   gem 'better_errors'
   gem 'binding_of_caller'
-  gem 'pry-rails'
+  # gem 'pry-rails'
   gem 'annotate'
 end
 
