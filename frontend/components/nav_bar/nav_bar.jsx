@@ -98,7 +98,7 @@ export default class NavBar extends React.Component{
               <i className="fas fa-cog"></i> Settings
             </div>
           </li></Link>
-          <a href="https://github.com/AA-ScottHa/" target="_blank"><li className="dropdown-li">
+          <a href="https://github.com/Scott-N-Ha/" target="_blank"><li className="dropdown-li">
             <div>
               <i className="fas fa-question-circle"></i> Help 
             </div>
