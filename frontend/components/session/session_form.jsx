@@ -114,10 +114,10 @@ export default class SessionForm extends React.Component {
       // btn.textContent = "Logging in...";
     });
 
-    this.setState({username: 'test', password: 'password'});
+    this.setState({username: 'demo', password: 'password'});
     
     const demo = {
-      username: 'test',
+      username: 'demo',
       password: 'password'
     }
 
